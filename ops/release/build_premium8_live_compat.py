@@ -29,12 +29,16 @@ new+='(0,F.jsx)('+B+'span'+B+',{className:'+B+'dd-student-lbl'+B+',children:'+B+
 new+='(0,F.jsxs)('+B+'strong'+B+',{className:'+B+'dd-student-val'+B+',children:[a,se?'+B+' · '+D+'se}'+B+':'+B+B+']})]}):null,'
 new+='(0,F.jsxs)('+B+'div'+B+',{className:'+B+'dd-student-field dd-student-roll-field'+B
 change(old,new,'class details')
-old=B+'Roll No.'+B+'})]})]}),(0,F.jsxs)('+B+'div'+B+',{className:'+B+'dd-table-head'+B
-new=B+'Roll No.'+B+'})]}),n.premium?(0,F.jsxs)('+B+'div'+B+',{className:'+B+'dd-student-field dd-student-date-field'+B+',children:['
-new+='(0,F.jsx)('+B+'span'+B+',{className:'+B+'dd-student-lbl'+B+',children:'+B+'DATE:'+B+'}),'
-new+='(0,F.jsx)('+B+'strong'+B+',{className:'+B+'dd-student-val'+B+',children:He(s)})]}):null]}),'
-new+='(0,F.jsxs)('+B+'div'+B+',{className:'+B+'dd-table-head'+B
-change(old,new,'date details')
+# The date has moved to the upper-right calendar, so no date column is injected.
+
+# Calendar is the third item in the existing top header row (logo, school brand, calendar).
+old='children:'+B+'Official Student Academic Record'+B+'})]})]})]}),(0,F.jsxs)('+B+'div'+B+',{className:'+B+'dd-head-meta-row'+B
+cal='(0,F.jsxs)('+B+'div'+B+',{className:'+B+'dd-premium-calendar'+B+',role:'+B+'group'+B+',"aria-label":'+B+'Diary date '+D+'He(s)}'+B+',children:['
+cal+='(0,F.jsx)('+B+'span'+B+',{className:'+B+'dd-premium-calendar-month'+B+',children:He(s).split('+B+' '+B+').slice(1).join('+B+' '+B+').toUpperCase()}),'
+cal+='(0,F.jsx)('+B+'strong'+B+',{className:'+B+'dd-premium-calendar-day'+B+',children:He(s).split('+B+' '+B+')[0]}),'
+cal+='(0,F.jsx)('+B+'span'+B+',{className:'+B+'dd-premium-calendar-weekday'+B+',children:new Date(String(s).slice(0,10)+'+B+'T12:00:00'+B+').toLocaleDateString('+B+'en-GB'+B+',{weekday:'+B+'short'+B+'}).toUpperCase()})]})'
+new='children:'+B+'Official Student Academic Record'+B+'})]})]}),n.premium?'+cal+':null]}),(0,F.jsxs)('+B+'div'+B+',{className:'+B+'dd-head-meta-row'+B
+change(old,new,'premium calendar in school header')
 change('Le.some(e=>e.id===Number(w.paletteId))?Number(w.paletteId):3)', 'Le.some(e=>e.id===Number(w.paletteId))?Number(w.paletteId):21)', 'new default')
 pcss=Path('/root/workspace/assps-diary-premium8-20261104/ops/release/premium8-print.css').read_text()
 needle='  </style>\n</head>\n<body>\n  <div class="dd-page-stage">'
@@ -44,8 +48,8 @@ marker='/* ASSPS Premium Daily Diary — eight opt-in editorial, low-toner templ
 assert styles.count(marker)==1
 styles=styles[styles.index(marker):]
 assert len(styles)>3000
-jn='DailyDiaryWorkspace-ASSPS-PREMIUM8-20261104.js'
-cn='DailyDiaryWorkspace-ASSPS-PREMIUM8-20261104.css'
+jn='DailyDiaryWorkspace-ASSPS-PREMIUM8-CALENDAR-V2-20261104.js'
+cn='DailyDiaryWorkspace-ASSPS-PREMIUM8-CALENDAR-V2-20261104.css'
 (OUT/jn).write_text(js)
 (OUT/cn).write_text(styles)
 manifest={'baseline_sha256':checksum,'new_sha256':hashlib.sha256(js.encode()).hexdigest(),'source_bundle':LIVE.name,'js':jn,'css':cn,'ids':[int(x[0]) for x in items],'theme_names':[x[1] for x in items],'production_status':'NOT_DEPLOYED','existing_ids_unchanged':[1,2,3,4]}

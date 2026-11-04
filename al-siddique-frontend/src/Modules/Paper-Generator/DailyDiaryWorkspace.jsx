@@ -102,6 +102,19 @@ const formatDate = value => {
   return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
 }
 
+const calendarDateParts = value => {
+  const raw = String(value || today()).trim()
+  const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(raw)
+  const date = match ? new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 12) : new Date(raw)
+  if (Number.isNaN(date.getTime())) return { day: '--', month: 'DATE', year: '', weekday: '' }
+  return {
+    day: String(date.getDate()).padStart(2, '0'),
+    month: date.toLocaleDateString('en-GB', { month: 'short' }).toUpperCase(),
+    year: String(date.getFullYear()),
+    weekday: date.toLocaleDateString('en-GB', { weekday: 'short' }).toUpperCase(),
+  }
+}
+
 const studentName = student => clean(student?.name || student?.student_name || student?.full_name || [student?.first_name, student?.last_name].filter(Boolean).join(' ')) || 'Student'
 const studentRoll = student => clean(student?.roll_number || student?.roll_no || student?.roll || student?.gr_number || '')
 const studentSection = student => clean(student?.section || student?.section_name || '')
@@ -202,6 +215,7 @@ function StudentCard({
 }) {
   const layout = computeA4Layout(cardsPerPage)
   const studentSec = studentSection(student) || section
+  const calendar = calendarDateParts(date)
   const logo = logoUrl ? resolveAssetUrl(logoUrl) : ''
   const currentSubjectBase = layout.baseSubjectSize || 11.5
   const colRatio = `${subjectColWidth || 28}% 1fr`
@@ -247,6 +261,13 @@ function StudentCard({
             <span className="dd-motto-tag">Official Student Academic Record</span>
           </div>
         </div>
+        {palette.premium && (
+          <div className="dd-premium-calendar" role="group" aria-label={'Diary date ' + formatDate(date)}>
+            <span className="dd-premium-calendar-month">{calendar.month} {calendar.year}</span>
+            <strong className="dd-premium-calendar-day">{calendar.day}</strong>
+            <span className="dd-premium-calendar-weekday">{calendar.weekday}</span>
+          </div>
+        )}
       </div>
       <div className="dd-head-meta-row">
         <div className="dd-meta-pill dd-meta-class">
@@ -275,12 +296,6 @@ function StudentCard({
         <span className="dd-student-lbl">ROLL:</span>
         <strong className="dd-student-val">{student ? (studentRoll(student) ? `Roll ${studentRoll(student)}` : '—') : 'Roll No.'}</strong>
       </div>
-      {palette.premium && (
-        <div className="dd-student-field dd-student-date-field">
-          <span className="dd-student-lbl">DATE:</span>
-          <strong className="dd-student-val">{formatDate(date)}</strong>
-        </div>
-      )}
     </div>
 
     <div className="dd-table-head" style={{ gridTemplateColumns: colRatio }}>
@@ -1024,6 +1039,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       flex: 0 0 auto !important;
     }
 
+
 /* Premium 8 — isolated iframe A4 print rules. Inline AFTER standard print CSS. */
 @media print {
   .dd-card.dd-card-premium {border-color:var(--line)!important;border-radius:1.4mm!important;box-shadow:none!important}
@@ -1051,9 +1067,22 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   .dd-card-premium .dd-diary-cell {background:#fff!important;color:#1f2b3c!important;padding:.85mm 1.35mm!important;line-height:1.24!important;white-space:pre-wrap!important}
   .dd-card-premium .dd-diary-cell.urdu {line-height:1.55!important}
   .dd-card-premium footer {margin-top:.6mm!important;background:#fff!important;border-top:.5px solid var(--line)!important;padding:.8mm 1.8mm!important;color:#516170!important;text-align:left!important}
+  /* ASSPS premium header reflow v2 — mirror preview in isolated iframe. */
+  .dd-card-premium .dd-card-head {padding:1.35mm 2mm 1.1mm!important;background:#fff!important}
+  .dd-card-premium .dd-head-top {display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;align-items:center!important;gap:1.65mm!important}
+  .dd-card-premium .dd-logo {width:calc(14mm * var(--scale))!important;height:calc(14mm * var(--scale))!important}
+  .dd-card-premium .dd-school-name {font-family:'Times New Roman',Times,Georgia,serif!important;font-size:clamp(10px,calc(16px * var(--scale)),18px)!important;font-weight:900!important;line-height:1.09!important;letter-spacing:.006em!important;color:#1b3047!important}
+  .dd-card-premium .dd-premium-calendar {display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;width:calc(17.5mm * var(--scale))!important;min-width:calc(17.5mm * var(--scale))!important;min-height:calc(16mm * var(--scale))!important;border:.75px solid var(--line)!important;border-radius:1.1mm!important;overflow:hidden!important;background:#fff!important;font-family:'Times New Roman',Times,serif!important;line-height:1.05!important}
+  .dd-card-premium .dd-premium-calendar-month {background:var(--soft)!important;border-bottom:.5px solid var(--line)!important;color:var(--accent)!important;font-size:calc(7px * var(--scale))!important;font-weight:800!important;letter-spacing:.04em!important;width:100%!important;padding:.45mm 0!important;text-align:center!important;white-space:nowrap!important}
+  .dd-card-premium .dd-premium-calendar-day {font-size:calc(18px * var(--scale))!important;font-weight:900!important;color:#1b3047!important;line-height:1!important;margin-top:.35mm!important}
+  .dd-card-premium .dd-premium-calendar-weekday {font-size:calc(6.9px * var(--scale))!important;font-weight:800!important;letter-spacing:.11em!important;color:var(--accent)!important;padding-bottom:.35mm!important}
+  .dd-card-premium .dd-student-strip {grid-template-columns:minmax(0,2.2fr) minmax(0,1.15fr) minmax(0,1.12fr)!important;padding:1mm 1.6mm!important}
+  .dd-card-premium .dd-student-field {align-content:center!important;padding:.35mm 1.15mm!important;gap:.2mm .85mm!important}
+  .dd-card-premium .dd-student-lbl {font-size:calc(7.4px * var(--scale))!important;color:#4b6170!important;font-weight:800!important}
+  .dd-card-premium .dd-student-val,.dd-card-premium .dd-student-roll-field .dd-student-val {font-size:calc(13.2px * var(--scale))!important;line-height:1.12!important;font-weight:900!important;color:#1b3047!important;overflow-wrap:anywhere!important}
+  .dd-card-premium footer {text-align:center!important;font-weight:700!important;display:block!important;width:100%!important}
+
 }
-
-
   </style>
 </head>
 <body>

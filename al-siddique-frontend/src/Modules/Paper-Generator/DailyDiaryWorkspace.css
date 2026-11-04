@@ -1889,3 +1889,17 @@
   .dd-card-premium .dd-diary-cell.urdu {line-height:1.55!important}
   .dd-card-premium footer {margin-top:.6mm!important;background:#fff!important;border-top:.5px solid var(--line)!important;padding:.8mm 1.8mm!important;color:#516170!important;text-align:left!important}
 }
+/* ASSPS premium header reflow v2 — visual hierarchy without shrinking branding. */
+.dd-card-premium .dd-card-head {padding:1.35mm 2mm 1.1mm;background:#fff}
+.dd-card-premium .dd-head-top {display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:1.65mm}
+.dd-card-premium .dd-logo {width:calc(14mm * var(--scale));height:calc(14mm * var(--scale))}
+.dd-card-premium .dd-school-name {font-family:'Times New Roman',Times,Georgia,serif;font-size:clamp(10px,calc(16px * var(--scale)),18px);font-weight:900;line-height:1.09;letter-spacing:.006em;color:#1b3047}
+.dd-card-premium .dd-premium-calendar {width:calc(17.5mm * var(--scale));min-width:calc(17.5mm * var(--scale));min-height:calc(16mm * var(--scale));display:flex;flex-direction:column;align-items:center;justify-content:center;border:.75px solid var(--line);border-radius:1.1mm;overflow:hidden;background:#fff;font-family:'Times New Roman',Times,serif;line-height:1.05;box-shadow:none}
+.dd-card-premium .dd-premium-calendar-month {background:var(--soft);border-bottom:.5px solid var(--line);color:var(--accent);font-size:calc(7px * var(--scale));font-weight:800;letter-spacing:.04em;width:100%;padding:.45mm 0;text-align:center;white-space:nowrap}
+.dd-card-premium .dd-premium-calendar-day {font-size:calc(18px * var(--scale));font-weight:900;color:#1b3047;line-height:1;margin-top:.35mm}
+.dd-card-premium .dd-premium-calendar-weekday {font-size:calc(6.9px * var(--scale));font-weight:800;letter-spacing:.11em;color:var(--accent);padding-bottom:.35mm}
+.dd-card-premium .dd-student-strip {grid-template-columns:minmax(0,2.2fr) minmax(0,1.15fr) minmax(0,1.12fr);padding:1mm 1.6mm}
+.dd-card-premium .dd-student-field {align-content:center;padding:.35mm 1.15mm;gap:.2mm .85mm}
+.dd-card-premium .dd-student-lbl {font-size:calc(7.4px * var(--scale));color:#4b6170;font-weight:800}
+.dd-card-premium .dd-student-val,.dd-card-premium .dd-student-roll-field .dd-student-val {font-size:calc(13.2px * var(--scale));line-height:1.12;font-weight:900;color:#1b3047;overflow-wrap:anywhere}
+.dd-card-premium footer {text-align:center;font-weight:700;display:block;width:100%}

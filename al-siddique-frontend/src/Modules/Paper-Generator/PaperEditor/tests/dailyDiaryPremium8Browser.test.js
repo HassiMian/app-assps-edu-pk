@@ -35,15 +35,41 @@ test('Daily Diary split workspace personalizes students, supports dynamic A4 cou
     const info=await page.locator('.dd-card-premium').first().evaluate(el=>({
       classField:!!el.querySelector('.dd-student-class-field'),
       dateField:!!el.querySelector('.dd-student-date-field'),
+      calendar:!!el.querySelector('.dd-premium-calendar'),
+      metaColumns:getComputedStyle(el.querySelector('.dd-student-strip')).gridTemplateColumns.trim().split(/\s+/).length,
+      schoolFont:parseFloat(getComputedStyle(el.querySelector('.dd-school-name')).fontSize),
+      studentFont:parseFloat(getComputedStyle(el.querySelector('.dd-student-val')).fontSize),
+      footerAlign:getComputedStyle(el.querySelector('footer')).textAlign,
       rowGap:getComputedStyle(el.querySelector('.dd-rows')).rowGap,
       metaHidden:getComputedStyle(el.querySelector('.dd-head-meta-row')).display==='none',
       headColor:getComputedStyle(el.querySelector('.dd-table-head')).color,
     }));
     assert.equal(info.classField,true,`class field missing: ${name}`);
-    assert.equal(info.dateField,true,`date field missing: ${name}`);
+    assert.equal(info.dateField,false,'Date must not repeat in strip: '+name);
+    assert.equal(info.calendar,true,'Calendar missing: '+name);
+    assert.equal(info.metaColumns,3,'Student strip must have three columns: '+name);
+    assert.ok(info.schoolFont>=9,'School branding too small: '+name+' '+info.schoolFont);
+    assert.ok(info.studentFont>=7.5,'Student details too small: '+name+' '+info.studentFont);
+    assert.equal(info.footerAlign,'center','Footer should be centered: '+name);
     assert.equal(info.rowGap,'0px',`continuous table rows not applied: ${name}`);
     assert.equal(info.metaHidden,true,`redundant old header fields visible: ${name}`);
   }
+  await page.locator('[data-dd-date]').fill('2026-11-04');
+  const cal=page.locator('.dd-card-premium .dd-premium-calendar').first();
+  await cal.getByText('04',{exact:true}).waitFor();
+  assert.match(await cal.textContent(),/NOV 2026/);
+  assert.match(await cal.textContent(),/WED/);
+  await page.locator('[data-card-count="8"]').click();
+  await page.waitForTimeout(200);
+  assert.equal(await page.locator('.dd-card-premium').count(),5,'5 selected students should remain personalized at 8-per-page density');
+  const geometry=await page.locator('.dd-card-premium').first().evaluate(el=>{
+    const cal=el.querySelector('.dd-premium-calendar').getBoundingClientRect();
+    const school=el.querySelector('.dd-school-name').getBoundingClientRect();
+    return {right:cal.right,cardRight:el.getBoundingClientRect().right,overlap:school.right>cal.left}
+  });
+  assert.ok(geometry.right<=geometry.cardRight+1,'Calendar exceeds diary card');
+  assert.equal(geometry.overlap,false,'School branding overlaps calendar');
+  console.log('PREMIUM_CALENDAR_DATE_AND_HEADER_PASS',JSON.stringify(geometry));
   console.log('PREMIUM_8_PALETTES_AND_TABLES 8/8 PASS');
 
   await page.locator('[data-card-count="5"]').click();await page.waitForTimeout(250);assert.equal(await page.locator('[data-a4-page]').count(),1);assert.equal(await page.locator('[data-student-card]').count(),5);assert.match((await page.locator('[data-a4-page]').textContent())||'',/Ali Ahmad/);assert.match((await page.locator('[data-a4-page]').textContent())||'',/Roll 01/);assert.doesNotMatch((await page.locator('[data-a4-page]').textContent())||'',/null|undefined|DIARY_TENANT/i)

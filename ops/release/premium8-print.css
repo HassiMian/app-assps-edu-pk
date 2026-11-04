@@ -26,5 +26,20 @@
   .dd-card-premium .dd-diary-cell {background:#fff!important;color:#1f2b3c!important;padding:.85mm 1.35mm!important;line-height:1.24!important;white-space:pre-wrap!important}
   .dd-card-premium .dd-diary-cell.urdu {line-height:1.55!important}
   .dd-card-premium footer {margin-top:.6mm!important;background:#fff!important;border-top:.5px solid var(--line)!important;padding:.8mm 1.8mm!important;color:#516170!important;text-align:left!important}
+  /* ASSPS premium header reflow v2 — mirror preview in isolated iframe. */
+  .dd-card-premium .dd-card-head {padding:1.35mm 2mm 1.1mm!important;background:#fff!important}
+  .dd-card-premium .dd-head-top {display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;align-items:center!important;gap:1.65mm!important}
+  .dd-card-premium .dd-logo {width:calc(14mm * var(--scale))!important;height:calc(14mm * var(--scale))!important}
+  .dd-card-premium .dd-school-name {font-family:'Times New Roman',Times,Georgia,serif!important;font-size:clamp(10px,calc(16px * var(--scale)),18px)!important;font-weight:900!important;line-height:1.09!important;letter-spacing:.006em!important;color:#1b3047!important}
+  .dd-card-premium .dd-premium-calendar {display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;width:calc(17.5mm * var(--scale))!important;min-width:calc(17.5mm * var(--scale))!important;min-height:calc(16mm * var(--scale))!important;border:.75px solid var(--line)!important;border-radius:1.1mm!important;overflow:hidden!important;background:#fff!important;font-family:'Times New Roman',Times,serif!important;line-height:1.05!important}
+  .dd-card-premium .dd-premium-calendar-month {background:var(--soft)!important;border-bottom:.5px solid var(--line)!important;color:var(--accent)!important;font-size:calc(7px * var(--scale))!important;font-weight:800!important;letter-spacing:.04em!important;width:100%!important;padding:.45mm 0!important;text-align:center!important;white-space:nowrap!important}
+  .dd-card-premium .dd-premium-calendar-day {font-size:calc(18px * var(--scale))!important;font-weight:900!important;color:#1b3047!important;line-height:1!important;margin-top:.35mm!important}
+  .dd-card-premium .dd-premium-calendar-weekday {font-size:calc(6.9px * var(--scale))!important;font-weight:800!important;letter-spacing:.11em!important;color:var(--accent)!important;padding-bottom:.35mm!important}
+  .dd-card-premium .dd-student-strip {grid-template-columns:minmax(0,2.2fr) minmax(0,1.15fr) minmax(0,1.12fr)!important;padding:1mm 1.6mm!important}
+  .dd-card-premium .dd-student-field {align-content:center!important;padding:.35mm 1.15mm!important;gap:.2mm .85mm!important}
+  .dd-card-premium .dd-student-lbl {font-size:calc(7.4px * var(--scale))!important;color:#4b6170!important;font-weight:800!important}
+  .dd-card-premium .dd-student-val,.dd-card-premium .dd-student-roll-field .dd-student-val {font-size:calc(13.2px * var(--scale))!important;line-height:1.12!important;font-weight:900!important;color:#1b3047!important;overflow-wrap:anywhere!important}
+  .dd-card-premium footer {text-align:center!important;font-weight:700!important;display:block!important;width:100%!important}
+
 }
 
