@@ -1,0 +1,487 @@
+/* ASSPS Premium Daily Diary — eight opt-in editorial, low-toner templates.
+   Scope is intentionally limited to dd-card-premium; legacy styles remain intact.
+   All rules apply to the same document used by preview and isolated print. */
+.dd-card.dd-card-premium {
+  border: 1px solid var(--line);
+  border-radius: 1.4mm;
+  box-shadow: none;
+  background: #fff;
+  color: var(--ink);
+}
+.dd-card-premium .dd-card-accent {
+  height: .5mm;
+  background: linear-gradient(to right, var(--foil) 0 13%, var(--line) 13% 100%);
+}
+.dd-card-premium .dd-card-head {
+  padding: 1.1mm 2mm .85mm;
+  gap: 0;
+  background: #fff;
+  border-bottom: .4px solid var(--line);
+}
+.dd-card-premium .dd-head-top {gap: 1.65mm; align-items: center}
+.dd-card-premium .dd-logo {
+  width: calc(8.5mm * var(--header-scale, 1));
+  height: calc(8.5mm * var(--header-scale, 1));
+}
+.dd-card-premium .dd-school-name {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-size: calc(10px * var(--scale) * var(--header-scale, 1));
+  font-weight: 800;
+  letter-spacing: .016em;
+  line-height: 1.06;
+  color: #1b3047;
+}
+.dd-card-premium .dd-brand {gap: .15mm}
+.dd-card-premium .dd-brand-badge-row {gap: .6mm}
+.dd-card-premium .dd-mode-badge {
+  padding: .15mm .8mm;
+  font-size: calc(5.9px * var(--scale));
+  color: var(--accent);
+  background: var(--soft);
+  border-left: 1.4px solid var(--foil);
+  border-radius: 0;
+  letter-spacing: .13em;
+}
+.dd-card-premium .dd-motto-tag {display: none}
+.dd-card-premium .dd-head-meta-row {display: none}
+.dd-card-premium .dd-student-strip {
+  display: grid;
+  grid-template-columns: minmax(0,2.1fr) minmax(0,1.05fr) minmax(0,1.15fr) minmax(0,1fr);
+  gap: 0;
+  padding: .9mm 1.8mm;
+  background: var(--soft);
+  border-bottom: .6px solid var(--line);
+  align-items: stretch;
+}
+.dd-card-premium .dd-student-field {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+  gap: .3mm .8mm;
+  padding: .1mm .85mm;
+  min-width: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+.dd-card-premium .dd-student-field + .dd-student-field {border-left: .5px solid var(--line)}
+.dd-card-premium .dd-student-name-field {padding-left: .3mm}
+.dd-card-premium .dd-student-lbl {
+  font-size: calc(6.3px * var(--scale));
+  color: #63727a;
+  letter-spacing: .008em;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+.dd-card-premium .dd-student-val,
+.dd-card-premium .dd-student-roll-field .dd-student-val {
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-size: calc(8px * var(--scale));
+  font-weight: 700;
+  line-height: 1.16;
+  color: var(--ink);
+  min-width: 0;
+  white-space: normal;
+  word-break: normal;
+  overflow-wrap: anywhere;
+  overflow: visible;
+  text-overflow: clip;
+}
+.dd-card-premium .dd-table-head {
+  margin: .95mm 1.65mm 0;
+  background: var(--soft);
+  color: var(--ink);
+  border: .8px solid var(--line);
+  border-radius: .7mm .7mm 0 0;
+}
+.dd-card-premium .dd-table-head span {
+  padding: .85mm 1mm;
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-size: calc(7.5px * var(--scale));
+  font-weight: 800;
+  letter-spacing: .025em;
+}
+.dd-card-premium .dd-table-head span + span {
+  border-left: .8px solid var(--line);
+}
+.dd-card-premium .dd-rows {
+  margin: 0 1.65mm;
+  padding: 0;
+  gap: 0;
+  border: .8px solid var(--line);
+  border-top: 0;
+  border-radius: 0 0 .7mm .7mm;
+  overflow: hidden;
+}
+.dd-card-premium .dd-row {
+  border: 0;
+  border-top: .6px solid var(--line);
+  border-radius: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  background: #fff;
+}
+.dd-card-premium .dd-row:first-child {border-top: .7px solid var(--line)}
+.dd-card-premium .dd-sub-cell {
+  background: color-mix(in srgb, var(--soft) 62%, white);
+  color: #23354b;
+  border-right: .7px solid var(--line);
+  padding: .75mm .7mm;
+}
+.dd-card-premium .dd-diary-cell {
+  background: #fff;
+  color: #1f2b3c;
+  padding: .85mm 1.35mm;
+  line-height: 1.24;
+  align-items: center;
+  white-space: pre-wrap;
+}
+.dd-card-premium .dd-diary-cell.urdu {line-height: 1.55}
+.dd-card-premium footer {
+  margin-top: .6mm;
+  background: #fff;
+  border-top: .5px solid var(--line);
+  padding: .8mm 1.8mm;
+  color: #516170;
+  text-align: left;
+  font-family: 'Times New Roman', Times, Georgia, serif;
+  font-weight: 600;
+}
+.dd-card-premium footer.urdu {font-family: 'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif}
+@media print {
+  .dd-card.dd-card-premium {box-shadow: none !important}
+  .dd-card-premium .dd-student-field {break-inside: avoid}
+  .dd-card-premium .dd-row {break-inside: avoid}
+}
+
+
+/* Premium 8 — isolated iframe A4 print rules. Inline AFTER standard print CSS. */
+@media print {
+  .dd-card.dd-card-premium {border-color:var(--line)!important;border-radius:1.4mm!important;box-shadow:none!important}
+  .dd-card-premium .dd-card-accent {height:.5mm!important;background:linear-gradient(to right,var(--foil) 0 13%,var(--line) 13% 100%)!important}
+  .dd-card-premium .dd-card-head {gap:0!important;padding:1.1mm 2mm .85mm!important;background:#fff!important;border-bottom:.5px solid var(--line)!important}
+  .dd-card-premium .dd-head-top {gap:1.65mm!important;align-items:center!important}
+  .dd-card-premium .dd-logo {width:calc(8.5mm * var(--header-scale,1))!important;height:calc(8.5mm * var(--header-scale,1))!important}
+  .dd-card-premium .dd-school-name {font-family:'Times New Roman',Times,Georgia,serif!important;font-size:calc(10px * var(--scale) * var(--header-scale,1))!important;font-weight:800!important;letter-spacing:.016em!important;line-height:1.06!important;color:#1b3047!important}
+  .dd-card-premium .dd-brand {gap:.15mm!important}
+  .dd-card-premium .dd-mode-badge {background:var(--soft)!important;color:var(--accent)!important;border-left:1.4px solid var(--foil)!important;border-radius:0!important;padding:.15mm .8mm!important;font-size:calc(5.9px * var(--scale))!important}
+  .dd-card-premium .dd-motto-tag,.dd-card-premium .dd-head-meta-row {display:none!important}
+  .dd-card-premium .dd-student-strip {display:grid!important;grid-template-columns:minmax(0,2.1fr) minmax(0,1.05fr) minmax(0,1.15fr) minmax(0,1fr)!important;gap:0!important;padding:.9mm 1.8mm!important;background:var(--soft)!important;border-bottom:.6px solid var(--line)!important}
+  .dd-card-premium .dd-student-field {display:flex!important;flex-wrap:wrap!important;align-content:center!important;justify-content:flex-start!important;gap:.3mm .8mm!important;min-width:0!important;padding:.1mm .85mm!important;border:0!important;border-radius:0!important;background:transparent!important}
+  .dd-card-premium .dd-student-field + .dd-student-field {border-left:.5px solid var(--line)!important}
+  .dd-card-premium .dd-student-name-field {padding-left:.3mm!important}
+  .dd-card-premium .dd-student-lbl {font-size:calc(6.3px * var(--scale))!important;color:#63727a!important;letter-spacing:.008em!important}
+  .dd-card-premium .dd-student-val,.dd-card-premium .dd-student-roll-field .dd-student-val {font-family:'Times New Roman',Times,Georgia,serif!important;font-size:calc(8px * var(--scale))!important;font-weight:700!important;line-height:1.16!important;color:var(--ink)!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere!important}
+  .dd-card-premium .dd-table-head {margin:.95mm 1.65mm 0!important;background:var(--soft)!important;color:var(--ink)!important;border:.8px solid var(--line)!important;border-radius:.7mm .7mm 0 0!important}
+  .dd-card-premium .dd-table-head span {padding:.85mm 1mm!important;font-family:'Times New Roman',Times,Georgia,serif!important;font-size:calc(7.5px * var(--scale))!important;letter-spacing:.025em!important}
+  .dd-card-premium .dd-table-head span + span {border-left:.8px solid var(--line)!important}
+  .dd-card-premium .dd-rows {margin:0 1.65mm!important;padding:0!important;gap:0!important;border:.8px solid var(--line)!important;border-top:0!important;border-radius:0 0 .7mm .7mm!important;overflow:visible!important}
+  .dd-card-premium .dd-row {border:0!important;border-top:.6px solid var(--line)!important;border-radius:0!important;min-height:0!important;flex:1 1 auto!important;break-inside:avoid!important}
+  .dd-card-premium .dd-row:first-child {border-top:.7px solid var(--line)!important}
+  .dd-card-premium .dd-sub-cell {background:var(--soft)!important;color:#23354b!important;border-right:.7px solid var(--line)!important;padding:.75mm .7mm!important}
+  .dd-card-premium .dd-diary-cell {background:#fff!important;color:#1f2b3c!important;padding:.85mm 1.35mm!important;line-height:1.24!important;white-space:pre-wrap!important}
+  .dd-card-premium .dd-diary-cell.urdu {line-height:1.55!important}
+  .dd-card-premium footer {margin-top:.6mm!important;background:#fff!important;border-top:.5px solid var(--line)!important;padding:.8mm 1.8mm!important;color:#516170!important;text-align:left!important}
+}
+/* ASSPS premium header reflow v2 — visual hierarchy without shrinking branding. */
+.dd-card-premium .dd-card-head {padding:1.35mm 2mm 1.1mm;background:#fff}
+.dd-card-premium .dd-head-top {display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:1.65mm}
+.dd-card-premium .dd-logo {width:calc(14mm * var(--scale));height:calc(14mm * var(--scale))}
+.dd-card-premium .dd-school-name {font-family:'Times New Roman',Times,Georgia,serif;font-size:clamp(10px,calc(16px * var(--scale)),18px);font-weight:900;line-height:1.09;letter-spacing:.006em;color:#1b3047}
+.dd-card-premium .dd-premium-calendar {width:calc(17.5mm * var(--scale));min-width:calc(17.5mm * var(--scale));min-height:calc(16mm * var(--scale));display:flex;flex-direction:column;align-items:center;justify-content:center;border:.75px solid var(--line);border-radius:1.1mm;overflow:hidden;background:#fff;font-family:'Times New Roman',Times,serif;line-height:1.05;box-shadow:none}
+.dd-card-premium .dd-premium-calendar-month {background:var(--soft);border-bottom:.5px solid var(--line);color:var(--accent);font-size:calc(7px * var(--scale));font-weight:800;letter-spacing:.04em;width:100%;padding:.45mm 0;text-align:center;white-space:nowrap}
+.dd-card-premium .dd-premium-calendar-day {font-size:calc(18px * var(--scale));font-weight:900;color:#1b3047;line-height:1;margin-top:.35mm}
+.dd-card-premium .dd-premium-calendar-weekday {font-size:calc(6.9px * var(--scale));font-weight:800;letter-spacing:.11em;color:var(--accent);padding-bottom:.35mm}
+.dd-card-premium .dd-student-strip {grid-template-columns:minmax(0,2.2fr) minmax(0,1.15fr) minmax(0,1.12fr);padding:1mm 1.6mm}
+.dd-card-premium .dd-student-field {align-content:center;padding:.35mm 1.15mm;gap:.2mm .85mm}
+.dd-card-premium .dd-student-lbl {font-size:calc(7.4px * var(--scale));color:#4b6170;font-weight:800}
+.dd-card-premium .dd-student-val,.dd-card-premium .dd-student-roll-field .dd-student-val {font-size:calc(13.2px * var(--scale));line-height:1.12;font-weight:900;color:#1b3047;overflow-wrap:anywhere}
+.dd-card-premium footer {text-align:center;font-weight:700;display:block;width:100%}
+
+/* ASSPS STUDIO EDITIONS 2026-11-04
+ * Print-first designs — eight genuinely distinct structural systems.
+ * The original 1-4 and premium 21-28 styles remain unchanged.
+ * Only the classes dd-card-studio/dd-edition-* can activate these rules.
+ */
+.dd-card.dd-card-premium.dd-card-studio {
+  position:relative!important;
+  isolation:isolate!important;
+  background:#fff!important;
+  border-width:1px!important;
+  border-style:solid!important;
+  border-color:var(--line)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  font-family:'Times New Roman',Times,Georgia,serif!important;
+}
+.dd-card-studio .dd-card-head {z-index:1!important}
+.dd-card-studio .dd-school-name {
+  font-family:'Times New Roman',Times,Georgia,serif!important;
+  font-weight:900!important;
+  color:var(--ink)!important;
+}
+.dd-card-studio .dd-student-strip {
+  display:grid!important;
+  grid-template-columns:minmax(0,2.18fr) minmax(0,1.14fr) minmax(0,1.12fr)!important;
+  align-items:center!important;
+  background:#fff!important;
+}
+.dd-card-studio .dd-student-field {min-width:0!important;overflow:visible!important}
+.dd-card-studio .dd-student-val,.dd-card-studio .dd-student-roll-field .dd-student-val {
+  color:var(--ink)!important;
+  font-weight:900!important;
+}
+.dd-card-studio .dd-premium-calendar {
+  flex-shrink:0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+.dd-card-studio .dd-premium-calendar-day {color:var(--ink)!important}
+.dd-card-studio .dd-rows {min-height:0!important;flex:1 1 auto!important;overflow:visible!important}
+.dd-card-studio .dd-row {min-height:0!important;break-inside:avoid!important}
+.dd-card-studio .dd-diary-cell {white-space:pre-wrap!important;word-break:normal!important;overflow-wrap:anywhere!important;line-height:1.25!important}
+.dd-card-studio .dd-diary-cell.urdu {line-height:1.52!important}
+.dd-card-studio footer {
+  display:block!important;
+  width:100%!important;
+  margin-top:auto!important;
+  padding:1mm 1.8mm!important;
+  text-align:center!important;
+  font-weight:700!important;
+  background:#fff!important;
+  color:var(--ink)!important;
+}
+
+/* 31 — Atelier Folio: gallery-mounted stationery; left bookbind spine */
+.dd-card-studio.dd-edition-atelier {
+  border:1.2px solid var(--line)!important;
+  outline:1px solid var(--line)!important;
+  outline-offset:-2.4mm!important;
+  padding-left:1.2mm!important;
+}
+.dd-edition-atelier .dd-card-accent {position:absolute!important;left:0!important;top:0!important;bottom:0!important;width:1.1mm!important;height:auto!important;background:var(--accent)!important}
+.dd-edition-atelier .dd-card-head {padding:2mm 2.2mm 1.4mm!important;background:#fff!important;border-bottom:2px double var(--foil)!important}
+.dd-edition-atelier .dd-school-name {letter-spacing:.035em!important;font-variant:small-caps!important;line-height:1.13!important}
+.dd-edition-atelier .dd-premium-calendar {border:1px solid var(--foil)!important;border-radius:0!important}
+.dd-edition-atelier .dd-premium-calendar-month {background:var(--soft)!important;color:var(--ink)!important;border-bottom:1px solid var(--foil)!important}
+.dd-edition-atelier .dd-student-strip {background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-atelier .dd-table-head {background:#fff!important;border-top:1px solid var(--accent)!important;border-bottom:2px solid var(--accent)!important;color:var(--ink)!important;margin:1.3mm 2.2mm 0!important}
+.dd-edition-atelier .dd-table-head span {font-variant:small-caps!important;letter-spacing:.085em!important}
+.dd-edition-atelier .dd-rows {margin:0 2.2mm!important;border-color:var(--line)!important}
+.dd-edition-atelier .dd-sub-cell {background:var(--soft)!important;border-right:1px solid var(--line)!important;color:var(--ink)!important}
+.dd-edition-atelier .dd-row {border-top:1px solid var(--line)!important}
+.dd-edition-atelier footer {border-top:2px double var(--foil)!important;margin:1mm 2.2mm 1.2mm!important;width:auto!important}
+
+/* 32 — Ivory Ledger: audited double rule with ruled journal hierarchy */
+.dd-card-studio.dd-edition-ledger {border:2px double var(--line)!important;background:var(--soft)!important}
+.dd-edition-ledger .dd-card-accent {height:.4mm!important;background:var(--foil)!important}
+.dd-edition-ledger .dd-card-head {background:var(--soft)!important;padding:1.5mm 2mm 1.3mm!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-ledger .dd-school-name {letter-spacing:.008em!important;text-decoration:none!important}
+.dd-edition-ledger .dd-mode-badge {background:var(--soft)!important;color:var(--ink)!important;border:1px solid var(--line)!important;padding:.25mm 1mm!important}
+.dd-edition-ledger .dd-premium-calendar {border:1px solid var(--line)!important;border-radius:0!important;background:var(--soft)!important}
+.dd-edition-ledger .dd-premium-calendar-month {background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-ledger .dd-student-strip {background:var(--soft)!important;border-bottom:2px double var(--line)!important}
+.dd-edition-ledger .dd-student-field+.dd-student-field {border-left:1px dashed var(--line)!important}
+.dd-edition-ledger .dd-table-head {background:var(--soft)!important;border:1px solid var(--accent)!important;color:var(--ink)!important;border-radius:0!important;margin:1.2mm 1.7mm 0!important}
+.dd-edition-ledger .dd-rows {border:1px solid var(--accent)!important;border-top:0!important;border-radius:0!important;margin:0 1.7mm!important}
+.dd-edition-ledger .dd-row {border-top:1px solid var(--line)!important}
+.dd-edition-ledger .dd-sub-cell {background:var(--soft)!important;color:var(--ink)!important;border-right:1px solid var(--accent)!important}
+.dd-edition-ledger footer {background:var(--soft)!important;border-top:1px dashed var(--accent)!important}
+
+/* 33 — Nordic Index: Scandinavian typography, edge-to-edge crisp white */
+.dd-card-studio.dd-edition-nordic {border:1px solid var(--line)!important;background:#fff!important;border-radius:1mm!important}
+.dd-edition-nordic .dd-card-accent {height:.7mm!important;background:linear-gradient(90deg,var(--line) 0 34%,var(--soft) 34% 100%)!important}
+.dd-edition-nordic .dd-card-head {padding:1.6mm 2mm 1.5mm!important;border-bottom:0!important;background:#fff!important}
+.dd-edition-nordic .dd-school-name {letter-spacing:.045em!important;text-transform:uppercase!important;color:var(--ink)!important}
+.dd-edition-nordic .dd-mode-badge {background:var(--soft)!important;color:var(--ink)!important;border-left:0!important;border-bottom:1.5px solid var(--accent)!important}
+.dd-edition-nordic .dd-premium-calendar {border:0!important;border-left:2px solid var(--line)!important;border-radius:0!important}
+.dd-edition-nordic .dd-premium-calendar-month {border:0!important;background:var(--soft)!important;color:var(--ink)!important}
+.dd-edition-nordic .dd-student-strip {background:var(--soft)!important;border-top:1px solid var(--line)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-nordic .dd-student-field+.dd-student-field {border-left:1px solid var(--line)!important}
+.dd-edition-nordic .dd-table-head {background:#fff!important;color:var(--ink)!important;border:0!important;border-bottom:2px solid var(--accent)!important;margin:1.2mm 2mm 0!important;letter-spacing:.05em!important}
+.dd-edition-nordic .dd-rows {border:0!important;margin:0 2mm!important}
+.dd-edition-nordic .dd-row {border:0!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-nordic .dd-sub-cell {background:var(--soft)!important;color:var(--ink)!important;border-right:2px solid var(--line)!important}
+.dd-edition-nordic footer {border-top:2px solid var(--accent)!important;margin:0 2mm!important;width:auto!important}
+
+/* 34 — Cambridge Folio: traditional academic double-frame, centered crest/name */
+.dd-card-studio.dd-edition-cambridge {border:1px solid var(--line)!important;box-shadow:inset 0 0 0 1.3mm #fff,inset 0 0 0 1.5mm var(--line)!important}
+.dd-edition-cambridge .dd-card-accent {height:.5mm!important;background:var(--line)!important}
+.dd-edition-cambridge .dd-card-head {padding:1.8mm 2.5mm 1.5mm!important;background:#fff!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-cambridge .dd-head-top {grid-template-columns:auto minmax(0,1fr) auto!important}
+.dd-edition-cambridge .dd-school-name {font-variant:small-caps!important;letter-spacing:.035em!important;text-align:center!important}
+.dd-edition-cambridge .dd-brand-badge-row {justify-content:center!important}
+.dd-edition-cambridge .dd-mode-badge {background:var(--soft)!important;color:var(--ink)!important;border-left:0!important;border-top:1px solid var(--accent)!important;border-bottom:1px solid var(--accent)!important}
+.dd-edition-cambridge .dd-premium-calendar {border:1px solid var(--line)!important;border-radius:50%!important;min-height:calc(17.5mm * var(--scale))!important}
+.dd-edition-cambridge .dd-premium-calendar-month {background:transparent!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-cambridge .dd-student-strip {margin:0 1.4mm!important;background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-cambridge .dd-table-head {background:var(--soft)!important;border:1px solid var(--line)!important;color:var(--ink)!important;margin:1.3mm 2.3mm 0!important;border-radius:0!important}
+.dd-edition-cambridge .dd-rows {border:1px solid var(--line)!important;border-top:0!important;margin:0 2.3mm!important}
+.dd-edition-cambridge .dd-row {border-top:1px solid var(--line)!important}
+.dd-edition-cambridge .dd-sub-cell {background:var(--soft)!important;border-right:1px solid var(--line)!important;color:var(--ink)!important}
+.dd-edition-cambridge footer {border-top:1px solid var(--line)!important;margin:1mm 2.3mm!important;width:auto!important;font-style:italic!important}
+
+/* 35 — Jade Monogram: strong architectural spine + soft asymmetric header */
+.dd-card-studio.dd-edition-monogram {border:1px solid var(--line)!important;border-radius:0 2.5mm 0 2.5mm!important}
+.dd-edition-monogram .dd-card-accent {height:1.0mm!important;background:linear-gradient(90deg,var(--accent) 0 13%,var(--soft) 13% 100%)!important}
+.dd-edition-monogram .dd-card-head {background:linear-gradient(110deg,var(--soft) 0 75%,#fff 75% 100%)!important;border-bottom:1px solid var(--line)!important;padding:1.4mm 1.8mm 1.2mm!important}
+.dd-edition-monogram .dd-logo {border:1px solid var(--accent)!important;border-radius:50%!important;padding:.5mm!important;background:#fff!important}
+.dd-edition-monogram .dd-school-name {letter-spacing:.012em!important;color:var(--ink)!important}
+.dd-edition-monogram .dd-mode-badge {background:#fff!important;color:var(--accent)!important;border-left:2px solid var(--accent)!important}
+.dd-edition-monogram .dd-premium-calendar {border:1px solid var(--line)!important;border-radius:0 2mm 0 2mm!important}
+.dd-edition-monogram .dd-premium-calendar-month {background:var(--soft)!important}
+.dd-edition-monogram .dd-student-strip {background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-monogram .dd-table-head {background:var(--soft)!important;color:var(--ink)!important;border:0!important;border-left:2mm solid var(--accent)!important;margin:1.1mm 1.8mm 0!important}
+.dd-edition-monogram .dd-rows {margin:0 1.8mm!important;border:1px solid var(--line)!important;border-top:0!important}
+.dd-edition-monogram .dd-row {border-top:1px solid var(--line)!important}
+.dd-edition-monogram .dd-sub-cell {background:var(--soft)!important;border-right:1px solid var(--line)!important;color:var(--ink)!important}
+.dd-edition-monogram footer {border-top:1px solid var(--line)!important;background:var(--soft)!important}
+
+/* 36 — Rose Letterpress: elegant typographic high-end paper, thin engraved rules */
+.dd-card-studio.dd-edition-letterpress {border:1px solid var(--line)!important;background:#fff!important;border-radius:2mm 0 2mm 0!important}
+.dd-edition-letterpress .dd-card-accent {height:.5mm!important;background:var(--accent)!important}
+.dd-edition-letterpress .dd-card-head {padding:1.7mm 2mm 1.3mm!important;background:#fff!important;border-bottom:2px double var(--line)!important}
+.dd-edition-letterpress .dd-school-name {font-style:normal!important;font-variant:small-caps!important;letter-spacing:.055em!important;color:var(--ink)!important}
+.dd-edition-letterpress .dd-mode-badge {background:#fff!important;color:var(--accent)!important;border:0!important;border-bottom:1px solid var(--accent)!important;border-radius:0!important}
+.dd-edition-letterpress .dd-premium-calendar {border:1px solid var(--line)!important;border-radius:2.2mm 2.2mm .5mm .5mm!important}
+.dd-edition-letterpress .dd-premium-calendar-month {background:var(--soft)!important;color:var(--ink)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-letterpress .dd-student-strip {background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-letterpress .dd-table-head {background:#fff!important;color:var(--ink)!important;border:0!important;border-bottom:1px solid var(--accent)!important;margin:1.3mm 1.8mm 0!important}
+.dd-edition-letterpress .dd-rows {border:0!important;margin:0 1.8mm!important}
+.dd-edition-letterpress .dd-row {border:0!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-letterpress .dd-sub-cell {background:var(--soft)!important;color:var(--ink)!important;border-right:1px solid var(--line)!important}
+.dd-edition-letterpress footer {border-top:2px double var(--line)!important;margin:0 1.8mm!important;width:auto!important;font-style:italic!important}
+
+/* 37 — Architect Grid: crisp technical-spec sheet, numbered table-side labels */
+.dd-card-studio.dd-edition-architect {border:1px solid var(--accent)!important;background:#fff!important}
+.dd-edition-architect .dd-card-accent {height:.45mm!important;background:var(--accent)!important}
+.dd-edition-architect .dd-card-head {padding:1.55mm 1.8mm 1.3mm!important;background:var(--soft)!important;border-bottom:1px solid var(--accent)!important}
+.dd-edition-architect .dd-school-name {letter-spacing:.015em!important;color:var(--ink)!important}
+.dd-edition-architect .dd-mode-badge {border:1px solid var(--line)!important;color:var(--ink)!important;background:#fff!important;padding:.25mm .75mm!important}
+.dd-edition-architect .dd-premium-calendar {border:1px solid var(--accent)!important;border-radius:0!important;background:#fff!important}
+.dd-edition-architect .dd-premium-calendar-month {background:var(--soft)!important;border-bottom:1px solid var(--accent)!important}
+.dd-edition-architect .dd-student-strip {background:var(--soft)!important;border-top:1px solid var(--line)!important;border-bottom:1px solid var(--accent)!important}
+.dd-edition-architect .dd-student-field+.dd-student-field {border-left:1px solid var(--line)!important}
+.dd-edition-architect .dd-table-head {background:var(--soft)!important;color:var(--ink)!important;border:1px solid var(--accent)!important;border-radius:0!important;margin:1mm 1.7mm 0!important}
+.dd-edition-architect .dd-rows {counter-reset:academic!important;border:1px solid var(--accent)!important;border-top:0!important;margin:0 1.7mm!important;border-radius:0!important}
+.dd-edition-architect .dd-row {counter-increment:academic!important;border-top:1px solid var(--line)!important}
+.dd-edition-architect .dd-sub-cell {background:var(--soft)!important;border-right:1px solid var(--accent)!important;color:var(--ink)!important}
+.dd-edition-architect .dd-sub-cell::before {content:counter(academic, decimal-leading-zero)!important;display:inline-block!important;color:var(--accent)!important;font-size:.7em!important;margin-right:.9mm!important}
+.dd-edition-architect footer {border-top:1px solid var(--accent)!important}
+
+/* 38 — Pearl Horizon: understated architectural line, asymmetric premium composition */
+.dd-card-studio.dd-edition-horizon {border:1px solid var(--line)!important;border-radius:1.5mm!important}
+.dd-edition-horizon .dd-card-accent {height:.75mm!important;background:linear-gradient(90deg,var(--accent) 0 23%,var(--line) 23% 70%,var(--line) 70% 100%)!important}
+.dd-edition-horizon .dd-card-head {padding:1.8mm 2mm 1.4mm!important;background:linear-gradient(120deg,var(--soft) 0 62%,#fff 62% 100%)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-horizon .dd-school-name {font-variant:small-caps!important;letter-spacing:.035em!important;color:var(--ink)!important}
+.dd-edition-horizon .dd-mode-badge {background:var(--soft)!important;color:var(--ink)!important;border-left:0!important;border-right:2px solid var(--accent)!important}
+.dd-edition-horizon .dd-premium-calendar {border:1px solid var(--line)!important;border-radius:1.6mm!important}
+.dd-edition-horizon .dd-premium-calendar-month {background:var(--soft)!important;color:var(--ink)!important}
+.dd-edition-horizon .dd-student-strip {background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-horizon .dd-table-head {background:var(--soft)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:1.3mm 1.3mm 0 0!important;margin:1.2mm 1.8mm 0!important}
+.dd-edition-horizon .dd-rows {border:1px solid var(--line)!important;border-top:0!important;border-radius:0 0 1.3mm 1.3mm!important;margin:0 1.8mm!important}
+.dd-edition-horizon .dd-row {border-top:1px solid var(--line)!important}
+.dd-edition-horizon .dd-sub-cell {background:var(--soft)!important;color:var(--ink)!important;border-right:1px solid var(--line)!important}
+.dd-edition-horizon footer {border-top:1px solid var(--line)!important;color:var(--ink)!important}
+
+/* Print geometry is fixed by A4 card grid; never force fixed row heights. */
+@media print {
+  .dd-card-studio .dd-row {break-inside:avoid!important;page-break-inside:avoid!important}
+  .dd-card-studio .dd-premium-calendar {break-inside:avoid!important}
+  .dd-card-studio .dd-diary-cell.urdu {font-family:'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif!important}
+}
+
+/* Studio selector — structure and color are two independent decisions. */
+.dd-studio-config {display:flex;flex-direction:column;gap:12px;padding:12px 10px;border:1px solid rgba(174,190,203,.28);border-radius:14px;background:rgba(255,255,255,.025)}
+.dd-studio-config-title {display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:5px}
+.dd-studio-config-title strong {font-size:12px;letter-spacing:.02em;color:#edf3f8}
+.dd-studio-config-title span {font-size:10px;color:#aab8ca}
+.dd-studio-designs {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.dd-studio-designs .dd-studio-design-choice {min-width:0;display:flex;align-items:center;gap:8px;border:1px solid rgba(171,188,204,.25);border-radius:10px;background:rgba(255,255,255,.03);padding:7px;text-align:left;box-shadow:none;color:#e3eaf3;font-size:10px;font-weight:700;line-height:1.2}
+.dd-studio-design-choice.active {border-color:#c9b995!important;background:rgba(236,232,219,.12)!important;color:#fff}
+.dd-studio-mini {display:flex;flex-direction:column;flex-shrink:0;gap:2px;position:relative;width:35px;height:39px;padding:5px 4px;border:1px solid #c5c9c7;background:#fff;border-radius:2px}
+.dd-studio-mini i {display:block;height:3px;background:#acbfc0}
+.dd-studio-mini i:nth-child(2) {height:2px;width:70%}
+.dd-studio-mini i:nth-child(3) {height:13px;background:repeating-linear-gradient(0deg,#d1dfdf,#d1dfdf 1px,transparent 1px,transparent 5px);border-left:7px solid #e5efef}
+.dd-studio-mini-atelier {border-left:4px solid #8aa9a0}
+.dd-studio-mini-ledger {border:3px double #c2af8c}
+.dd-studio-mini-nordic {border-top:3px solid #86b9cd}
+.dd-studio-mini-cambridge {outline:1px solid #c0b29a;outline-offset:-4px}
+.dd-studio-mini-monogram {border-radius:0 7px 0 7px;border-top:3px solid #a3cdb8}
+.dd-studio-mini-letterpress {border-bottom:3px double #c3a4b3}
+.dd-studio-mini-architect {border-radius:0;border:1px solid #95adb1}
+.dd-studio-mini-architect i:nth-child(3) {border-left:3px double #718e96}
+.dd-studio-mini-horizon {border-top:3px solid #b7a7c8;border-radius:3px}
+.dd-studio-colors {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.dd-studio-colors .dd-studio-color-choice {display:flex;gap:7px;align-items:center;min-width:0;box-shadow:none;padding:5px 6px;border:1px solid rgba(171,188,204,.26);background:rgba(255,255,255,.03);border-radius:9px;color:#dce6f0;text-align:left;font-size:10px;font-weight:700;line-height:1.15}
+.dd-studio-colors .dd-studio-color-choice.active {border-color:#c9b995!important;background:rgba(236,232,219,.10)!important;color:#fff}
+.dd-studio-color-swatch {width:27px;height:23px;flex-shrink:0;background:linear-gradient(135deg,var(--swatch-soft) 0 52%,var(--swatch-accent) 52% 75%,var(--swatch-line) 75%);border:1px solid var(--swatch-line);border-radius:3px}
+.dd-studio-colors button:disabled {opacity:.4;cursor:not-allowed}
+.dd-classic-themes {font-size:10px;color:#aabbcc;border-top:1px solid rgba(171,188,204,.18);padding-top:8px}
+.dd-classic-themes summary {cursor:pointer;font-weight:700;line-height:1.6}
+.dd-classic-themes .dd-palettes {margin-top:8px}
+@media(max-width:470px){.dd-studio-designs,.dd-studio-colors{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* A195 – Daily Diary Studio typography engine.
+ * Shared by preview and independent A4 print iframe; Studio editions only. */
+.dd-card.dd-card-premium.dd-card-studio {font-family:var(--dd-font,'Times New Roman',serif)!important}
+.dd-card-studio .dd-school-name {
+  font-family:'Times New Roman',Times,Georgia,serif!important;
+  font-size:clamp(10px,calc(var(--dd-school-base,16px) * var(--scale) * var(--dd-header-factor,1)),24px)!important
+}
+.dd-card-studio .dd-logo {
+  width:calc(var(--dd-logo-base,14mm) * var(--scale) * var(--dd-header-factor,1))!important;
+  height:calc(var(--dd-logo-base,14mm) * var(--scale) * var(--dd-header-factor,1))!important;
+  flex-shrink:0!important
+}
+.dd-card-studio .dd-card-head {
+  padding-top:calc(1.4mm * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important;
+  padding-bottom:calc(1.25mm * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important
+}
+.dd-card-studio .dd-head-top {gap:calc(1.65mm * var(--dd-header-factor,1))!important}
+.dd-card-studio .dd-premium-calendar {
+  width:calc(17.5mm * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important;
+  min-width:calc(17.5mm * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important;
+  min-height:calc(16mm * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important
+}
+.dd-card-studio .dd-premium-calendar-day {
+  font-size:clamp(12px,calc(18px * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1)),27px)!important
+}
+.dd-card-studio .dd-table-head span {
+  font-family:var(--dd-font,'Times New Roman',serif)!important;
+  font-size:var(--dd-table-head-size,9px)!important;
+  font-weight:var(--dd-table-head-weight,850)!important;
+  line-height:1.15!important;
+  letter-spacing:.018em!important;
+  min-height:3.7mm!important;
+  align-items:center!important
+}
+.dd-card-studio .dd-sub-cell:not(.urdu),
+.dd-card-studio .dd-diary-cell:not(.urdu),
+.dd-card-studio .dd-student-val,
+.dd-card-studio .dd-student-roll-field .dd-student-val {
+  font-family:var(--dd-font,'Times New Roman',serif)!important
+}
+.dd-card-studio .dd-sub-cell.urdu,
+.dd-card-studio .dd-diary-cell.urdu {
+  font-family:var(--dd-urdu-font,'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif)!important
+}
+.dd-card-studio .dd-row {
+  min-height:var(--dd-row-height,0px)!important;
+  flex:var(--dd-row-flex,1 1 auto)!important
+}
+.dd-card-studio footer {
+  font-size:var(--dd-footer-size,8px)!important;
+  line-height:1.12!important;
+  min-height:2.4mm!important
+}
+.dd-card-studio footer.urdu {
+  font-family:var(--dd-urdu-font,'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif)!important
+}
+.dd-sqb-table-heading .dd-sqb-label {white-space:nowrap}
+.dd-sqb-table-heading .dd-sqb-stepper button {min-width:23px}
+@media print {
+  .dd-card-studio .dd-table-head span {break-inside:avoid!important}
+  .dd-card-studio .dd-row {break-inside:avoid!important}
+}

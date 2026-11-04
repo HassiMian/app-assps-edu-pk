@@ -236,3 +236,66 @@
   .dd-card-studio .dd-premium-calendar {break-inside:avoid!important}
   .dd-card-studio .dd-diary-cell.urdu {font-family:'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif!important}
 }
+
+/* A195 – Daily Diary Studio typography engine.
+ * Shared by preview and independent A4 print iframe; Studio editions only. */
+.dd-card.dd-card-premium.dd-card-studio {font-family:var(--dd-font,'Times New Roman',serif)!important}
+.dd-card-studio .dd-school-name {
+  font-family:'Times New Roman',Times,Georgia,serif!important;
+  font-size:clamp(10px,calc(var(--dd-school-base,16px) * var(--scale) * var(--dd-header-factor,1)),24px)!important
+}
+.dd-card-studio .dd-logo {
+  width:calc(var(--dd-logo-base,14mm) * var(--scale) * var(--dd-header-factor,1))!important;
+  height:calc(var(--dd-logo-base,14mm) * var(--scale) * var(--dd-header-factor,1))!important;
+  flex-shrink:0!important
+}
+.dd-card-studio .dd-card-head {
+  padding-top:calc(1.4mm * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important;
+  padding-bottom:calc(1.25mm * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important
+}
+.dd-card-studio .dd-head-top {gap:calc(1.65mm * var(--dd-header-factor,1))!important}
+.dd-card-studio .dd-premium-calendar {
+  width:calc(17.5mm * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important;
+  min-width:calc(17.5mm * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important;
+  min-height:calc(16mm * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important
+}
+.dd-card-studio .dd-premium-calendar-day {
+  font-size:clamp(12px,calc(18px * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1)),27px)!important
+}
+.dd-card-studio .dd-table-head span {
+  font-family:var(--dd-font,'Times New Roman',serif)!important;
+  font-size:var(--dd-table-head-size,9px)!important;
+  font-weight:var(--dd-table-head-weight,850)!important;
+  line-height:1.15!important;
+  letter-spacing:.018em!important;
+  min-height:3.7mm!important;
+  align-items:center!important
+}
+.dd-card-studio .dd-sub-cell:not(.urdu),
+.dd-card-studio .dd-diary-cell:not(.urdu),
+.dd-card-studio .dd-student-val,
+.dd-card-studio .dd-student-roll-field .dd-student-val {
+  font-family:var(--dd-font,'Times New Roman',serif)!important
+}
+.dd-card-studio .dd-sub-cell.urdu,
+.dd-card-studio .dd-diary-cell.urdu {
+  font-family:var(--dd-urdu-font,'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif)!important
+}
+.dd-card-studio .dd-row {
+  min-height:var(--dd-row-height,0px)!important;
+  flex:var(--dd-row-flex,1 1 auto)!important
+}
+.dd-card-studio footer {
+  font-size:var(--dd-footer-size,8px)!important;
+  line-height:1.12!important;
+  min-height:2.4mm!important
+}
+.dd-card-studio footer.urdu {
+  font-family:var(--dd-urdu-font,'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif)!important
+}
+.dd-sqb-table-heading .dd-sqb-label {white-space:nowrap}
+.dd-sqb-table-heading .dd-sqb-stepper button {min-width:23px}
+@media print {
+  .dd-card-studio .dd-table-head span {break-inside:avoid!important}
+  .dd-card-studio .dd-row {break-inside:avoid!important}
+}

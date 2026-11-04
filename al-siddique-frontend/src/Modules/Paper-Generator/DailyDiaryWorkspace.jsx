@@ -94,8 +94,13 @@ const STUDIO_COLORS = [
 
 const FONT_STYLES = [
   { id: 'times', name: 'Times New Roman (Academic Classic)', family: "'Times New Roman', Times, 'Georgia', serif" },
-  { id: 'inter', name: 'Modern Clean (ChatGPT / Anthropic)', family: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" },
+  { id: 'inter', name: 'Inter (Modern Sans)', family: "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" },
   { id: 'serif', name: 'Georgia (Editorial Serif)', family: "'Georgia', 'Times New Roman', serif" },
+  { id: 'cambria', name: 'Cambria (Scholastic Serif)', family: "'Cambria', 'Georgia', 'Times New Roman', serif" },
+  { id: 'garamond', name: 'Garamond (Classic Editorial)', family: "'Garamond', 'Georgia', 'Times New Roman', serif" },
+  { id: 'arial', name: 'Arial (Clean Sans)', family: "Arial, 'Helvetica Neue', sans-serif" },
+  { id: 'verdana', name: 'Verdana (Readable Sans)', family: "Verdana, Geneva, sans-serif" },
+  { id: 'tahoma', name: 'Tahoma (Compact Sans)', family: "Tahoma, Geneva, sans-serif" },
   { id: 'jameel', name: 'Jameel Noori Nastaleeq (Urdu)', family: "'ASSPS Jameel Noori', 'Jameel Noori Nastaleeq', 'Noto Nastaliq Urdu', serif" },
   { id: 'naskh', name: 'Noto Naskh Arabic', family: "'Noto Naskh Arabic', Arial, sans-serif" },
 ]
@@ -233,7 +238,9 @@ function StudentCard({
   footerFontSize = 0,
   globalDiaryFontSize = 12,
   globalSubjectFontSize = 0,
-  globalSubjectBold = false
+  globalSubjectBold = false,
+  tableHeaderFontSize = 12,
+  tableHeaderBold = true
 }) {
   const layout = computeA4Layout(cardsPerPage)
   const studentSec = studentSection(student) || section
@@ -244,6 +251,11 @@ function StudentCard({
   const dynamicHeaderScale = ((headerScalePercent || 100) / 100) * (layout.headerScale || 1.0)
   const isTwoCol = layout.cols >= 2
   const selectedFont = FONT_STYLES.find(f => f.id === fontStyleId) || FONT_STYLES[0]
+  const headerFactor = Math.max(0.75, Math.min(1.35, (Number(headerScalePercent) || 100) / 100))
+  const presetFactor = headerPreset === 'compact' ? .78 : headerPreset === 'spacious' ? 1.28 : 1
+  const urduCardFont = selectedFont.id === 'naskh'
+    ? "'Noto Naskh Arabic', Arial, sans-serif"
+    : "'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif"
 
   const rowCount = rows.filter(r => clean(r.subject) || clean(r.diary)).length
   const isCompactHeader = headerPreset === 'compact' || (rowCount >= 4 && cardsPerPage >= 6)
@@ -258,6 +270,17 @@ function StudentCard({
       '--foil': palette.foil || palette.accent,
       '--scale': layout.scale,
       '--header-scale': dynamicHeaderScale,
+      '--dd-font': selectedFont.family,
+      '--dd-urdu-font': urduCardFont,
+      '--dd-header-factor': headerFactor,
+      '--dd-preset-factor': presetFactor,
+      '--dd-school-base': (schoolNameFontSize > 0 ? schoolNameFontSize : 16) + 'px',
+      '--dd-logo-base': (logoSizeMm > 0 ? logoSizeMm : 14) + 'mm',
+      '--dd-row-height': rowHeightMm > 0 ? 'calc(' + rowHeightMm + 'mm * var(--scale))' : '0px',
+      '--dd-row-flex': rowHeightMm > 0 ? '0 0 var(--dd-row-height)' : '1 1 auto',
+      '--dd-table-head-size': 'clamp(8px, calc(' + (tableHeaderFontSize || 12) + 'px * var(--scale)), 20px)',
+      '--dd-table-head-weight': tableHeaderBold ? 850 : 650,
+      '--dd-footer-size': 'clamp(7.5px, calc(' + (footerFontSize || 9) + 'px * var(--scale)), 16px)',
       fontFamily: selectedFont.family
     }}
     data-student-card
@@ -419,6 +442,8 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const [globalSubjectFontSize, setGlobalSubjectFontSize] = useState(Number(initialDraft.globalSubjectFontSize) || 0)
   const [globalSubjectBold, setGlobalSubjectBold] = useState(Boolean(initialDraft.globalSubjectBold ?? false))
   const [footerFontSize, setFooterFontSize] = useState(Number(initialDraft.footerFontSize) || 0)
+  const [tableHeaderFontSize, setTableHeaderFontSize] = useState(Math.max(9, Math.min(20, Number(initialDraft.tableHeaderFontSize) || 12)))
+  const [tableHeaderBold, setTableHeaderBold] = useState(Boolean(initialDraft.tableHeaderBold ?? true))
   const [editorFontSize, setEditorFontSize] = useState(Number(initialDraft.editorFontSize) || 13)
 
   // Saved Record Identity & Library State
@@ -480,10 +505,10 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
         subjectColWidth, headerScalePercent, rowHeightMm, fontStyleId, headerPreset,
         schoolNameFontSize, logoSizeMm, activeSavedDiaryId,
         globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold,
-        footerFontSize, editorFontSize
+        tableHeaderFontSize, tableHeaderBold, footerFontSize, editorFontSize
       }))
     } catch { /* Preserve editor state */ }
-  }, [mode, classLevel, section, date, rows, cardsPerPage, paletteId, studioColorId, footerText, subjectColWidth, headerScalePercent, rowHeightMm, fontStyleId, headerPreset, schoolNameFontSize, logoSizeMm, activeSavedDiaryId, globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold, footerFontSize, editorFontSize])
+  }, [mode, classLevel, section, date, rows, cardsPerPage, paletteId, studioColorId, footerText, subjectColWidth, headerScalePercent, rowHeightMm, fontStyleId, headerPreset, schoolNameFontSize, logoSizeMm, activeSavedDiaryId, globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold, tableHeaderFontSize, tableHeaderBold, footerFontSize, editorFontSize])
 
   useEffect(() => {
     let cancelled = false
@@ -606,6 +631,17 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       setBusy('')
     }
   }
+  // When switching from Auto, derive the current physical row height before
+  // stepping. CSS zoom affects getBoundingClientRect, so use offsetHeight.
+  const changeRowHeight = direction => {
+    const row = document.querySelector('.dd-card-studio .dd-row') || document.querySelector('.dd-card .dd-row')
+    const scale = computeA4Layout(cardsPerPage).scale || 1
+    const actualMm = row ? row.offsetHeight / (96 / 25.4) / scale : 12
+    const currentMm = rowHeightMm > 0 ? rowHeightMm : actualMm
+    const next = direction > 0 ? Math.ceil(currentMm) + 2 : Math.floor(currentMm) - 2
+    setRowHeightMm(Math.min(26, Math.max(6, next)))
+  }
+
   const changeGlobalDiaryFontSize = delta => {
     const next = Math.max(9, Math.min(24, (globalDiaryFontSize || 12) + delta))
     setGlobalDiaryFontSize(next)
@@ -687,6 +723,8 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     if (record.style_settings?.headerScalePercent) setHeaderScalePercent(Number(record.style_settings.headerScalePercent))
     if (record.style_settings?.rowHeightMm !== undefined) setRowHeightMm(Number(record.style_settings.rowHeightMm))
     if (record.style_settings?.fontStyleId) setFontStyleId(record.style_settings.fontStyleId)
+    if (Number.isFinite(Number(record.style_settings?.tableHeaderFontSize)) && Number(record.style_settings?.tableHeaderFontSize) >= 9) setTableHeaderFontSize(Math.min(20, Number(record.style_settings.tableHeaderFontSize)))
+    if (typeof record.style_settings?.tableHeaderBold === 'boolean') setTableHeaderBold(record.style_settings.tableHeaderBold)
     if (record.style_settings?.headerPreset) setHeaderPreset(record.style_settings.headerPreset)
     if (record.style_settings?.schoolNameFontSize) setSchoolNameFontSize(Number(record.style_settings.schoolNameFontSize))
     if (record.style_settings?.logoSizeMm) setLogoSizeMm(Number(record.style_settings.logoSizeMm))
@@ -771,6 +809,8 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
           globalDiaryFontSize,
           globalSubjectFontSize,
           globalSubjectBold,
+          tableHeaderFontSize,
+          tableHeaderBold,
           footerFontSize,
           editorFontSize
         }
@@ -839,6 +879,13 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     const stageEl = document.querySelector('.dd-page-stage')
     if (!stageEl) {
       window.print()
+      return
+    }
+    // Fail closed instead of silently cutting off homework in dense A4 layouts.
+    const overflowingCards = [...stageEl.querySelectorAll('.dd-card-studio')]
+      .filter(card => card.scrollHeight > card.clientHeight + 2)
+    if (overflowingCards.length) {
+      setStatus(`Print blocked: ${overflowingCards.length} diary card(s) exceed A4 space. Reduce Row Height, text size, or diaries per page, then preview again.`)
       return
     }
 
@@ -1304,6 +1351,69 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   .dd-card-studio .dd-row {break-inside:avoid!important;page-break-inside:avoid!important}
   .dd-card-studio .dd-premium-calendar {break-inside:avoid!important}
   .dd-card-studio .dd-diary-cell.urdu {font-family:'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif!important}
+}
+
+/* A195 – Daily Diary Studio typography engine.
+ * Shared by preview and independent A4 print iframe; Studio editions only. */
+.dd-card.dd-card-premium.dd-card-studio {font-family:var(--dd-font,'Times New Roman',serif)!important}
+.dd-card-studio .dd-school-name {
+  font-family:'Times New Roman',Times,Georgia,serif!important;
+  font-size:clamp(10px,calc(var(--dd-school-base,16px) * var(--scale) * var(--dd-header-factor,1)),24px)!important
+}
+.dd-card-studio .dd-logo {
+  width:calc(var(--dd-logo-base,14mm) * var(--scale) * var(--dd-header-factor,1))!important;
+  height:calc(var(--dd-logo-base,14mm) * var(--scale) * var(--dd-header-factor,1))!important;
+  flex-shrink:0!important
+}
+.dd-card-studio .dd-card-head {
+  padding-top:calc(1.4mm * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important;
+  padding-bottom:calc(1.25mm * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important
+}
+.dd-card-studio .dd-head-top {gap:calc(1.65mm * var(--dd-header-factor,1))!important}
+.dd-card-studio .dd-premium-calendar {
+  width:calc(17.5mm * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important;
+  min-width:calc(17.5mm * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important;
+  min-height:calc(16mm * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1))!important
+}
+.dd-card-studio .dd-premium-calendar-day {
+  font-size:clamp(12px,calc(18px * var(--scale) * var(--dd-header-factor,1) * var(--dd-preset-factor,1)),27px)!important
+}
+.dd-card-studio .dd-table-head span {
+  font-family:var(--dd-font,'Times New Roman',serif)!important;
+  font-size:var(--dd-table-head-size,9px)!important;
+  font-weight:var(--dd-table-head-weight,850)!important;
+  line-height:1.15!important;
+  letter-spacing:.018em!important;
+  min-height:3.7mm!important;
+  align-items:center!important
+}
+.dd-card-studio .dd-sub-cell:not(.urdu),
+.dd-card-studio .dd-diary-cell:not(.urdu),
+.dd-card-studio .dd-student-val,
+.dd-card-studio .dd-student-roll-field .dd-student-val {
+  font-family:var(--dd-font,'Times New Roman',serif)!important
+}
+.dd-card-studio .dd-sub-cell.urdu,
+.dd-card-studio .dd-diary-cell.urdu {
+  font-family:var(--dd-urdu-font,'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif)!important
+}
+.dd-card-studio .dd-row {
+  min-height:var(--dd-row-height,0px)!important;
+  flex:var(--dd-row-flex,1 1 auto)!important
+}
+.dd-card-studio footer {
+  font-size:var(--dd-footer-size,8px)!important;
+  line-height:1.12!important;
+  min-height:2.4mm!important
+}
+.dd-card-studio footer.urdu {
+  font-family:var(--dd-urdu-font,'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif)!important
+}
+.dd-sqb-table-heading .dd-sqb-label {white-space:nowrap}
+.dd-sqb-table-heading .dd-sqb-stepper button {min-width:23px}
+@media print {
+  .dd-card-studio .dd-table-head span {break-inside:avoid!important}
+  .dd-card-studio .dd-row {break-inside:avoid!important}
 }
 
   </style>
@@ -1785,9 +1895,9 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
               <label>
                 <span>Row Height (Expansion)</span>
                 <div className="dd-stepper">
-                  <button type="button" onClick={() => setRowHeightMm(h => Math.max(0, (h || 12) - 2))}><Minus size={12} /></button>
+                  <button type="button" onClick={() => changeRowHeight(-1)}><Minus size={12} /></button>
                   <b>{rowHeightMm > 0 ? `${rowHeightMm}mm` : 'Auto'}</b>
-                  <button type="button" onClick={() => setRowHeightMm(h => Math.min(26, (h || 10) + 2))}><Plus size={12} /></button>
+                  <button type="button" onClick={() => changeRowHeight(1)}><Plus size={12} /></button>
                   {rowHeightMm > 0 ? <button type="button" className="dd-stepper-reset" onClick={() => setRowHeightMm(0)} title="Reset to auto height"><RotateCcw size={11} /></button> : null}
                 </div>
               </label>
@@ -1802,7 +1912,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
             </div>
 
             <label>
-              <span>Card Font Family</span>
+              <span>English Card Font Family</span>
               <select className="dd-font-select" value={fontStyleId} onChange={e => setFontStyleId(e.target.value)}>
                 {FONT_STYLES.map(font => <option key={font.id} value={font.id}>{font.name}</option>)}
               </select>
@@ -1810,7 +1920,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 
             <div className="dd-config-row">
               <label>
-                <span>Diary Font Size</span>
+                <span>Task Text Font Size</span>
                 <div className="dd-stepper">
                   <button type="button" onClick={() => changeGlobalDiaryFontSize(-1)} title="Decrease diary font size"><Minus size={12} /></button>
                   <b>{globalDiaryFontSize}px</b>
@@ -1818,7 +1928,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
                 </div>
               </label>
               <label>
-                <span>Subject Font & Bold</span>
+                <span>Subject Row Font & Bold</span>
                 <div className="dd-stepper">
                   <button
                     type="button"
@@ -1885,9 +1995,9 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
                     <label>
                       <span>School Font Size</span>
                       <div className="dd-stepper">
-                        <button type="button" onClick={() => setSchoolNameFontSize(s => Math.max(9, (s || 12) - 1))}><Minus size={12} /></button>
+                        <button type="button" onClick={() => setSchoolNameFontSize(s => Math.max(9, (s || 16) - 1))}><Minus size={12} /></button>
                         <b>{schoolNameFontSize > 0 ? `${schoolNameFontSize}px` : 'Auto'}</b>
-                        <button type="button" onClick={() => setSchoolNameFontSize(s => Math.min(22, (s || 11) + 1))}><Plus size={12} /></button>
+                        <button type="button" onClick={() => setSchoolNameFontSize(s => Math.min(24, (s || 16) + 1))}><Plus size={12} /></button>
                         {schoolNameFontSize > 0 ? <button type="button" className="dd-stepper-reset" onClick={() => setSchoolNameFontSize(0)}><RotateCcw size={11} /></button> : null}
                       </div>
                     </label>
@@ -1998,7 +2108,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
             <div className="dd-sqb-divider" />
 
             <div className="dd-sqb-group">
-              <span className="dd-sqb-label">Diary Font:</span>
+              <span className="dd-sqb-label">Task Text:</span>
               <div className="dd-sqb-stepper">
                 <button type="button" onClick={() => changeGlobalDiaryFontSize(-1)} title="Decrease diary font size"><Minus size={11} /></button>
                 <b>{globalDiaryFontSize}px</b>
@@ -2007,7 +2117,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
             </div>
 
             <div className="dd-sqb-group">
-              <span className="dd-sqb-label">Subject:</span>
+              <span className="dd-sqb-label">Subject Row:</span>
               <div className="dd-sqb-stepper">
                 <button
                   type="button"
@@ -2025,12 +2135,27 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 
             <div className="dd-sqb-divider" />
 
+            <div className="dd-sqb-divider" />
+            <div className="dd-sqb-group dd-sqb-table-heading" data-table-heading-controls>
+              <span className="dd-sqb-label">Table Headings:</span>
+              <div className="dd-sqb-stepper">
+                <button type="button" onClick={() => setTableHeaderBold(value => !value)}
+                  className={tableHeaderBold ? 'dd-sqb-btn-bold active' : 'dd-sqb-btn-bold'}
+                  title="Toggle Subject and Home Task heading bold" aria-label="Toggle table headings bold">B</button>
+                <button type="button" onClick={() => setTableHeaderFontSize(value => Math.max(9, value - 1))}
+                  title="Decrease table heading font size" aria-label="Decrease table heading font size"><Minus size={11} /></button>
+                <b>{tableHeaderFontSize}px</b>
+                <button type="button" onClick={() => setTableHeaderFontSize(value => Math.min(20, value + 1))}
+                  title="Increase table heading font size" aria-label="Increase table heading font size"><Plus size={11} /></button>
+              </div>
+            </div>
+
             <div className="dd-sqb-group">
               <span className="dd-sqb-label">Row Height:</span>
               <div className="dd-sqb-stepper">
-                <button type="button" onClick={() => setRowHeightMm(h => Math.max(0, (h || 12) - 2))} title="Decrease row height"><Minus size={11} /></button>
+                <button type="button" onClick={() => changeRowHeight(-1)} title="Decrease row height"><Minus size={11} /></button>
                 <b>{rowHeightMm > 0 ? `${rowHeightMm}mm` : 'Auto'}</b>
-                <button type="button" onClick={() => setRowHeightMm(h => Math.min(26, (h || 10) + 2))} title="Increase row height"><Plus size={11} /></button>
+                <button type="button" onClick={() => changeRowHeight(1)} title="Increase row height"><Plus size={11} /></button>
                 {rowHeightMm > 0 && <button type="button" className="dd-sqb-reset" onClick={() => setRowHeightMm(0)} title="Reset row height"><RotateCcw size={10} /></button>}
               </div>
             </div>
@@ -2054,9 +2179,9 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
                 <button type="button" onClick={() => setHeaderScalePercent(h => Math.min(135, (h || 100) + 5))} title="Increase header scale"><Plus size={11} /></button>
               </div>
               <div className="dd-sqb-stepper" title="School title font size">
-                <button type="button" onClick={() => setSchoolNameFontSize(s => Math.max(9, (s || 12) - 1))} title="Decrease school title font size"><Minus size={11} /></button>
+                <button type="button" onClick={() => setSchoolNameFontSize(s => Math.max(9, (s || 16) - 1))} title="Decrease school title font size"><Minus size={11} /></button>
                 <b>{schoolNameFontSize > 0 ? `${schoolNameFontSize}px` : 'Auto'}</b>
-                <button type="button" onClick={() => setSchoolNameFontSize(s => Math.min(22, (s || 11) + 1))} title="Increase school title font size"><Plus size={11} /></button>
+                <button type="button" onClick={() => setSchoolNameFontSize(s => Math.min(24, (s || 16) + 1))} title="Increase school title font size"><Plus size={11} /></button>
                 {schoolNameFontSize > 0 && <button type="button" className="dd-sqb-reset" onClick={() => setSchoolNameFontSize(0)} title="Reset school font size"><RotateCcw size={10} /></button>}
               </div>
             </div>
@@ -2119,6 +2244,8 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
                       globalDiaryFontSize={globalDiaryFontSize}
                       globalSubjectFontSize={globalSubjectFontSize}
                       globalSubjectBold={globalSubjectBold}
+                      tableHeaderFontSize={tableHeaderFontSize}
+                      tableHeaderBold={tableHeaderBold}
                     />
                   ))}
                 </div>
