@@ -1,0 +1,30 @@
+
+/* Premium 8 — isolated iframe A4 print rules. Inline AFTER standard print CSS. */
+@media print {
+  .dd-card.dd-card-premium {border-color:var(--line)!important;border-radius:1.4mm!important;box-shadow:none!important}
+  .dd-card-premium .dd-card-accent {height:.5mm!important;background:linear-gradient(to right,var(--foil) 0 13%,var(--line) 13% 100%)!important}
+  .dd-card-premium .dd-card-head {gap:0!important;padding:1.1mm 2mm .85mm!important;background:#fff!important;border-bottom:.5px solid var(--line)!important}
+  .dd-card-premium .dd-head-top {gap:1.65mm!important;align-items:center!important}
+  .dd-card-premium .dd-logo {width:calc(8.5mm * var(--header-scale,1))!important;height:calc(8.5mm * var(--header-scale,1))!important}
+  .dd-card-premium .dd-school-name {font-family:'Times New Roman',Times,Georgia,serif!important;font-size:calc(10px * var(--scale) * var(--header-scale,1))!important;font-weight:800!important;letter-spacing:.016em!important;line-height:1.06!important;color:#1b3047!important}
+  .dd-card-premium .dd-brand {gap:.15mm!important}
+  .dd-card-premium .dd-mode-badge {background:var(--soft)!important;color:var(--accent)!important;border-left:1.4px solid var(--foil)!important;border-radius:0!important;padding:.15mm .8mm!important;font-size:calc(5.9px * var(--scale))!important}
+  .dd-card-premium .dd-motto-tag,.dd-card-premium .dd-head-meta-row {display:none!important}
+  .dd-card-premium .dd-student-strip {display:grid!important;grid-template-columns:minmax(0,2.1fr) minmax(0,1.05fr) minmax(0,1.15fr) minmax(0,1fr)!important;gap:0!important;padding:.9mm 1.8mm!important;background:var(--soft)!important;border-bottom:.6px solid var(--line)!important}
+  .dd-card-premium .dd-student-field {display:flex!important;flex-wrap:wrap!important;align-content:center!important;justify-content:flex-start!important;gap:.3mm .8mm!important;min-width:0!important;padding:.1mm .85mm!important;border:0!important;border-radius:0!important;background:transparent!important}
+  .dd-card-premium .dd-student-field + .dd-student-field {border-left:.5px solid var(--line)!important}
+  .dd-card-premium .dd-student-name-field {padding-left:.3mm!important}
+  .dd-card-premium .dd-student-lbl {font-size:calc(6.3px * var(--scale))!important;color:#63727a!important;letter-spacing:.008em!important}
+  .dd-card-premium .dd-student-val,.dd-card-premium .dd-student-roll-field .dd-student-val {font-family:'Times New Roman',Times,Georgia,serif!important;font-size:calc(8px * var(--scale))!important;font-weight:700!important;line-height:1.16!important;color:var(--ink)!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere!important}
+  .dd-card-premium .dd-table-head {margin:.95mm 1.65mm 0!important;background:var(--soft)!important;color:var(--ink)!important;border:.8px solid var(--line)!important;border-radius:.7mm .7mm 0 0!important}
+  .dd-card-premium .dd-table-head span {padding:.85mm 1mm!important;font-family:'Times New Roman',Times,Georgia,serif!important;font-size:calc(7.5px * var(--scale))!important;letter-spacing:.025em!important}
+  .dd-card-premium .dd-table-head span + span {border-left:.8px solid var(--line)!important}
+  .dd-card-premium .dd-rows {margin:0 1.65mm!important;padding:0!important;gap:0!important;border:.8px solid var(--line)!important;border-top:0!important;border-radius:0 0 .7mm .7mm!important;overflow:visible!important}
+  .dd-card-premium .dd-row {border:0!important;border-top:.6px solid var(--line)!important;border-radius:0!important;min-height:0!important;flex:1 1 auto!important;break-inside:avoid!important}
+  .dd-card-premium .dd-row:first-child {border-top:.7px solid var(--line)!important}
+  .dd-card-premium .dd-sub-cell {background:var(--soft)!important;color:#23354b!important;border-right:.7px solid var(--line)!important;padding:.75mm .7mm!important}
+  .dd-card-premium .dd-diary-cell {background:#fff!important;color:#1f2b3c!important;padding:.85mm 1.35mm!important;line-height:1.24!important;white-space:pre-wrap!important}
+  .dd-card-premium .dd-diary-cell.urdu {line-height:1.55!important}
+  .dd-card-premium footer {margin-top:.6mm!important;background:#fff!important;border-top:.5px solid var(--line)!important;padding:.8mm 1.8mm!important;color:#516170!important;text-align:left!important}
+}
+

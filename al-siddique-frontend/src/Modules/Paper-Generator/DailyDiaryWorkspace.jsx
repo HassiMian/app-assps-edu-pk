@@ -58,6 +58,16 @@ const PALETTES = [
   { id: 2, name: 'Royal Blue', accent: '#1769aa', soft: '#edf6fc', line: '#c7dcec', ink: '#12314a' },
   { id: 3, name: 'Crimson Editorial', accent: '#a4343f', soft: '#fbf0f1', line: '#e6c7cb', ink: '#3b2024' },
   { id: 4, name: 'Gold Academy', accent: '#b77b00', soft: '#fff8e8', line: '#ead7aa', ink: '#3b2c12' },
+
+  // Eight new low-ink, print-safe editions. IDs 1-4 remain stable for saved diaries.
+  { id: 21, name: 'Porcelain Jade · Premium', premium: true, accent: '#517c70', soft: '#f1f8f4', line: '#bdd5ca', ink: '#1e3540', foil: '#c4a66e' },
+  { id: 22, name: 'Champagne Gold · Premium', premium: true, accent: '#a78047', soft: '#fdf8ee', line: '#e4d5ba', ink: '#31313b', foil: '#c8a469' },
+  { id: 23, name: 'Powder Blue · Premium', premium: true, accent: '#578db7', soft: '#f0f7fc', line: '#c6ddec', ink: '#1d344b', foil: '#b9a780' },
+  { id: 24, name: 'Blush Mauve · Premium', premium: true, accent: '#aa788c', soft: '#fcf4f7', line: '#e6d2dd', ink: '#3a2d3e', foil: '#cfad80' },
+  { id: 25, name: 'Lilac Mist · Premium', premium: true, accent: '#9179ad', soft: '#f7f3fb', line: '#ddd2eb', ink: '#302c45', foil: '#c6a97c' },
+  { id: 26, name: 'Elegant Sage · Premium', premium: true, accent: '#718e72', soft: '#f4f8f2', line: '#cfddcb', ink: '#293b35', foil: '#c2ac78' },
+  { id: 27, name: 'Peach & Navy · Premium', premium: true, accent: '#b9795f', soft: '#fff6f0', line: '#eddbcc', ink: '#21344b', foil: '#cba176' },
+  { id: 28, name: 'Silver Lavender · Premium', premium: true, accent: '#827da3', soft: '#f5f4fa', line: '#d9d8e8', ink: '#29334a', foil: '#b9b7c6' },
 ]
 
 const FONT_STYLES = [
@@ -203,12 +213,13 @@ function StudentCard({
   const isCompactHeader = headerPreset === 'compact' || (rowCount >= 4 && cardsPerPage >= 6)
 
   return <article
-    className={`dd-card ${isTwoCol ? 'dd-card-two-col' : 'dd-card-one-col'} ${isCompactHeader ? 'dd-card-compact' : ''} ${layout.lastSpan && cardsPerPage === 5 && indexInPage === 4 ? 'span-last' : ''}`}
+    className={`dd-card ${palette.premium ? 'dd-card-premium' : ''} ${isTwoCol ? 'dd-card-two-col' : 'dd-card-one-col'} ${isCompactHeader ? 'dd-card-compact' : ''} ${layout.lastSpan && cardsPerPage === 5 && indexInPage === 4 ? 'span-last' : ''}`}
     style={{
       '--accent': palette.accent,
       '--soft': palette.soft,
       '--line': palette.line,
       '--ink': palette.ink,
+      '--foil': palette.foil || palette.accent,
       '--scale': layout.scale,
       '--header-scale': dynamicHeaderScale,
       fontFamily: selectedFont.family
@@ -254,10 +265,22 @@ function StudentCard({
         <span className="dd-student-lbl">STUDENT:</span>
         <strong className="dd-student-val">{student ? studentName(student) : 'Student Name'}</strong>
       </div>
+      {palette.premium && (
+        <div className="dd-student-field dd-student-class-field">
+          <span className="dd-student-lbl">CLASS:</span>
+          <strong className="dd-student-val">{classLabel}{studentSec ? ' · ' + studentSec : ''}</strong>
+        </div>
+      )}
       <div className="dd-student-field dd-student-roll-field">
         <span className="dd-student-lbl">ROLL:</span>
         <strong className="dd-student-val">{student ? (studentRoll(student) ? `Roll ${studentRoll(student)}` : '—') : 'Roll No.'}</strong>
       </div>
+      {palette.premium && (
+        <div className="dd-student-field dd-student-date-field">
+          <span className="dd-student-lbl">DATE:</span>
+          <strong className="dd-student-val">{formatDate(date)}</strong>
+        </div>
+      )}
     </div>
 
     <div className="dd-table-head" style={{ gridTemplateColumns: colRatio }}>
@@ -340,7 +363,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const [date, setDate] = useState(initialDraft.date || today())
   const [rows, setRows] = useState(Array.isArray(initialDraft.rows) && initialDraft.rows.length ? initialDraft.rows : DEFAULT_ROWS)
   const [cardsPerPage, setCardsPerPage] = useState(CARD_COUNTS.includes(Number(initialDraft.cardsPerPage)) ? Number(initialDraft.cardsPerPage) : 6)
-  const [paletteId, setPaletteId] = useState(PALETTES.some(p => p.id === Number(initialDraft.paletteId)) ? Number(initialDraft.paletteId) : 3)
+  const [paletteId, setPaletteId] = useState(PALETTES.some(p => p.id === Number(initialDraft.paletteId)) ? Number(initialDraft.paletteId) : 21)
   const [footerText, setFooterText] = useState(initialDraft.footerText || 'Please review the assigned work and keep this card in the notebook.')
   const [subjectColWidth, setSubjectColWidth] = useState(Number(initialDraft.subjectColWidth) || 28)
   const [headerScalePercent, setHeaderScalePercent] = useState(Number(initialDraft.headerScalePercent) || 100)
@@ -1000,6 +1023,37 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       font-weight: 700 !important;
       flex: 0 0 auto !important;
     }
+
+/* Premium 8 — isolated iframe A4 print rules. Inline AFTER standard print CSS. */
+@media print {
+  .dd-card.dd-card-premium {border-color:var(--line)!important;border-radius:1.4mm!important;box-shadow:none!important}
+  .dd-card-premium .dd-card-accent {height:.5mm!important;background:linear-gradient(to right,var(--foil) 0 13%,var(--line) 13% 100%)!important}
+  .dd-card-premium .dd-card-head {gap:0!important;padding:1.1mm 2mm .85mm!important;background:#fff!important;border-bottom:.5px solid var(--line)!important}
+  .dd-card-premium .dd-head-top {gap:1.65mm!important;align-items:center!important}
+  .dd-card-premium .dd-logo {width:calc(8.5mm * var(--header-scale,1))!important;height:calc(8.5mm * var(--header-scale,1))!important}
+  .dd-card-premium .dd-school-name {font-family:'Times New Roman',Times,Georgia,serif!important;font-size:calc(10px * var(--scale) * var(--header-scale,1))!important;font-weight:800!important;letter-spacing:.016em!important;line-height:1.06!important;color:#1b3047!important}
+  .dd-card-premium .dd-brand {gap:.15mm!important}
+  .dd-card-premium .dd-mode-badge {background:var(--soft)!important;color:var(--accent)!important;border-left:1.4px solid var(--foil)!important;border-radius:0!important;padding:.15mm .8mm!important;font-size:calc(5.9px * var(--scale))!important}
+  .dd-card-premium .dd-motto-tag,.dd-card-premium .dd-head-meta-row {display:none!important}
+  .dd-card-premium .dd-student-strip {display:grid!important;grid-template-columns:minmax(0,2.1fr) minmax(0,1.05fr) minmax(0,1.15fr) minmax(0,1fr)!important;gap:0!important;padding:.9mm 1.8mm!important;background:var(--soft)!important;border-bottom:.6px solid var(--line)!important}
+  .dd-card-premium .dd-student-field {display:flex!important;flex-wrap:wrap!important;align-content:center!important;justify-content:flex-start!important;gap:.3mm .8mm!important;min-width:0!important;padding:.1mm .85mm!important;border:0!important;border-radius:0!important;background:transparent!important}
+  .dd-card-premium .dd-student-field + .dd-student-field {border-left:.5px solid var(--line)!important}
+  .dd-card-premium .dd-student-name-field {padding-left:.3mm!important}
+  .dd-card-premium .dd-student-lbl {font-size:calc(6.3px * var(--scale))!important;color:#63727a!important;letter-spacing:.008em!important}
+  .dd-card-premium .dd-student-val,.dd-card-premium .dd-student-roll-field .dd-student-val {font-family:'Times New Roman',Times,Georgia,serif!important;font-size:calc(8px * var(--scale))!important;font-weight:700!important;line-height:1.16!important;color:var(--ink)!important;white-space:normal!important;overflow:visible!important;text-overflow:clip!important;overflow-wrap:anywhere!important}
+  .dd-card-premium .dd-table-head {margin:.95mm 1.65mm 0!important;background:var(--soft)!important;color:var(--ink)!important;border:.8px solid var(--line)!important;border-radius:.7mm .7mm 0 0!important}
+  .dd-card-premium .dd-table-head span {padding:.85mm 1mm!important;font-family:'Times New Roman',Times,Georgia,serif!important;font-size:calc(7.5px * var(--scale))!important;letter-spacing:.025em!important}
+  .dd-card-premium .dd-table-head span + span {border-left:.8px solid var(--line)!important}
+  .dd-card-premium .dd-rows {margin:0 1.65mm!important;padding:0!important;gap:0!important;border:.8px solid var(--line)!important;border-top:0!important;border-radius:0 0 .7mm .7mm!important;overflow:visible!important}
+  .dd-card-premium .dd-row {border:0!important;border-top:.6px solid var(--line)!important;border-radius:0!important;min-height:0!important;flex:1 1 auto!important;break-inside:avoid!important}
+  .dd-card-premium .dd-row:first-child {border-top:.7px solid var(--line)!important}
+  .dd-card-premium .dd-sub-cell {background:var(--soft)!important;color:#23354b!important;border-right:.7px solid var(--line)!important;padding:.75mm .7mm!important}
+  .dd-card-premium .dd-diary-cell {background:#fff!important;color:#1f2b3c!important;padding:.85mm 1.35mm!important;line-height:1.24!important;white-space:pre-wrap!important}
+  .dd-card-premium .dd-diary-cell.urdu {line-height:1.55!important}
+  .dd-card-premium footer {margin-top:.6mm!important;background:#fff!important;border-top:.5px solid var(--line)!important;padding:.8mm 1.8mm!important;color:#516170!important;text-align:left!important}
+}
+
+
   </style>
 </head>
 <body>
