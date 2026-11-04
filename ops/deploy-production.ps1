@@ -105,7 +105,11 @@ grep -Eq '^AUTO_MIGRATE_ON_BOOT=false$' /var/www/apex-backend/.env
 }
 
 if ($Mode -in @('Frontend', 'Both')) {
+  # Source must carry the live Diary Studio controller contract before any frontend promotion.
+  RunAlways 'node ops/a197/check-diary-release-continuity.mjs'
   Run 'npm run build:frontend'
+  # A successful build alone is insufficient: reject orphaned or legacy diary chunks.
+  if ($Apply) { RunAlways 'node ops/a197/check-diary-release-continuity.mjs --dist' }
   $archive = Join-Path $env:TEMP "assps-frontend-dist-$timestamp.tar"
   Run "tar -cf `"$archive`" -C `"$frontendRoot\dist`" ."
   CopyToRemote $archive "/tmp/assps-frontend-dist-$timestamp.tar"
