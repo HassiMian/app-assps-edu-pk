@@ -1,9 +1,9 @@
 {
   "baseline_sha256": "0a2bda12ebe44d264e5a47015396830c7ea648454c6241215da8fe85f8e93750",
-  "new_sha256": "2ecfe676b94433a2aab718a235d33baa79203bde0b15e35176e2c3590db191b0",
+  "new_sha256": "792e3b2ca6a88f1762eaf403ef173fa95fd8308c2d6284b1928d51651de06b75",
   "source_bundle": "DailyDiaryWorkspace-Crc_h4AZ.js",
-  "js": "DailyDiaryWorkspace-ASSPS-PREMIUM8-CALENDAR-V2-20261104.js",
-  "css": "DailyDiaryWorkspace-ASSPS-PREMIUM8-CALENDAR-V2-20261104.css",
+  "js": "DailyDiaryWorkspace-ASSPS-STUDIO8-INDEPENDENT-COLORS-20261104.js",
+  "css": "DailyDiaryWorkspace-ASSPS-STUDIO8-INDEPENDENT-COLORS-20261104.css",
   "ids": [
     21,
     22,
@@ -12,7 +12,15 @@
     25,
     26,
     27,
-    28
+    28,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38
   ],
   "theme_names": [
     "Porcelain Jade · Premium",
@@ -22,7 +30,15 @@
     "Lilac Mist · Premium",
     "Elegant Sage · Premium",
     "Peach & Navy · Premium",
-    "Silver Lavender · Premium"
+    "Silver Lavender · Premium",
+    "01 · Atelier Folio / Studio",
+    "02 · Ivory Ledger / Studio",
+    "03 · Nordic Index / Studio",
+    "04 · Cambridge Folio / Studio",
+    "05 · Jade Monogram / Studio",
+    "06 · Rose Letterpress / Studio",
+    "07 · Architect Grid / Studio",
+    "08 · Pearl Horizon / Studio"
   ],
   "production_status": "NOT_DEPLOYED",
   "existing_ids_unchanged": [
@@ -30,5 +46,16 @@
     2,
     3,
     4
-  ]
+  ],
+  "color_ids": [
+    "jade",
+    "blue",
+    "champagne",
+    "lavender",
+    "blush",
+    "sand",
+    "sea",
+    "silver"
+  ],
+  "combinations": 64
 }

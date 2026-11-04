@@ -54,6 +54,16 @@ const DRAFT_KEY = 'assps_daily_diary_workspace_v3'
 const CARD_COUNTS = [2, 3, 4, 5, 6, 8, 10]
 
 const PALETTES = [
+  // Eight architecturally distinct Studio editions; preserve original templates.
+  { id: 31, name: '01 · Atelier Folio / Studio', premium: true, studio: true, edition: 'atelier', accent: '#54796a', soft: '#f4f7f2', line: '#c6d4c8', ink: '#1f3a35', foil: '#bb9e69' },
+  { id: 32, name: '02 · Ivory Ledger / Studio', premium: true, studio: true, edition: 'ledger', accent: '#937850', soft: '#fcf8ef', line: '#d9c7a7', ink: '#42392b', foil: '#ba9863' },
+  { id: 33, name: '03 · Nordic Index / Studio', premium: true, studio: true, edition: 'nordic', accent: '#608da3', soft: '#f1f7fa', line: '#c4d7df', ink: '#29465b', foil: '#a9c4d0' },
+  { id: 34, name: '04 · Cambridge Folio / Studio', premium: true, studio: true, edition: 'cambridge', accent: '#93866c', soft: '#faf7f1', line: '#d8cbb6', ink: '#3c3b35', foil: '#bcaa88' },
+  { id: 35, name: '05 · Jade Monogram / Studio', premium: true, studio: true, edition: 'monogram', accent: '#548f76', soft: '#f0f8f3', line: '#bad5c6', ink: '#244538', foil: '#9abbab' },
+  { id: 36, name: '06 · Rose Letterpress / Studio', premium: true, studio: true, edition: 'letterpress', accent: '#ad798e', soft: '#fcf5f8', line: '#dfc7d0', ink: '#564051', foil: '#cbaaaf' },
+  { id: 37, name: '07 · Architect Grid / Studio', premium: true, studio: true, edition: 'architect', accent: '#5d9094', soft: '#f0f7f6', line: '#bad0cd', ink: '#274f53', foil: '#aac6c0' },
+  { id: 38, name: '08 · Pearl Horizon / Studio', premium: true, studio: true, edition: 'horizon', accent: '#847da5', soft: '#f4f4fa', line: '#d2d0e0', ink: '#373951', foil: '#baa8cf' },
+
   { id: 1, name: 'Navy Signature', accent: '#0b2a4a', soft: '#edf3f8', line: '#c9d7e4', ink: '#102538' },
   { id: 2, name: 'Royal Blue', accent: '#1769aa', soft: '#edf6fc', line: '#c7dcec', ink: '#12314a' },
   { id: 3, name: 'Crimson Editorial', accent: '#a4343f', soft: '#fbf0f1', line: '#e6c7cb', ink: '#3b2024' },
@@ -68,6 +78,18 @@ const PALETTES = [
   { id: 26, name: 'Elegant Sage · Premium', premium: true, accent: '#718e72', soft: '#f4f8f2', line: '#cfddcb', ink: '#293b35', foil: '#c2ac78' },
   { id: 27, name: 'Peach & Navy · Premium', premium: true, accent: '#b9795f', soft: '#fff6f0', line: '#eddbcc', ink: '#21344b', foil: '#cba176' },
   { id: 28, name: 'Silver Lavender · Premium', premium: true, accent: '#827da3', soft: '#f5f4fa', line: '#d9d8e8', ink: '#29334a', foil: '#b9b7c6' },
+]
+
+// Independent light color selections for all eight Studio layouts.
+const STUDIO_COLORS = [
+  { id: 'jade', name: 'Porcelain Jade', accent: '#4f8578', soft: '#f0f8f4', line: '#bad7ca', ink: '#203e3a', foil: '#b8a27b' },
+  { id: 'blue', name: 'Powder Blue', accent: '#588fae', soft: '#f0f7fc', line: '#bed7e7', ink: '#253f52', foil: '#b8b1a3' },
+  { id: 'champagne', name: 'Champagne', accent: '#a08053', soft: '#fcf8ef', line: '#e2d1b4', ink: '#483c30', foil: '#bda26d' },
+  { id: 'lavender', name: 'Lavender Mist', accent: '#867aad', soft: '#f6f4fb', line: '#d6d0e9', ink: '#38354f', foil: '#b1a7c1' },
+  { id: 'blush', name: 'Rose Quartz', accent: '#ae7d91', soft: '#fdf5f8', line: '#e4cad4', ink: '#543c4d', foil: '#c0a4a8' },
+  { id: 'sand', name: 'Warm Sand', accent: '#ac826c', soft: '#fff8f1', line: '#e8d1c4', ink: '#4e3c33', foil: '#c6aa80' },
+  { id: 'sea', name: 'Sea Glass', accent: '#5b9b9b', soft: '#effaf8', line: '#c0dfda', ink: '#2b5050', foil: '#a8c4b7' },
+  { id: 'silver', name: 'Silver Pearl', accent: '#707f97', soft: '#f4f6fa', line: '#d1d8e3', ink: '#323e52', foil: '#b9b5bb' },
 ]
 
 const FONT_STYLES = [
@@ -227,7 +249,7 @@ function StudentCard({
   const isCompactHeader = headerPreset === 'compact' || (rowCount >= 4 && cardsPerPage >= 6)
 
   return <article
-    className={`dd-card ${palette.premium ? 'dd-card-premium' : ''} ${isTwoCol ? 'dd-card-two-col' : 'dd-card-one-col'} ${isCompactHeader ? 'dd-card-compact' : ''} ${layout.lastSpan && cardsPerPage === 5 && indexInPage === 4 ? 'span-last' : ''}`}
+    className={`dd-card ${palette.premium ? 'dd-card-premium' : ''} ${palette.studio ? `dd-card-studio dd-edition-${palette.edition}` : ''} ${isTwoCol ? 'dd-card-two-col' : 'dd-card-one-col'} ${isCompactHeader ? 'dd-card-compact' : ''} ${layout.lastSpan && cardsPerPage === 5 && indexInPage === 4 ? 'span-last' : ''}`}
     style={{
       '--accent': palette.accent,
       '--soft': palette.soft,
@@ -378,7 +400,8 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const [date, setDate] = useState(initialDraft.date || today())
   const [rows, setRows] = useState(Array.isArray(initialDraft.rows) && initialDraft.rows.length ? initialDraft.rows : DEFAULT_ROWS)
   const [cardsPerPage, setCardsPerPage] = useState(CARD_COUNTS.includes(Number(initialDraft.cardsPerPage)) ? Number(initialDraft.cardsPerPage) : 6)
-  const [paletteId, setPaletteId] = useState(PALETTES.some(p => p.id === Number(initialDraft.paletteId)) ? Number(initialDraft.paletteId) : 21)
+  const [paletteId, setPaletteId] = useState(PALETTES.some(p => p.id === Number(initialDraft.paletteId)) ? Number(initialDraft.paletteId) : 31)
+  const [studioColorId, setStudioColorId] = useState(STUDIO_COLORS.some(item => item.id === initialDraft.studioColorId) ? initialDraft.studioColorId : 'jade')
   const [footerText, setFooterText] = useState(initialDraft.footerText || 'Please review the assigned work and keep this card in the notebook.')
   const [subjectColWidth, setSubjectColWidth] = useState(Number(initialDraft.subjectColWidth) || 28)
   const [headerScalePercent, setHeaderScalePercent] = useState(Number(initialDraft.headerScalePercent) || 100)
@@ -435,7 +458,9 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const classLabel = selectedClass?.name || classLevel || 'Class'
   const subjectOptions = useMemo(() => subjectsForClass(classLevel || selectedClass?.level || '') || [], [subjectsForClass, classLevel, selectedClass?.level])
   const sectionOptions = useMemo(() => selectedClass ? sectionsForClass(selectedClass.name) : [], [selectedClass, sectionsForClass])
-  const palette = PALETTES.find(item => item.id === paletteId) || PALETTES[0]
+  const structure = PALETTES.find(item => item.id === paletteId) || PALETTES[0]
+  const studioColor = STUDIO_COLORS.find(item => item.id === studioColorId) || STUDIO_COLORS[0]
+  const palette = structure.studio ? { ...structure, ...studioColor, id: structure.id, name: structure.name, studio: true, premium: true, edition: structure.edition } : structure
   const schoolName = safeSchoolName(paperSettings?.schoolName)
   const logoUrl = paperSettings?.logo || ''
   const previewRows = useMemo(() => mode === 'lesson' ? deriveDiaryRowsFromLessonPlan(lessonDoc, date).map(row => ({ ...row, fontSize: row.fontSize || globalDiaryFontSize || (row.isUrdu ? 13 : 12), isBold: false, textAlign: row.isUrdu ? 'right' : 'left', subjectFontSize: row.subjectFontSize || globalSubjectFontSize || 0, subjectBold: row.subjectBold ?? globalSubjectBold })) : rows, [mode, lessonDoc, date, rows, globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold])
@@ -451,14 +476,14 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   useEffect(() => {
     try {
       setTenantStorageItem(DRAFT_KEY, JSON.stringify({
-        mode, classLevel, section, date, rows, cardsPerPage, paletteId, footerText,
+        mode, classLevel, section, date, rows, cardsPerPage, paletteId, studioColorId, footerText,
         subjectColWidth, headerScalePercent, rowHeightMm, fontStyleId, headerPreset,
         schoolNameFontSize, logoSizeMm, activeSavedDiaryId,
         globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold,
         footerFontSize, editorFontSize
       }))
     } catch { /* Preserve editor state */ }
-  }, [mode, classLevel, section, date, rows, cardsPerPage, paletteId, footerText, subjectColWidth, headerScalePercent, rowHeightMm, fontStyleId, headerPreset, schoolNameFontSize, logoSizeMm, activeSavedDiaryId, globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold, footerFontSize, editorFontSize])
+  }, [mode, classLevel, section, date, rows, cardsPerPage, paletteId, studioColorId, footerText, subjectColWidth, headerScalePercent, rowHeightMm, fontStyleId, headerPreset, schoolNameFontSize, logoSizeMm, activeSavedDiaryId, globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold, footerFontSize, editorFontSize])
 
   useEffect(() => {
     let cancelled = false
@@ -656,6 +681,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     if (PALETTES.some(p => p.id === Number(record.style_settings?.paletteId || record.template_id))) {
       setPaletteId(Number(record.style_settings?.paletteId || record.template_id))
     }
+    setStudioColorId(STUDIO_COLORS.some(item => item.id === record.style_settings?.studioColorId) ? record.style_settings.studioColorId : 'jade')
     if (typeof record.footer_text === 'string') setFooterText(record.footer_text)
     if (record.style_settings?.subjectColWidth) setSubjectColWidth(Number(record.style_settings.subjectColWidth))
     if (record.style_settings?.headerScalePercent) setHeaderScalePercent(Number(record.style_settings.headerScalePercent))
@@ -733,6 +759,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
           workspaceVersion: 3,
           section,
           paletteId,
+          studioColorId,
           mode: 'diary',
           subjectColWidth,
           headerScalePercent,
@@ -1040,6 +1067,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     }
 
 
+
 /* Premium 8 — isolated iframe A4 print rules. Inline AFTER standard print CSS. */
 @media print {
   .dd-card.dd-card-premium {border-color:var(--line)!important;border-radius:1.4mm!important;box-shadow:none!important}
@@ -1083,6 +1111,201 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   .dd-card-premium footer {text-align:center!important;font-weight:700!important;display:block!important;width:100%!important}
 
 }
+
+/* ASSPS STUDIO EDITIONS 2026-11-04
+ * Print-first designs — eight genuinely distinct structural systems.
+ * The original 1-4 and premium 21-28 styles remain unchanged.
+ * Only the classes dd-card-studio/dd-edition-* can activate these rules.
+ */
+.dd-card.dd-card-premium.dd-card-studio {
+  position:relative!important;
+  isolation:isolate!important;
+  background:#fff!important;
+  border-width:1px!important;
+  border-style:solid!important;
+  border-color:var(--line)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  font-family:'Times New Roman',Times,Georgia,serif!important;
+}
+.dd-card-studio .dd-card-head {z-index:1!important}
+.dd-card-studio .dd-school-name {
+  font-family:'Times New Roman',Times,Georgia,serif!important;
+  font-weight:900!important;
+  color:var(--ink)!important;
+}
+.dd-card-studio .dd-student-strip {
+  display:grid!important;
+  grid-template-columns:minmax(0,2.18fr) minmax(0,1.14fr) minmax(0,1.12fr)!important;
+  align-items:center!important;
+  background:#fff!important;
+}
+.dd-card-studio .dd-student-field {min-width:0!important;overflow:visible!important}
+.dd-card-studio .dd-student-val,.dd-card-studio .dd-student-roll-field .dd-student-val {
+  color:var(--ink)!important;
+  font-weight:900!important;
+}
+.dd-card-studio .dd-premium-calendar {
+  flex-shrink:0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+.dd-card-studio .dd-premium-calendar-day {color:var(--ink)!important}
+.dd-card-studio .dd-rows {min-height:0!important;flex:1 1 auto!important;overflow:visible!important}
+.dd-card-studio .dd-row {min-height:0!important;break-inside:avoid!important}
+.dd-card-studio .dd-diary-cell {white-space:pre-wrap!important;word-break:normal!important;overflow-wrap:anywhere!important;line-height:1.25!important}
+.dd-card-studio .dd-diary-cell.urdu {line-height:1.52!important}
+.dd-card-studio footer {
+  display:block!important;
+  width:100%!important;
+  margin-top:auto!important;
+  padding:1mm 1.8mm!important;
+  text-align:center!important;
+  font-weight:700!important;
+  background:#fff!important;
+  color:var(--ink)!important;
+}
+
+/* 31 — Atelier Folio: gallery-mounted stationery; left bookbind spine */
+.dd-card-studio.dd-edition-atelier {
+  border:1.2px solid var(--line)!important;
+  outline:1px solid var(--line)!important;
+  outline-offset:-2.4mm!important;
+  padding-left:1.2mm!important;
+}
+.dd-edition-atelier .dd-card-accent {position:absolute!important;left:0!important;top:0!important;bottom:0!important;width:1.1mm!important;height:auto!important;background:var(--accent)!important}
+.dd-edition-atelier .dd-card-head {padding:2mm 2.2mm 1.4mm!important;background:#fff!important;border-bottom:2px double var(--foil)!important}
+.dd-edition-atelier .dd-school-name {letter-spacing:.035em!important;font-variant:small-caps!important;line-height:1.13!important}
+.dd-edition-atelier .dd-premium-calendar {border:1px solid var(--foil)!important;border-radius:0!important}
+.dd-edition-atelier .dd-premium-calendar-month {background:var(--soft)!important;color:var(--ink)!important;border-bottom:1px solid var(--foil)!important}
+.dd-edition-atelier .dd-student-strip {background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-atelier .dd-table-head {background:#fff!important;border-top:1px solid var(--accent)!important;border-bottom:2px solid var(--accent)!important;color:var(--ink)!important;margin:1.3mm 2.2mm 0!important}
+.dd-edition-atelier .dd-table-head span {font-variant:small-caps!important;letter-spacing:.085em!important}
+.dd-edition-atelier .dd-rows {margin:0 2.2mm!important;border-color:var(--line)!important}
+.dd-edition-atelier .dd-sub-cell {background:var(--soft)!important;border-right:1px solid var(--line)!important;color:var(--ink)!important}
+.dd-edition-atelier .dd-row {border-top:1px solid var(--line)!important}
+.dd-edition-atelier footer {border-top:2px double var(--foil)!important;margin:1mm 2.2mm 1.2mm!important;width:auto!important}
+
+/* 32 — Ivory Ledger: audited double rule with ruled journal hierarchy */
+.dd-card-studio.dd-edition-ledger {border:2px double var(--line)!important;background:var(--soft)!important}
+.dd-edition-ledger .dd-card-accent {height:.4mm!important;background:var(--foil)!important}
+.dd-edition-ledger .dd-card-head {background:var(--soft)!important;padding:1.5mm 2mm 1.3mm!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-ledger .dd-school-name {letter-spacing:.008em!important;text-decoration:none!important}
+.dd-edition-ledger .dd-mode-badge {background:var(--soft)!important;color:var(--ink)!important;border:1px solid var(--line)!important;padding:.25mm 1mm!important}
+.dd-edition-ledger .dd-premium-calendar {border:1px solid var(--line)!important;border-radius:0!important;background:var(--soft)!important}
+.dd-edition-ledger .dd-premium-calendar-month {background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-ledger .dd-student-strip {background:var(--soft)!important;border-bottom:2px double var(--line)!important}
+.dd-edition-ledger .dd-student-field+.dd-student-field {border-left:1px dashed var(--line)!important}
+.dd-edition-ledger .dd-table-head {background:var(--soft)!important;border:1px solid var(--accent)!important;color:var(--ink)!important;border-radius:0!important;margin:1.2mm 1.7mm 0!important}
+.dd-edition-ledger .dd-rows {border:1px solid var(--accent)!important;border-top:0!important;border-radius:0!important;margin:0 1.7mm!important}
+.dd-edition-ledger .dd-row {border-top:1px solid var(--line)!important}
+.dd-edition-ledger .dd-sub-cell {background:var(--soft)!important;color:var(--ink)!important;border-right:1px solid var(--accent)!important}
+.dd-edition-ledger footer {background:var(--soft)!important;border-top:1px dashed var(--accent)!important}
+
+/* 33 — Nordic Index: Scandinavian typography, edge-to-edge crisp white */
+.dd-card-studio.dd-edition-nordic {border:1px solid var(--line)!important;background:#fff!important;border-radius:1mm!important}
+.dd-edition-nordic .dd-card-accent {height:.7mm!important;background:linear-gradient(90deg,var(--line) 0 34%,var(--soft) 34% 100%)!important}
+.dd-edition-nordic .dd-card-head {padding:1.6mm 2mm 1.5mm!important;border-bottom:0!important;background:#fff!important}
+.dd-edition-nordic .dd-school-name {letter-spacing:.045em!important;text-transform:uppercase!important;color:var(--ink)!important}
+.dd-edition-nordic .dd-mode-badge {background:var(--soft)!important;color:var(--ink)!important;border-left:0!important;border-bottom:1.5px solid var(--accent)!important}
+.dd-edition-nordic .dd-premium-calendar {border:0!important;border-left:2px solid var(--line)!important;border-radius:0!important}
+.dd-edition-nordic .dd-premium-calendar-month {border:0!important;background:var(--soft)!important;color:var(--ink)!important}
+.dd-edition-nordic .dd-student-strip {background:var(--soft)!important;border-top:1px solid var(--line)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-nordic .dd-student-field+.dd-student-field {border-left:1px solid var(--line)!important}
+.dd-edition-nordic .dd-table-head {background:#fff!important;color:var(--ink)!important;border:0!important;border-bottom:2px solid var(--accent)!important;margin:1.2mm 2mm 0!important;letter-spacing:.05em!important}
+.dd-edition-nordic .dd-rows {border:0!important;margin:0 2mm!important}
+.dd-edition-nordic .dd-row {border:0!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-nordic .dd-sub-cell {background:var(--soft)!important;color:var(--ink)!important;border-right:2px solid var(--line)!important}
+.dd-edition-nordic footer {border-top:2px solid var(--accent)!important;margin:0 2mm!important;width:auto!important}
+
+/* 34 — Cambridge Folio: traditional academic double-frame, centered crest/name */
+.dd-card-studio.dd-edition-cambridge {border:1px solid var(--line)!important;box-shadow:inset 0 0 0 1.3mm #fff,inset 0 0 0 1.5mm var(--line)!important}
+.dd-edition-cambridge .dd-card-accent {height:.5mm!important;background:var(--line)!important}
+.dd-edition-cambridge .dd-card-head {padding:1.8mm 2.5mm 1.5mm!important;background:#fff!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-cambridge .dd-head-top {grid-template-columns:auto minmax(0,1fr) auto!important}
+.dd-edition-cambridge .dd-school-name {font-variant:small-caps!important;letter-spacing:.035em!important;text-align:center!important}
+.dd-edition-cambridge .dd-brand-badge-row {justify-content:center!important}
+.dd-edition-cambridge .dd-mode-badge {background:var(--soft)!important;color:var(--ink)!important;border-left:0!important;border-top:1px solid var(--accent)!important;border-bottom:1px solid var(--accent)!important}
+.dd-edition-cambridge .dd-premium-calendar {border:1px solid var(--line)!important;border-radius:50%!important;min-height:calc(17.5mm * var(--scale))!important}
+.dd-edition-cambridge .dd-premium-calendar-month {background:transparent!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-cambridge .dd-student-strip {margin:0 1.4mm!important;background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-cambridge .dd-table-head {background:var(--soft)!important;border:1px solid var(--line)!important;color:var(--ink)!important;margin:1.3mm 2.3mm 0!important;border-radius:0!important}
+.dd-edition-cambridge .dd-rows {border:1px solid var(--line)!important;border-top:0!important;margin:0 2.3mm!important}
+.dd-edition-cambridge .dd-row {border-top:1px solid var(--line)!important}
+.dd-edition-cambridge .dd-sub-cell {background:var(--soft)!important;border-right:1px solid var(--line)!important;color:var(--ink)!important}
+.dd-edition-cambridge footer {border-top:1px solid var(--line)!important;margin:1mm 2.3mm!important;width:auto!important;font-style:italic!important}
+
+/* 35 — Jade Monogram: strong architectural spine + soft asymmetric header */
+.dd-card-studio.dd-edition-monogram {border:1px solid var(--line)!important;border-radius:0 2.5mm 0 2.5mm!important}
+.dd-edition-monogram .dd-card-accent {height:1.0mm!important;background:linear-gradient(90deg,var(--accent) 0 13%,var(--soft) 13% 100%)!important}
+.dd-edition-monogram .dd-card-head {background:linear-gradient(110deg,var(--soft) 0 75%,#fff 75% 100%)!important;border-bottom:1px solid var(--line)!important;padding:1.4mm 1.8mm 1.2mm!important}
+.dd-edition-monogram .dd-logo {border:1px solid var(--accent)!important;border-radius:50%!important;padding:.5mm!important;background:#fff!important}
+.dd-edition-monogram .dd-school-name {letter-spacing:.012em!important;color:var(--ink)!important}
+.dd-edition-monogram .dd-mode-badge {background:#fff!important;color:var(--accent)!important;border-left:2px solid var(--accent)!important}
+.dd-edition-monogram .dd-premium-calendar {border:1px solid var(--line)!important;border-radius:0 2mm 0 2mm!important}
+.dd-edition-monogram .dd-premium-calendar-month {background:var(--soft)!important}
+.dd-edition-monogram .dd-student-strip {background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-monogram .dd-table-head {background:var(--soft)!important;color:var(--ink)!important;border:0!important;border-left:2mm solid var(--accent)!important;margin:1.1mm 1.8mm 0!important}
+.dd-edition-monogram .dd-rows {margin:0 1.8mm!important;border:1px solid var(--line)!important;border-top:0!important}
+.dd-edition-monogram .dd-row {border-top:1px solid var(--line)!important}
+.dd-edition-monogram .dd-sub-cell {background:var(--soft)!important;border-right:1px solid var(--line)!important;color:var(--ink)!important}
+.dd-edition-monogram footer {border-top:1px solid var(--line)!important;background:var(--soft)!important}
+
+/* 36 — Rose Letterpress: elegant typographic high-end paper, thin engraved rules */
+.dd-card-studio.dd-edition-letterpress {border:1px solid var(--line)!important;background:#fff!important;border-radius:2mm 0 2mm 0!important}
+.dd-edition-letterpress .dd-card-accent {height:.5mm!important;background:var(--accent)!important}
+.dd-edition-letterpress .dd-card-head {padding:1.7mm 2mm 1.3mm!important;background:#fff!important;border-bottom:2px double var(--line)!important}
+.dd-edition-letterpress .dd-school-name {font-style:normal!important;font-variant:small-caps!important;letter-spacing:.055em!important;color:var(--ink)!important}
+.dd-edition-letterpress .dd-mode-badge {background:#fff!important;color:var(--accent)!important;border:0!important;border-bottom:1px solid var(--accent)!important;border-radius:0!important}
+.dd-edition-letterpress .dd-premium-calendar {border:1px solid var(--line)!important;border-radius:2.2mm 2.2mm .5mm .5mm!important}
+.dd-edition-letterpress .dd-premium-calendar-month {background:var(--soft)!important;color:var(--ink)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-letterpress .dd-student-strip {background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-letterpress .dd-table-head {background:#fff!important;color:var(--ink)!important;border:0!important;border-bottom:1px solid var(--accent)!important;margin:1.3mm 1.8mm 0!important}
+.dd-edition-letterpress .dd-rows {border:0!important;margin:0 1.8mm!important}
+.dd-edition-letterpress .dd-row {border:0!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-letterpress .dd-sub-cell {background:var(--soft)!important;color:var(--ink)!important;border-right:1px solid var(--line)!important}
+.dd-edition-letterpress footer {border-top:2px double var(--line)!important;margin:0 1.8mm!important;width:auto!important;font-style:italic!important}
+
+/* 37 — Architect Grid: crisp technical-spec sheet, numbered table-side labels */
+.dd-card-studio.dd-edition-architect {border:1px solid var(--accent)!important;background:#fff!important}
+.dd-edition-architect .dd-card-accent {height:.45mm!important;background:var(--accent)!important}
+.dd-edition-architect .dd-card-head {padding:1.55mm 1.8mm 1.3mm!important;background:var(--soft)!important;border-bottom:1px solid var(--accent)!important}
+.dd-edition-architect .dd-school-name {letter-spacing:.015em!important;color:var(--ink)!important}
+.dd-edition-architect .dd-mode-badge {border:1px solid var(--line)!important;color:var(--ink)!important;background:#fff!important;padding:.25mm .75mm!important}
+.dd-edition-architect .dd-premium-calendar {border:1px solid var(--accent)!important;border-radius:0!important;background:#fff!important}
+.dd-edition-architect .dd-premium-calendar-month {background:var(--soft)!important;border-bottom:1px solid var(--accent)!important}
+.dd-edition-architect .dd-student-strip {background:var(--soft)!important;border-top:1px solid var(--line)!important;border-bottom:1px solid var(--accent)!important}
+.dd-edition-architect .dd-student-field+.dd-student-field {border-left:1px solid var(--line)!important}
+.dd-edition-architect .dd-table-head {background:var(--soft)!important;color:var(--ink)!important;border:1px solid var(--accent)!important;border-radius:0!important;margin:1mm 1.7mm 0!important}
+.dd-edition-architect .dd-rows {counter-reset:academic!important;border:1px solid var(--accent)!important;border-top:0!important;margin:0 1.7mm!important;border-radius:0!important}
+.dd-edition-architect .dd-row {counter-increment:academic!important;border-top:1px solid var(--line)!important}
+.dd-edition-architect .dd-sub-cell {background:var(--soft)!important;border-right:1px solid var(--accent)!important;color:var(--ink)!important}
+.dd-edition-architect .dd-sub-cell::before {content:counter(academic, decimal-leading-zero)!important;display:inline-block!important;color:var(--accent)!important;font-size:.7em!important;margin-right:.9mm!important}
+.dd-edition-architect footer {border-top:1px solid var(--accent)!important}
+
+/* 38 — Pearl Horizon: understated architectural line, asymmetric premium composition */
+.dd-card-studio.dd-edition-horizon {border:1px solid var(--line)!important;border-radius:1.5mm!important}
+.dd-edition-horizon .dd-card-accent {height:.75mm!important;background:linear-gradient(90deg,var(--accent) 0 23%,var(--line) 23% 70%,var(--line) 70% 100%)!important}
+.dd-edition-horizon .dd-card-head {padding:1.8mm 2mm 1.4mm!important;background:linear-gradient(120deg,var(--soft) 0 62%,#fff 62% 100%)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-horizon .dd-school-name {font-variant:small-caps!important;letter-spacing:.035em!important;color:var(--ink)!important}
+.dd-edition-horizon .dd-mode-badge {background:var(--soft)!important;color:var(--ink)!important;border-left:0!important;border-right:2px solid var(--accent)!important}
+.dd-edition-horizon .dd-premium-calendar {border:1px solid var(--line)!important;border-radius:1.6mm!important}
+.dd-edition-horizon .dd-premium-calendar-month {background:var(--soft)!important;color:var(--ink)!important}
+.dd-edition-horizon .dd-student-strip {background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-horizon .dd-table-head {background:var(--soft)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:1.3mm 1.3mm 0 0!important;margin:1.2mm 1.8mm 0!important}
+.dd-edition-horizon .dd-rows {border:1px solid var(--line)!important;border-top:0!important;border-radius:0 0 1.3mm 1.3mm!important;margin:0 1.8mm!important}
+.dd-edition-horizon .dd-row {border-top:1px solid var(--line)!important}
+.dd-edition-horizon .dd-sub-cell {background:var(--soft)!important;color:var(--ink)!important;border-right:1px solid var(--line)!important}
+.dd-edition-horizon footer {border-top:1px solid var(--line)!important;color:var(--ink)!important}
+
+/* Print geometry is fixed by A4 card grid; never force fixed row heights. */
+@media print {
+  .dd-card-studio .dd-row {break-inside:avoid!important;page-break-inside:avoid!important}
+  .dd-card-studio .dd-premium-calendar {break-inside:avoid!important}
+  .dd-card-studio .dd-diary-cell.urdu {font-family:'ASSPS Jameel Noori','Jameel Noori Nastaleeq','Noto Nastaliq Urdu',serif!important}
+}
+
   </style>
 </head>
 <body>
@@ -1684,22 +1907,50 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
               )}
             </div>
 
-            <label>
-              <span>Color Theme Palette</span>
-              <div className="dd-palettes">
-                {PALETTES.map(item => (
-                  <button
-                    type="button"
-                    key={item.id}
-                    className={paletteId === item.id ? 'active' : ''}
-                    onClick={() => setPaletteId(item.id)}
-                  >
-                    <i style={{ background: item.accent }} />
+            <div className="dd-studio-config" data-studio-configuration>
+              <div className="dd-studio-config-title">
+                <strong>01 — Choose Design Structure</strong>
+                <span>8 independent print layouts</span>
+              </div>
+              <div className="dd-studio-designs" role="group" aria-label="Studio design structure">
+                {PALETTES.filter(item => item.studio).map(item => (
+                  <button type="button" key={item.id} data-studio-design={item.id}
+                    aria-pressed={paletteId === item.id}
+                    className={'dd-studio-design-choice ' + (paletteId === item.id ? 'active' : '')}
+                    onClick={() => setPaletteId(item.id)}>
+                    <span className={'dd-studio-mini dd-studio-mini-' + item.edition} aria-hidden="true"><i/><i/><i/></span>
+                    <span>{item.name.replace(/\s*\/ Studio$/, '')}</span>
+                  </button>
+                ))}
+              </div>
+              <div className="dd-studio-config-title">
+                <strong>02 — Choose Color Palette</strong>
+                <span>8 light palettes apply to any structure</span>
+              </div>
+              <div className="dd-studio-colors" role="group" aria-label="Studio color palette">
+                {STUDIO_COLORS.map(item => (
+                  <button type="button" key={item.id} data-studio-color={item.id}
+                    aria-pressed={studioColorId === item.id}
+                    disabled={!structure.studio}
+                    className={'dd-studio-color-choice ' + (studioColorId === item.id && structure.studio ? 'active' : '')}
+                    onClick={() => setStudioColorId(item.id)}
+                    title={item.name}>
+                    <span className="dd-studio-color-swatch" style={{ '--swatch-accent':item.accent, '--swatch-soft':item.soft, '--swatch-line':item.line }} />
                     <span>{item.name}</span>
                   </button>
                 ))}
               </div>
-            </label>
+              <details className="dd-classic-themes">
+                <summary>Existing designs (preserved for saved diaries)</summary>
+                <div className="dd-palettes">
+                  {PALETTES.filter(item => !item.studio).map(item => (
+                    <button type="button" key={item.id} className={paletteId === item.id ? 'active' : ''} onClick={() => setPaletteId(item.id)}>
+                      <i style={{ background:item.accent }} /><span>{item.name}</span>
+                    </button>
+                  ))}
+                </div>
+              </details>
+            </div>
 
             <label>
               <span>Footer note</span>
