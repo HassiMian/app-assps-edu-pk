@@ -11,6 +11,7 @@ export default function AssessmentCatalogReview({ exam, onClose }) {
   const [error, setError] = useState('')
   const [preview, setPreview] = useState(null)
   const [ledger, setLedger] = useState(null)
+  const [coverage, setCoverage] = useState(null)
   const examId = Number(exam?.id)
   const refresh = useCallback(async () => {
     const seq = ++epoch.current
@@ -18,6 +19,7 @@ export default function AssessmentCatalogReview({ exam, onClose }) {
     setError('')
     setPreview(null)
     setLedger(null)
+    setCoverage(null)
     if (!Number.isSafeInteger(examId) || examId <= 0) {
       setError('Select an existing saved Assessment to review.')
       setLoading(false)
@@ -25,18 +27,25 @@ export default function AssessmentCatalogReview({ exam, onClose }) {
     }
     try {
       const endpoint = `/api/academic-approvals/assessment-catalog/${examId}`
-      const [proposal, current] = await Promise.all([
+      const [proposal, current, cohortReport] = await Promise.all([
         api.get(`${endpoint}/preview`, { skipCache: true }),
         api.get(`${endpoint}/offerings`, { skipCache: true }),
+        api.get('/api/academic-approvals/assessment-catalog/cohort-coverage', { skipCache: true }),
       ])
       if (seq !== epoch.current) return
       const p = proposal?.data?.data
       const l = current?.data?.data
+      const coverageSnapshot = cohortReport?.data?.data
       if (proposal?.data?.success !== true || Number(p?.examId) !== examId || current?.data?.success !== true || Number(l?.examId) !== examId) {
         throw new Error('Authenticated catalog review returned inconsistent evidence. No action taken.')
       }
       setPreview(p)
       setLedger(l)
+      // Old backend cohort routes use assignment-only shortcuts. Never treat
+      // that weaker report as verified teacher+employee+reviewed timetable proof.
+      setCoverage(cohortReport?.data?.success === true &&
+        coverageSnapshot?.verifiedTeachingPolicy === 'active_teacher_employee_and_reviewed_timetable'
+          ? coverageSnapshot : null)
     } catch (cause) {
       if (seq === epoch.current) {
         setError(cause?.response?.data?.code || cause?.response?.data?.message || cause?.message || 'Catalog review unavailable.')
@@ -52,7 +61,14 @@ export default function AssessmentCatalogReview({ exam, onClose }) {
 
   const gapsKnown = Array.isArray(preview?.uncoveredCohorts) && Number.isInteger(Number(preview?.totalActiveStudentCohorts))
   const uncovered = gapsKnown ? preview.uncoveredCohorts : []
-  const fullCoverage = gapsKnown && preview?.canStageFullCoverage === true && uncovered.length === 0
+  const trustedCoverage = coverage && Array.isArray(coverage.cohorts) &&
+    Number.isSafeInteger(Number(coverage.uncoveredStudents)) &&
+    Number.isSafeInteger(Number(coverage.totalActiveStudents))
+  const matchingCoverage = trustedCoverage &&
+    Number(coverage.uncoveredCohorts) === uncovered.length &&
+    Number(coverage.cohorts.length) === Number(preview?.totalActiveStudentCohorts)
+  const fullCoverage = gapsKnown && matchingCoverage &&
+    Number(coverage.uncoveredStudents) === 0 && preview?.canStageFullCoverage === true && uncovered.length === 0
   const existingOfferings = Number(ledger?.totalOfferings || 0)
   const candidates = Array.isArray(preview?.candidates) ? preview.candidates : []
   return (
@@ -78,10 +94,11 @@ export default function AssessmentCatalogReview({ exam, onClose }) {
           <span>Candidate cohorts: <strong>{Number(preview.activeCohorts) || 0}</strong></span>
           <span>Existing active offerings: <strong>{existingOfferings}</strong></span>
           <span>Pending approvals: <strong>{Number(ledger.pendingCount) || 0}</strong></span>
+          {trustedCoverage && <span>Students needing verified teaching evidence: <strong>{Number(coverage.uncoveredStudents) || 0}</strong> / {Number(coverage.totalActiveStudents) || 0}</span>}
         </div>
         <p role="status" style={{ marginTop: 12, color: fullCoverage ? C.green : C.red, fontWeight: 700 }}>
           {fullCoverage ? 'All active student cohorts are represented. Independent authorized source staging and Principal approval are still required.'
-            : !gapsKnown ? 'Coverage certification is unavailable from the current backend. Catalog staging must remain blocked until the guard is deployed.'
+            : !gapsKnown || !matchingCoverage ? 'Strict teacher-evidence coverage certification is missing or inconsistent. Catalog staging must remain blocked.'
             : `${uncovered.length} active class-section cohort(s) are not represented. Full-coverage catalog staging must remain blocked.`}
         </p>
         {gapsKnown && uncovered.length > 0 && <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 8 }}>
@@ -89,6 +106,21 @@ export default function AssessmentCatalogReview({ exam, onClose }) {
             style={{ padding: '5px 8px', border: `1px solid ${C.border}`, borderRadius: 8, fontSize: 12 }}>
             {cohort.className} — {cohort.section}
           </span>)}
+        </div>}
+        {trustedCoverage && Number(coverage.uncoveredStudents) > 0 && <div style={{ marginTop: 14, overflowX: 'auto' }}>
+          <strong style={{ fontSize: 13 }}>Verified teaching-source gaps — administrative review only</strong>
+          <table style={{ width: '100%', marginTop: 8, borderCollapse: 'collapse', fontSize: 12 }}>
+            <thead><tr>{['Class', 'Section', 'Students', 'Active assignments', 'Reviewed timetable entries'].map(name =>
+              <th key={name} style={{ padding: 7, textAlign: 'left', borderBottom: `1px solid ${C.border}` }}>{name}</th>)}</tr></thead>
+            <tbody>{coverage.cohorts.filter(cohort => !cohort.has_subject_assignment).map((cohort,i) =>
+              <tr key={`${cohort.class_name}:${cohort.section}:${i}`}>
+                <td style={{ padding: 7 }}>{cohort.class_name}</td>
+                <td style={{ padding: 7 }}>{cohort.section}</td>
+                <td style={{ padding: 7 }}>{Number(cohort.active_students) || 0}</td>
+                <td style={{ padding: 7 }}>{Number(cohort.active_assignment_records) || 0}</td>
+                <td style={{ padding: 7 }}>{Number(cohort.reviewed_timetable_rows) || 0}</td>
+              </tr>)}</tbody>
+          </table>
         </div>}
         {candidates.length > 0 && <div style={{ maxHeight: 240, overflow: 'auto', marginTop: 14 }}>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 12 }}>

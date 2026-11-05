@@ -201,18 +201,41 @@ router.get('/assessment-catalog/cohort-coverage',protect,requireRoles('admin','p
   if(check.rowCount!==1){await client.query('ROLLBACK');opened=false;return res.status(403).json({success:false,code:'ACTIVE_SCHOOL_PRINCIPAL_REQUIRED'})}
   const {rows}=await client.query(`
    SELECT s.class AS class_name,s.section,COUNT(*)::int AS active_students,
+   (SELECT COUNT(*)::int FROM teacher_class_assignments aa
+     WHERE aa.school_id=s.school_id AND aa.is_active=true
+       AND ${sqlCanonicalClass('aa.class_name')}=${sqlCanonicalClass('s.class')}
+       AND LOWER(BTRIM(aa.section))=LOWER(BTRIM(s.section))) AS active_assignment_records,
+   (SELECT COUNT(*)::int FROM timetable tt
+     WHERE tt.school_id=s.school_id AND tt.staff_identity_reviewed=true
+       AND ${sqlCanonicalClass('tt.class_name')}=${sqlCanonicalClass('s.class')}
+       AND LOWER(BTRIM(tt.section))=LOWER(BTRIM(s.section))) AS reviewed_timetable_rows,
+   -- Use the EXACT verified teacher, employee and timetable evidence predicates
+   -- used by proposedCatalog. An unreviewed assignment is not staging coverage.
    EXISTS(SELECT 1 FROM teacher_class_assignments a
+     JOIN users u ON u.school_id=a.school_id AND u.id=a.teacher_user_id
+       AND u.role='teacher' AND u.is_active=true
+     JOIN employees ep ON ep.school_id=u.school_id AND ep.user_id=u.id
+       AND ep.id=a.employee_id AND ep.is_active=true
      WHERE a.school_id=s.school_id AND a.is_active=true
-     AND ${sqlCanonicalClass('a.class_name')}=${sqlCanonicalClass('s.class')}
-     AND LOWER(BTRIM(a.section))=LOWER(BTRIM(s.section))
-     AND BTRIM(COALESCE(a.subject,''))<>'') AS has_subject_assignment
+       AND ${sqlCanonicalClass('a.class_name')}=${sqlCanonicalClass('s.class')}
+       AND LOWER(BTRIM(a.section))=LOWER(BTRIM(s.section))
+       AND BTRIM(COALESCE(a.subject,''))<>''
+       AND EXISTS (SELECT 1 FROM timetable t WHERE t.school_id=a.school_id
+         AND t.teacher_id=a.teacher_user_id AND t.staff_identity_reviewed=true
+         AND LOWER(BTRIM(t.class_name))=LOWER(BTRIM(a.class_name))
+         AND LOWER(BTRIM(t.section))=LOWER(BTRIM(a.section))
+         AND LOWER(BTRIM(t.subject))=LOWER(BTRIM(a.subject)))) AS has_subject_assignment
    FROM students s WHERE s.school_id=$1 AND s.is_active=true
    GROUP BY s.school_id,s.class,s.section ORDER BY s.class,s.section
   `,[school])
   await client.query('COMMIT');opened=false
   return res.json({success:true,data:{
-   cohorts:rows,totalActiveStudents:rows.reduce((n,c)=>n+c.active_students,0),
-   uncoveredStudents:rows.filter(c=>!c.has_subject_assignment).reduce((n,c)=>n+c.active_students,0),
+   cohorts:rows,totalActiveStudents:rows.reduce((n,c)=>n+Number(c.active_students||0),0),
+   uncoveredStudents:rows.filter(c=>!c.has_subject_assignment).reduce((n,c)=>n+Number(c.active_students||0),0),
+   coveredCohorts:rows.filter(c=>c.has_subject_assignment).length,
+   uncoveredCohorts:rows.filter(c=>!c.has_subject_assignment).length,
+   verifiedTeachingPolicy:'active_teacher_employee_and_reviewed_timetable',
+   stagingReady:false, // Subject staging STILL requires real signed academic source.
    changesApplied:false,academicApprovalsCreated:false
   }})
  }catch(e){
