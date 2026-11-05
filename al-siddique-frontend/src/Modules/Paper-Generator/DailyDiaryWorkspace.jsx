@@ -878,7 +878,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const print = () => {
     const stageEl = document.querySelector('.dd-page-stage')
     if (!stageEl) {
-      window.print()
+      setStatus('Diary print blocked: printable diary preview is not ready.')
       return
     }
     // Fail closed instead of silently cutting off homework in dense A4 layouts.
@@ -1447,8 +1447,10 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
         iframe.contentWindow.focus()
         iframe.contentWindow.print()
       }, 350)
-    } catch {
-      window.print()
+    } catch (error) {
+      // Never fall back to a global print: it prints the app controls and page-break markers.
+      setStatus('Diary print blocked: isolated preview failed. ' +
+        (error?.message || 'Try printing from the Diary Print / PDF button again.'))
     }
   }
 
