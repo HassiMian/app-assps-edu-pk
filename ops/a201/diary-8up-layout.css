@@ -1,0 +1,170 @@
+/* A201 — eight-up A4 usable-area recovery, no homework font-size reduction.
+   These selectors intentionally override older Studio/edition !important rules.
+   Preview and isolated print iframe share this exact stylesheet. */
+.dd-card.dd-card-studio.dd-density-8 .dd-card-head{
+  gap:0!important;
+  padding:.65mm 1.35mm .45mm!important;
+  border-bottom:.8px solid var(--line)!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-head-top{
+  gap:1mm!important;
+  min-height:0!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-brand{
+  gap:.12mm!important;
+  min-width:0!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-premium-calendar{
+  flex:0 0 auto!important;
+  box-sizing:border-box!important;
+  width:calc(12.5mm * var(--scale))!important;
+  min-width:calc(12.5mm * var(--scale))!important;
+  height:calc(12mm * var(--scale))!important;
+  min-height:calc(12mm * var(--scale))!important;
+  max-height:calc(12mm * var(--scale))!important;
+  padding:0 .25mm!important;
+  margin:0!important;
+  border-radius:.7mm!important;
+  line-height:1!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-premium-calendar-month{
+  padding:0!important;
+  margin:0!important;
+  line-height:1.05!important;
+  flex:0 0 auto!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-premium-calendar-day{
+  font-size:clamp(11.5px,calc(18px * var(--scale)),19px)!important;
+  line-height:.98!important;
+  margin:0!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-premium-calendar-weekday{
+  padding:0!important;
+  margin:0!important;
+  line-height:1.05!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-student-strip{
+  display:grid!important;
+  grid-template-columns:minmax(0,2.15fr) minmax(0,1.23fr) minmax(0,1.4fr)!important;
+  align-items:center!important;
+  gap:.5mm!important;
+  min-height:0!important;
+  padding:.45mm 1.2mm!important;
+  border-bottom:.85px solid var(--line)!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-student-field{
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  justify-content:flex-start!important;
+  align-items:center!important;
+  align-content:center!important;
+  gap:.45mm!important;
+  padding:0!important;
+  margin:0!important;
+  min-height:0!important;
+  min-width:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  background:transparent!important;
+  white-space:nowrap!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-student-lbl{
+  display:inline!important;
+  flex:0 0 auto!important;
+  white-space:nowrap!important;
+  line-height:1.1!important;
+  letter-spacing:0!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-student-val,
+.dd-card.dd-card-studio.dd-density-8 .dd-student-roll-field .dd-student-val{
+  display:inline!important;
+  flex:1 1 auto!important;
+  min-width:0!important;
+  max-width:100%!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  line-height:1.12!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-student-roll-field .dd-student-val{
+  font-variant-numeric:tabular-nums!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-table-head{
+  margin:.45mm 1.2mm 0!important;
+  border:.85px solid var(--line)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-table-head span{
+  min-height:3.1mm!important;
+  padding:.3mm .7mm!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-table-head span+span{
+  border-left:.85px solid var(--line)!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-rows{
+  display:flex!important;
+  flex-direction:column!important;
+  gap:0!important;
+  padding:0 1.2mm .25mm!important;
+  min-height:0!important;
+  overflow:visible!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-row{
+  border:0!important;
+  border-left:.85px solid var(--line)!important;
+  border-right:.85px solid var(--line)!important;
+  border-bottom:.85px solid var(--line)!important;
+  border-radius:0!important;
+  box-shadow:inset 0 -.12px 0 var(--line)!important;
+  min-height:var(--dd-row-height,0px)!important;
+  flex:var(--dd-row-flex,1 1 auto)!important;
+  break-inside:avoid!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-row:first-child{
+  border-top:.85px solid var(--line)!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-sub-cell{
+  border-right:.85px solid var(--line)!important;
+  /* Latin subject labels (including URDU) share one user-selected font. */
+  font-family:var(--dd-font,'Times New Roman',Times,serif)!important;
+  text-align:center!important;
+  justify-content:center!important;
+  padding:.35mm .65mm!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-sub-cell span{
+  font-family:inherit!important;
+  font-style:normal!important;
+  font-variant:normal!important;
+  letter-spacing:0!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-diary-cell{
+  border:0!important;
+  padding:.35mm 1mm!important;
+  line-height:1.25!important;
+  overflow-wrap:anywhere!important;
+}
+.dd-card.dd-card-studio.dd-density-8 footer{
+  padding:.25mm 1.2mm!important;
+  margin:0!important;
+  border-top:.85px solid var(--line)!important;
+  min-height:2.3mm!important;
+}
+@media print {
+  .dd-card.dd-card-studio.dd-density-8,
+  .dd-card.dd-card-studio.dd-density-8 .dd-table-head,
+  .dd-card.dd-card-studio.dd-density-8 .dd-row,
+  .dd-card.dd-card-studio.dd-density-8 .dd-sub-cell{
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+  .dd-card.dd-card-studio.dd-density-8 .dd-row{
+    box-decoration-break:clone!important;
+    -webkit-box-decoration-break:clone!important;
+  }
+}
+
