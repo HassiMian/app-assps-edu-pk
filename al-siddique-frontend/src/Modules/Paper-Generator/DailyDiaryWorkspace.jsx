@@ -259,6 +259,15 @@ function StudentCard({
 
   const rowCount = rows.filter(r => clean(r.subject) || clean(r.diary)).length
   const isCompactHeader = headerPreset === 'compact' || (rowCount >= 4 && cardsPerPage >= 6)
+  const footerInTable = palette.studio && cardsPerPage === 8
+  const footerElement = clean(footerText) ? (
+      <footer
+        className={(footerInTable ? 'dd-table-footer ' : '') + (/[\u0600-\u06FF]/.test(footerText) ? 'urdu' : '')}
+        style={footerFontSize > 0 ? { fontSize: `calc(${footerFontSize}px * var(--scale))` } : {}}
+      >
+        {clean(footerText)}
+      </footer>
+  ) : null
 
   return <article
     className={`dd-card ${palette.premium ? 'dd-card-premium' : ''} ${palette.studio ? `dd-card-studio dd-edition-${palette.edition}` : ''} ${isTwoCol ? 'dd-card-two-col' : 'dd-card-one-col'} ${isCompactHeader ? 'dd-card-compact' : ''} dd-density-${cardsPerPage} ${layout.lastSpan && cardsPerPage === 5 && indexInPage === 4 ? 'span-last' : ''}`}
@@ -328,7 +337,7 @@ function StudentCard({
 
     <div className="dd-student-strip">
       <div className="dd-student-field dd-student-name-field">
-        <span className="dd-student-lbl">STUDENT:</span>
+        <span className="dd-student-lbl">{footerInTable ? 'NAME:' : 'STUDENT:'}</span>
         <strong className="dd-student-val">{student ? studentName(student) : 'Student Name'}</strong>
       </div>
       {palette.premium && (
@@ -390,16 +399,10 @@ function StudentCard({
           </div>
         )
       })}
+      {footerInTable && footerElement}
     </div>
 
-    {clean(footerText) && (
-      <footer
-        className={/[\u0600-\u06FF]/.test(footerText) ? 'urdu' : ''}
-        style={footerFontSize > 0 ? { fontSize: `calc(${footerFontSize}px * var(--scale))` } : {}}
-      >
-        {clean(footerText)}
-      </footer>
-    )}
+    {!footerInTable && footerElement}
   </article>
 }
 
@@ -1230,7 +1233,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 .dd-edition-atelier .dd-table-head {background:#fff!important;border-top:1px solid var(--accent)!important;border-bottom:2px solid var(--accent)!important;color:var(--ink)!important;margin:1.3mm 2.2mm 0!important}
 .dd-edition-atelier .dd-table-head span {font-variant:small-caps!important;letter-spacing:.085em!important}
 .dd-edition-atelier .dd-rows {margin:0 2.2mm!important;border-color:var(--line)!important}
-.dd-edition-atelier .dd-sub-cell {background:var(--soft)!important;border-right:1px solid var(--line)!important;color:var(--ink)!important}
+.dd-edition-atelier .dd-sub-cell {background:var(--soft)!important;border-right:1px solid color-mix(in srgb,var(--line) 40%,var(--accent) 60%)!important;color:var(--ink)!important}
 .dd-edition-atelier .dd-row {border-top:1px solid var(--line)!important}
 .dd-edition-atelier footer {border-top:2px double var(--foil)!important;margin:1mm 2.2mm 1.2mm!important;width:auto!important}
 
@@ -1258,7 +1261,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 .dd-edition-nordic .dd-mode-badge {background:var(--soft)!important;color:var(--ink)!important;border-left:0!important;border-bottom:1.5px solid var(--accent)!important}
 .dd-edition-nordic .dd-premium-calendar {border:0!important;border-left:2px solid var(--line)!important;border-radius:0!important}
 .dd-edition-nordic .dd-premium-calendar-month {border:0!important;background:var(--soft)!important;color:var(--ink)!important}
-.dd-edition-nordic .dd-student-strip {background:var(--soft)!important;border-top:1px solid var(--line)!important;border-bottom:1px solid var(--line)!important}
+.dd-edition-nordic .dd-student-strip {background:var(--soft)!important;border-top:1px solid color-mix(in srgb,var(--line) 40%,var(--accent) 60%)!important;border-bottom:1px solid var(--line)!important}
 .dd-edition-nordic .dd-student-field+.dd-student-field {border-left:1px solid var(--line)!important}
 .dd-edition-nordic .dd-table-head {background:#fff!important;color:var(--ink)!important;border:0!important;border-bottom:2px solid var(--accent)!important;margin:1.2mm 2mm 0!important;letter-spacing:.05em!important}
 .dd-edition-nordic .dd-rows {border:0!important;margin:0 2mm!important}
@@ -1281,7 +1284,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 .dd-edition-cambridge .dd-rows {border:1px solid var(--line)!important;border-top:0!important;margin:0 2.3mm!important}
 .dd-edition-cambridge .dd-row {border-top:1px solid var(--line)!important}
 .dd-edition-cambridge .dd-sub-cell {background:var(--soft)!important;border-right:1px solid var(--line)!important;color:var(--ink)!important}
-.dd-edition-cambridge footer {border-top:1px solid var(--line)!important;margin:1mm 2.3mm!important;width:auto!important;font-style:italic!important}
+.dd-edition-cambridge footer {border-top:1px solid color-mix(in srgb,var(--line) 40%,var(--accent) 60%)!important;margin:1mm 2.3mm!important;width:auto!important;font-style:italic!important}
 
 /* 35 — Jade Monogram: strong architectural spine + soft asymmetric header */
 .dd-card-studio.dd-edition-monogram {border:1px solid var(--line)!important;border-radius:0 2.5mm 0 2.5mm!important}
@@ -1483,6 +1486,83 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 .dd-card.dd-card-premium.dd-card-studio.dd-density-8.dd-edition-monogram .dd-table-head {
   border-left:0!important;
   box-shadow:inset 2mm 0 0 var(--accent)!important;
+}
+
+
+/* A204: preserve premium template; repair only the 8-up diary content geometry. */
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-student-strip{
+  grid-template-columns:minmax(0,1.7fr) minmax(0,1.5fr) minmax(0,1.3fr)!important;
+  align-items:center!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-student-field{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  align-content:center!important;
+  gap:.13mm!important;
+  padding:0!important;
+  white-space:nowrap!important;
+  min-width:0!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-student-lbl{
+  white-space:nowrap!important;
+  flex:0 0 auto!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-student-val{
+  white-space:nowrap!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  text-overflow:clip!important;
+  overflow:visible!important;
+  flex:0 1 auto!important;
+  min-width:0!important;
+}
+/* Single soft row separator across both subject and diary columns. */
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-rows>.dd-row{
+  position:relative!important;
+  border-top-width:0!important;
+  border-bottom-width:0!important;
+  box-shadow:none!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-rows>.dd-row+.dd-row{
+ border-top:1px solid var(--line)!important;
+ print-color-adjust:exact!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-sub-cell{
+  border-right:1px solid var(--line)!important;
+}
+/* A real, final full-width footer row INSIDE the original table body. */
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-rows>footer.dd-table-footer{
+  margin:0!important;
+  width:100%!important;
+  flex:0 0 auto!important;
+  min-height:0!important;
+  padding:.45mm 1mm!important;
+  border:0!important;
+  border-top:1px solid var(--line)!important;
+  border-radius:0!important;
+  background:color-mix(in srgb,var(--soft) 72%,white)!important;
+  display:flex!important;
+  justify-content:center!important;
+  align-items:center!important;
+  box-sizing:border-box!important;
+  text-align:center!important;
+  position:relative!important;
+  line-height:1.15!important;
+  -webkit-print-color-adjust:exact!important;
+  print-color-adjust:exact!important;
+}
+/* Borderless editorial editions still retain a complete footer table cell. */
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8:is(.dd-edition-nordic,.dd-edition-letterpress) .dd-rows>footer.dd-table-footer{
+  border-left:1px solid var(--line)!important;
+  border-right:1px solid var(--line)!important;
+  border-bottom:1px solid var(--line)!important;
+}
+
+/* Retain full school-name text in one line without reducing its font size. */
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-student-name-field .dd-student-val{
+  letter-spacing:-.04em!important;
 }
 
   </style>
