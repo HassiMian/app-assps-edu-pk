@@ -99,23 +99,18 @@ const statusMeta = {
  },
 }
 
-const ATTENDANCE_CLASS_LABEL_FIXES = {
- 'Pre Nine': 'Nine',
-}
-
+// Preserve exact official Academic Setup class identity for attendance.
+// Pre Nine and Nine have different rosters and must never share API filters.
 function attendanceClassLabel(value) {
- return ATTENDANCE_CLASS_LABEL_FIXES[value] || value
+ return value
 }
 
 function attendanceApiClass(value) {
- return value === 'Pre Nine' ? 'Nine' : value
+ return value
 }
 
 function attendanceSectionsForClass(className, sectionsForClass) {
- const direct = sectionsForClass(className)
- if (direct.length) return direct
- if (className === 'Nine') return sectionsForClass('Pre Nine')
- return []
+ return sectionsForClass(className)
 }
 
 function Panel({ children, accent = C.blue, style = {}, className = '' }) {

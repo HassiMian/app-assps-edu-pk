@@ -33,11 +33,9 @@ const transformStudent = (student) => ({
  parent_whatsapp: student.parent_whatsapp || student.whatsapp_number || '',
 })
 
+// Do not fall back to a different class's section; attendance is roster scoped.
 function attendanceSectionsForClass(className, sectionsForClass) {
- const direct = sectionsForClass(className)
- if (direct.length) return direct
- if (className === 'Nine') return sectionsForClass('Pre Nine')
- return []
+ return sectionsForClass(className)
 }
 
 const card = {
