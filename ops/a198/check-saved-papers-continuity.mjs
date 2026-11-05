@@ -19,9 +19,19 @@ if(!args.includes('--dist-only')){
  const file=path.join(root,'al-siddique-frontend','src','Modules','Paper-Generator','SavedPapersTab.jsx')
  let source=''
  try{source=fs.readFileSync(file,'utf8')}catch{failures.push('SavedPapersTab.jsx missing')}
- try {
-   source += '\n' + fs.readFileSync(path.join(root,'al-siddique-frontend','src','Modules','Paper-Generator','AssessmentStudio','core','assessmentPersistence.js'),'utf8')
- }catch{ /* No helper present; contract checks still fail closed. */ }
+ // The recovered V5 implementation is split across a Saved Papers tab,
+ // a read-only server panel, and a pure Vault/assessment normalization helper.
+ // Accept this modular layout only when the imported source and built reachable
+ // chunk both preserve all three live sources.
+ for (const rel of [
+   'AssessmentStudio/core/assessmentPersistence.js',
+   'AssessmentStudio/SavedPapersV5Panels.jsx',
+   'AssessmentStudio/core/liveSavedPapersV5.mjs',
+ ]) {
+   try {
+     source += '\n' + fs.readFileSync(path.join(root,'al-siddique-frontend','src','Modules','Paper-Generator',rel),'utf8')
+   }catch{ /* Not every source layout uses the same modules. */ }
+ }
  ensure('Saved Papers source',source,[
    'usePaperStore','savedPapers','assessment-studio/papers',
    '/api/portal/paper-studio/library','serverPaperId','revisionAvailable'

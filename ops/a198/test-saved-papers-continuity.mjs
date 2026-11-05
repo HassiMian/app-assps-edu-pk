@@ -33,5 +33,14 @@ test('A198 preserves browser, Vault, assessment server and current routed module
    assert.equal(start(['--dist']).status,3,'Orphaned old asset must not count')
    file('al-siddique-frontend/src/Modules/Paper-Generator/SavedPapersTab.jsx','savedPapers usePaperStore')
    assert.equal(start().status,3,'Legacy local-only source must block release')
+   // Modular V5 source is valid: the tab owns local papers and the imported
+   // companion panels own authenticated Vault and Assessment Studio fetches.
+   file('al-siddique-frontend/src/Modules/Paper-Generator/AssessmentStudio/SavedPapersV5Panels.jsx',
+     '/api/assessment-studio/papers /api/portal/paper-studio/library')
+   file('al-siddique-frontend/src/Modules/Paper-Generator/AssessmentStudio/core/liveSavedPapersV5.mjs',
+     'serverPaperId revisionAvailable')
+   assert.equal(start().status,0,'Modular source must pass without flattening components')
+   file('al-siddique-frontend/src/Modules/Paper-Generator/AssessmentStudio/SavedPapersV5Panels.jsx','local-only')
+   assert.equal(start().status,3,'Removing server and Vault from modular source must block release')
  }finally{fs.rmSync(dir,{recursive:true,force:true})}
 })
