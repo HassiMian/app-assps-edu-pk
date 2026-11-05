@@ -2,9 +2,9 @@
 
 **Date:** 2026-11-05
 **Live app:** https://app.assps.edu.pk/paper-generator
-**Production release:** /var/www/assps-releases/assps-diary-a201-compact8-20261105
-**Rollback release:** /var/www/assps-releases/assps-diary-safeprint-failclosed-20261105
-**Nginx rollback config:** /root/secure-archive/assps-diary-a201-8up-20261105/apex-app-ssl.before-a201
+**Production release:** /var/www/assps-releases/assps-diary-a201-gridink-v2-20261105
+**Rollback release:** /var/www/assps-releases/assps-diary-a201-compact8-20261105 (previous release: assps-diary-safeprint-failclosed-20261105)
+**Nginx rollback config:** /root/secure-archive/assps-diary-a201-gridink-v2-20261105/apex-app-ssl.before-v2
 
 ## User-requested SaaS changes (NOT an image-only mockup)
 
@@ -13,7 +13,7 @@ The actual Paper Generator > Daily Diary eight-up A4 layout has been changed:
 1. Calendar enclosure reduced from large Studio preset to 12.5mm width / 12mm height at unit scale, with minimized header padding and gap. School title and logo remain present.
 2. Student, class/section, and roll number use one compact three-column metadata strip without duplicated Roll prefix. Example: ROLL: MIG26-086 instead of ROLL: Roll MIG26-086.
 3. English subject names URDU, ENGLISH, MATH, GK are handled as Latin labels with one selected font family. Real Urdu-script labels retain Urdu glyph fallback.
-4. Subject-table headers and rows have explicit continuous printed borders, with 0.85px lines at CSS pixel scale and print color adjustment. Each row has visible left/right/bottom borders and the first row also a top border.
+4. Subject-table headers and rows have explicit continuous printed borders, with 0.85px lines in printer-visible medium slate (#657689) and print color adjustment. Each row has visible left/right/bottom borders and the first row also a top border.
 5. Table margins, row gaps, header padding, and footer padding tightened to allow more homework content without reducing body/homework font sizes.
 6. Scoped only to Studio layout density-8 so all other Diary designs and density choices remain unchanged.
 7. Preserved A200 fail-closed isolated Diary printing and A195 font readiness and save logic.
@@ -26,6 +26,7 @@ The actual Paper Generator > Daily Diary eight-up A4 layout has been changed:
 - Roll number fits one line, without duplicate prefix: PASS.
 - Calendar measured 23.44px in workspace preview and 34.47px in isolated print layout at test configuration.
 - Row bottom borders measured at least 0.8px; no out-of-bounds cards: PASS.
+- PDF vector drawing check: at least 16 strokes in medium slate ink (RGB approx 0.396/0.463/0.537), correcting light pastel lines that could disappear on physical print.
 - Actual A4 Chromium PDF: one page (594.96 × 841.92 points), no text spans outside page, Jameel Noori Nastaleeq embedded, zero Chromium page errors.
 - Existing comprehensive A195 Daily Diary workspace browser suite: PASS after updating the old Roll prefix assertion.
 - Staging production-compatible module import and A201 stylesheet: PASS (23 CSS rules).

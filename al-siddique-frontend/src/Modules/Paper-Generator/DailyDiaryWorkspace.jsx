@@ -1469,7 +1469,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   gap:.5mm!important;
   min-height:0!important;
   padding:.45mm 1.2mm!important;
-  border-bottom:.85px solid var(--line)!important;
+  border-bottom:.85px solid #657689!important;
 }
 .dd-card.dd-card-studio.dd-density-8 .dd-student-field{
   box-sizing:border-box!important;
@@ -1514,7 +1514,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 }
 .dd-card.dd-card-studio.dd-density-8 .dd-table-head{
   margin:.45mm 1.2mm 0!important;
-  border:.85px solid var(--line)!important;
+  border:.85px solid #657689!important;
   border-radius:0!important;
   box-shadow:none!important;
 }
@@ -1523,7 +1523,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   padding:.3mm .7mm!important;
 }
 .dd-card.dd-card-studio.dd-density-8 .dd-table-head span+span{
-  border-left:.85px solid var(--line)!important;
+  border-left:.85px solid #657689!important;
 }
 .dd-card.dd-card-studio.dd-density-8 .dd-rows{
   display:flex!important;
@@ -1535,20 +1535,20 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 }
 .dd-card.dd-card-studio.dd-density-8 .dd-row{
   border:0!important;
-  border-left:.85px solid var(--line)!important;
-  border-right:.85px solid var(--line)!important;
-  border-bottom:.85px solid var(--line)!important;
+  border-left:.85px solid #657689!important;
+  border-right:.85px solid #657689!important;
+  border-bottom:.85px solid #657689!important;
   border-radius:0!important;
-  box-shadow:inset 0 -.12px 0 var(--line)!important;
+  box-shadow:inset 0 -.12px 0 #657689!important;
   min-height:var(--dd-row-height,0px)!important;
   flex:var(--dd-row-flex,1 1 auto)!important;
   break-inside:avoid!important;
 }
 .dd-card.dd-card-studio.dd-density-8 .dd-row:first-child{
-  border-top:.85px solid var(--line)!important;
+  border-top:.85px solid #657689!important;
 }
 .dd-card.dd-card-studio.dd-density-8 .dd-sub-cell{
-  border-right:.85px solid var(--line)!important;
+  border-right:.85px solid #657689!important;
   /* Latin subject labels (including URDU) share one user-selected font. */
   font-family:var(--dd-font,'Times New Roman',Times,serif)!important;
   text-align:center!important;
@@ -1570,7 +1570,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 .dd-card.dd-card-studio.dd-density-8 footer{
   padding:.25mm 1.2mm!important;
   margin:0!important;
-  border-top:.85px solid var(--line)!important;
+  border-top:.85px solid #657689!important;
   min-height:2.3mm!important;
 }
 @media print {
