@@ -125,8 +125,16 @@ export default function PaperGenerator() {
     if (paper?.userAuthored && (paper.serverPaperId || paper.canonicalDocument?.id)) {
       try {
         const server = await loadAssessmentPaper(paper.serverPaperId || paper.canonicalDocument.id)
+        if (!server?.document_json && paper.serverOnly) {
+          throw new Error('Server assessment revision is unavailable; no empty local document was opened.')
+        }
         if (server?.document_json) resolvedPaper = mergeServerDocumentIntoLocalPaper(paper, server.document_json, server)
       } catch (error) {
+        // A server-only listing has metadata, not a recoverable local document.
+        // Never silently load it as a blank/old local draft when verification fails.
+        if (paper.serverOnly) {
+          throw new Error('Could not verify server assessment. No unverified paper was opened.', { cause:error })
+        }
         const retryable = !error?.response || error.response.status === 408 || error.response.status === 429 || error.response.status >= 500
         resolvedPaper = { ...paper, persistenceMode:retryable ? 'DEGRADED_OFFLINE' : (paper.persistenceMode || 'LOCAL_RECOVERY'), serverReopenError:error?.response?.status || 'NETWORK' }
       }

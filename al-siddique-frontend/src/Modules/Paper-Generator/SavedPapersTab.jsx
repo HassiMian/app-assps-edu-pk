@@ -6,6 +6,7 @@ import { usePaperStore } from './usePaperStore'
 import { canDuplicatePaperInWorkspace } from './paperCreationDraft.js'
 import { useAuth } from '../../context/AuthContext'
 import { inferOfficialSectionKind, countOfficialMcqs, countNumberedItems } from './officialSectionSemantics.js'
+import SavedPapersV5Panels from './AssessmentStudio/SavedPapersV5Panels.jsx'
 
 const C = {
  card: 'rgba(11,44,77,0.92)', gold: '#C8991A', goldL: '#e8b420',
@@ -141,17 +142,19 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
  <div style={{ fontSize: 36 }}></div>
  <div style={{ flex: 1 }}>
  <div style={{ color: '#fff', fontWeight: 800, fontSize: 20 }}>Saved Papers</div>
- <div style={{ color: C.muted, fontSize: 13 }}>{savedPapers.length} paper{savedPapers.length !== 1 ? 's' : ''} saved — click any to load and print</div>
+ <div style={{ color: C.muted, fontSize: 13 }}>{savedPapers.length} browser paper{savedPapers.length !== 1 ? 's' : ''} · Vault and server assessments listed below</div>
  </div>
  <input value={search} onChange={e => setSearch(e.target.value)} placeholder=" Search papers..."
  style={{ background: 'rgba(11,44,77,0.6)', border: `1px solid ${C.border}`, borderRadius: 12, color: C.silver, padding: '10px 16px', fontSize: 13, outline: 'none', width: 220 }} />
  </div>
 
+ <SavedPapersV5Panels localPapers={savedPapers} query={search} onLoadPaper={onLoadPaper} />
+
  {filtered.length === 0 ? (
  <div style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 18, padding: 60, textAlign: 'center' }}>
  <div style={{ fontSize: 48, marginBottom: 16 }}></div>
  <div style={{ color: C.silver, fontWeight: 700, fontSize: 18, marginBottom: 8 }}>
- {savedPapers.length === 0 ? 'No saved papers yet' : 'No papers match your search'}
+ {savedPapers.length === 0 ? 'No browser-saved papers yet' : 'No browser-saved papers match your search'}
  </div>
  <div style={{ color: C.muted, fontSize: 14 }}>
  {savedPapers.length === 0 ? 'Generate a paper and click "Save Paper" in the preview.' : 'Try a different search term.'}
