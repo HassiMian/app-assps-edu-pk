@@ -261,7 +261,7 @@ function StudentCard({
   const isCompactHeader = headerPreset === 'compact' || (rowCount >= 4 && cardsPerPage >= 6)
 
   return <article
-    className={`dd-card ${palette.premium ? 'dd-card-premium' : ''} ${palette.studio ? `dd-card-studio dd-edition-${palette.edition}` : ''} ${isTwoCol ? 'dd-card-two-col' : 'dd-card-one-col'} ${isCompactHeader ? 'dd-card-compact' : ''} ${layout.lastSpan && cardsPerPage === 5 && indexInPage === 4 ? 'span-last' : ''}`}
+    className={`dd-card ${palette.premium ? 'dd-card-premium' : ''} ${palette.studio ? `dd-card-studio dd-edition-${palette.edition}` : ''} ${isTwoCol ? 'dd-card-two-col' : 'dd-card-one-col'} ${isCompactHeader ? 'dd-card-compact' : ''} dd-density-${cardsPerPage} ${layout.lastSpan && cardsPerPage === 5 && indexInPage === 4 ? 'span-last' : ''}`}
     style={{
       '--accent': palette.accent,
       '--soft': palette.soft,
@@ -339,7 +339,7 @@ function StudentCard({
       )}
       <div className="dd-student-field dd-student-roll-field">
         <span className="dd-student-lbl">ROLL:</span>
-        <strong className="dd-student-val">{student ? (studentRoll(student) ? `Roll ${studentRoll(student)}` : '—') : 'Roll No.'}</strong>
+        <strong className="dd-student-val">{student ? (studentRoll(student) || '—') : '—'}</strong>
       </div>
     </div>
 
@@ -350,7 +350,7 @@ function StudentCard({
 
     <div className="dd-rows">
       {rows.filter(row => clean(row.subject) || clean(row.diary)).map((row, index) => {
-        const hasUrduSubject = /[\u0600-\u06FF]/.test(row.subject || '') || /urdu|nazra|islamiat/i.test(row.subject || '')
+        const hasUrduSubject = /[\u0600-\u06FF]/.test(row.subject || '')
         const hasUrduDiary = /[\u0600-\u06FF]/.test(row.diary || '') || row.isUrdu
         const effectiveSubjSize = row.subjectFontSize || globalSubjectFontSize || currentSubjectBase
         const effectiveDiarySize = Math.max(9.5, Number(row.fontSize) || globalDiaryFontSize || 12)
@@ -1414,6 +1414,75 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 @media print {
   .dd-card-studio .dd-table-head span {break-inside:avoid!important}
   .dd-card-studio .dd-row {break-inside:avoid!important}
+}
+
+  /* A203 exact premium print preservation patch */
+/* A203: PREMIUM PRESERVATION — MINOR 8-UP PRINT REPAIRS
+ * Never reset a Studio edition's margins, border colors, frame, typography
+ * or header. The original premium CSS stays the source of truth.
+ * Widths/positions of table heading, body wrapper and subject divider
+ * are intentionally UNCHANGED.
+ */
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-premium-calendar {
+  width:calc(16mm * var(--scale))!important;
+  min-width:calc(16mm * var(--scale))!important;
+  min-height:calc(14.5mm * var(--scale))!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-premium-calendar-month {
+  padding:.25mm 0!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-premium-calendar-day {
+  margin-top:.12mm!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-premium-calendar-weekday {
+  padding-bottom:.2mm!important;
+}
+/* Keep original fonts and colors; reserve enough width for an actual roll ID. */
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-student-strip {
+  grid-template-columns:minmax(0,2fr) minmax(0,1.05fr) minmax(0,1.55fr)!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-student-roll-field {
+  flex-wrap:nowrap!important;
+  gap:.3mm!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-student-roll-field .dd-student-val {
+  white-space:nowrap!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  font-variant-numeric:tabular-nums!important;
+}
+/* No new heavy/dark frames. Use each edition's ORIGINAL --line / --accent
+ * colors and grid positioning, only make subpixel print separators visible.
+ * The heading already has a bottom border, so do NOT double-draw row 1.
+ */
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-row {
+  border-top-width:1px!important;
+  -webkit-print-color-adjust:exact!important;
+  print-color-adjust:exact!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-row:first-child {
+  border-top-width:0!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-sub-cell {
+  border-right-width:1px!important;
+  -webkit-print-color-adjust:exact!important;
+  print-color-adjust:exact!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-table-head span+span {
+  border-left-width:1px!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 footer {
+  border-top-width:0!important;
+}
+
+/* Edition 35 originally uses a 2mm accent BORDER on the heading.
+ * That border reduces the heading content grid width while homework rows
+ * remain full width. Preserve its colored spine as an inset visual stripe
+ * so the subject/task divider physically aligns, without changing colors.
+ */
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8.dd-edition-monogram .dd-table-head {
+  border-left:0!important;
+  box-shadow:inset 2mm 0 0 var(--accent)!important;
 }
 
   </style>
