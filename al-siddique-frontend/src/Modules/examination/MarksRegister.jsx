@@ -4,6 +4,7 @@ import { Eye, Printer, RefreshCw, Search, Pencil, ShieldCheck, FileSpreadsheet, 
 import api from '../../services/api'
 import {useTenantBranding} from '../../context/TenantBrandingContext'
 import './MarksRegister.css'
+import { selectDefaultMarksReviewExam } from './marksReviewExamSelection.js'
 
 const text = v => String(v ?? '').trim()
 const escapeHtml = v => text(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))
@@ -95,11 +96,11 @@ export default function MarksRegister(){
 
  useEffect(()=>{
   let live=true
-  api.get('/api/exams',{params:{include_subjects:'1'},marksReviewReadOnly401:true}).then(r=>{
+  api.get('/api/exams',{params:{include_subjects:'1',include_saved_counts:'1'},marksReviewReadOnly401:true}).then(r=>{
    if(!live)return
    if(!Array.isArray(r.data?.data))throw new Error('Exam catalog unavailable.')
    setExams(r.data.data)
-   selectExam(text(r.data.data[0]?.id))
+   selectExam(text(selectDefaultMarksReviewExam(r.data.data)?.id))
   }).catch(err=>live&&setError(err?.response?.data?.message||err?.message||'Could not load exams.')).finally(()=>live&&setLoadingExams(false))
   return()=>{live=false}
  },[selectExam])
