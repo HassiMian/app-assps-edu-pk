@@ -1588,6 +1588,84 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
 }
 
 
+
+/* A202 — PRINT TABLE INTEGRITY: one aligned edge for head + body.
+ * A201's header margin (1.2mm) conflicted with the old print body's
+ * 1.65mm margin + 1.2mm padding + outer border. This created an offset
+ * of roughly 9px and made subject/diary grid lines look disconnected.
+ * Scope: Studio 8-up only. Homework typography remains unchanged.
+ */
+.dd-card.dd-card-studio.dd-density-8 .dd-table-head,
+.dd-card.dd-card-studio.dd-density-8 .dd-rows{
+  margin-left:1.2mm!important;
+  margin-right:1.2mm!important;
+  width:auto!important;
+  box-sizing:border-box!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-table-head{
+  border:1px solid #657689!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-table-head span+span{
+  border-left:1px solid #657689!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-rows{
+  padding:0!important;
+  gap:0!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  flex:1 1 auto!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-row,
+.dd-card.dd-card-studio.dd-density-8 .dd-row:first-child{
+  display:grid!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  border-left:1px solid #657689!important;
+  border-right:1px solid #657689!important;
+  border-bottom:1px solid #657689!important;
+  border-top:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+  min-width:0!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-sub-cell{
+  box-sizing:border-box!important;
+  min-width:0!important;
+  border-right:1px solid #657689!important;
+}
+.dd-card.dd-card-studio.dd-density-8 .dd-diary-cell{
+  box-sizing:border-box!important;
+  min-width:0!important;
+  max-width:100%!important;
+  white-space:pre-wrap!important;
+  overflow-wrap:anywhere!important;
+  word-break:normal!important;
+}
+.dd-card.dd-card-studio.dd-density-8 footer{
+  margin-top:0!important;
+  border-top:0!important;
+  box-shadow:none!important;
+}
+@media print {
+  .dd-card.dd-card-studio.dd-density-8 .dd-table-head,
+  .dd-card.dd-card-studio.dd-density-8 .dd-row,
+  .dd-card.dd-card-studio.dd-density-8 .dd-sub-cell{
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+  .dd-card.dd-card-studio.dd-density-8 .dd-rows{
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+}
+
+
   </style>
 </head>
 <body>
