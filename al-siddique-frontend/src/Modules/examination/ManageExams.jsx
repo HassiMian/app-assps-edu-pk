@@ -5,6 +5,7 @@ import api from '../../services/api'
 import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHeader } from '../moduleStyles'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { resolveExamSession, validateExamCreation, nextAssessmentName } from './examCreationModel'
+import AssessmentCatalogReview from './AssessmentCatalogReview'
 
 const EXAM_TYPES = ['Term Exam', 'Assessment', 'Quiz', 'Annual Exam', 'Monthly Test']
 const emptyForm = { name: '', type: EXAM_TYPES[0], class: 'All Classes', session: '', total_marks: '', pass_marks: '' }
@@ -36,6 +37,7 @@ export default function ManageExams() {
  const [exams, setExams] = useState([])
  const [loading, setLoading] = useState(true)
  const [saving, setSaving] = useState(false)
+ const [reviewAssessment, setReviewAssessment] = useState(null)
  const [message, setMessage] = useState('')
  const [form, setForm] = useState(() => ({ ...emptyForm, session: activeSession }))
 
@@ -211,7 +213,12 @@ export default function ManageExams() {
  <td style={{ padding: '14px 16px', color: C.silver }}>{exam.type || '—'}</td>
  <td style={{ padding: '14px 16px' }}>{classLabel(exam.class || 'All Classes')}</td>
  <td style={{ padding: '14px 16px' }}>{exam.session || '—'}</td>
- <td style={{ padding: '14px 16px' }}><button type="button" style={btnSecondary} onClick={() => navigate(`/exams/marks?exam_id=${encodeURIComponent(exam.id)}`)}>Enter Marks</button></td>
+ <td style={{ padding: '14px 16px' }}>
+ <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+  <button type="button" style={btnSecondary} onClick={() => navigate(`/exams/marks?exam_id=${encodeURIComponent(exam.id)}`)}>Enter Marks</button>
+  {exam.type === 'Assessment' && <button type="button" style={btnSecondary} onClick={() => setReviewAssessment(exam)} aria-label={`Review ${exam.name} academic catalog`}>Review Catalog</button>}
+ </div>
+ </td>
  </tr>
  ))}
  {exams.length === 0 && (
@@ -220,6 +227,7 @@ export default function ManageExams() {
  </tbody>
  </table>
  )}
+ {reviewAssessment && <AssessmentCatalogReview key={reviewAssessment.id} exam={reviewAssessment} onClose={() => setReviewAssessment(null)} />}
  </div>
  </div>
  </div>

@@ -1,0 +1,57 @@
+--- a/src/routes/schoolAcademicCatalogRoutes.js
++++ b/src/routes/schoolAcademicCatalogRoutes.js
+@@ -11,6 +11,18 @@
+ const {parseFilters,expectedGradeSQL,summaryRows,mismatchHint,summarizeMismatchHints}=require('../services/gradeDiscrepancyReview')
+ 
+ function canonical(text) { return String(text || '').trim().toLowerCase().replace(/\s+/g, ' ') }
++
++// Source-only A208 guard: count real student cohorts before staging exam subjects.
++// Only the independently established Pre-Nine spelling alias is allowed.
++function assessmentCohortKey(className, section) {
++  const classKey = canonical(className) === 'pre-nine' ? 'pre nine' : canonical(className)
++  return [classKey, canonical(section)].join('\u0000')
++}
++function uncoveredActiveCohorts(activeRows = [], candidateRows = []) {
++  const covered = new Set(candidateRows.map(row => assessmentCohortKey(row.class_name, row.section)))
++  return activeRows.filter(row => !covered.has(assessmentCohortKey(row.class_name, row.section)))
++    .map(row => ({ className: String(row.class_name || '').trim(), section: String(row.section || '').trim() }))
++}
+ 
+ async function proposedCatalog(c, school, examId) {
+   const examRows = await c.query(
+@@ -54,7 +66,16 @@
+   // Fail closed on ambiguous normalized duplicate subjects (DB uniqueness is case sensitive).
+   const signatures = rows.rows.map(r=>[r.class_name,r.section,r.subject].map(canonical).join('\u0000'))
+   if(new Set(signatures).size!==signatures.length) return {error:'DUPLICATED_REVIEWED_SUBJECTS'}
+-  return {exam,pass,rows:rows.rows,cohorts:new Set(rows.rows.map(r=>[r.class_name,r.section].map(canonical).join('\u0000'))).size}
++  // A staged Assessment must cover EVERY active student cohort, not only
++  // cohorts with verified teacher subjects. Otherwise students disappear from
++  // Assessment 1-5 without any principal explicitly deciding their status.
++  const active = await c.query(
++    'SELECT DISTINCT s.class AS class_name,s.section FROM students s WHERE s.school_id=$1 AND s.is_active=true',
++    [school]
++  )
++  const uncoveredCohorts = uncoveredActiveCohorts(active.rows, rows.rows)
++  return {exam,pass,rows:rows.rows,cohorts:new Set(rows.rows.map(r=>assessmentCohortKey(r.class_name,r.section))).size,
++    totalActiveCohorts:active.rows.length, uncoveredCohorts}
+ }
+ 
+ // Read-only, authenticated Principal coverage report; no inferred assignments.
+@@ -361,7 +382,7 @@
+     if(p.error){await c.query('ROLLBACK');opened=false;return res.status(p.status||409).json({success:false,code:p.error})}
+     const existing=await c.query("SELECT approval_status,COUNT(*)::int AS n FROM exam_subjects WHERE school_id=$1 AND exam_id=$2 GROUP BY approval_status",[school,examId])
+     await c.query('COMMIT');opened=false
+-    return res.json({success:true,data:{examId,assessment:p.exam.name,totalMarks:Number(p.exam.total_marks),passMarks:p.pass,verifiedCandidateCount:p.rows.length,activeCohorts:p.cohorts,existing:existing.rows,candidates:p.rows,action:'SIGNED_PRINCIPAL_STAGE_REQUIRED',allCandidatesPendingUntilApproved:true}})
++    return res.json({success:true,data:{examId,assessment:p.exam.name,totalMarks:Number(p.exam.total_marks),passMarks:p.pass,verifiedCandidateCount:p.rows.length,activeCohorts:p.cohorts,totalActiveStudentCohorts:p.totalActiveCohorts,uncoveredCohorts:p.uncoveredCohorts,canStageFullCoverage:p.uncoveredCohorts.length===0,existing:existing.rows,candidates:p.rows,action:'SIGNED_PRINCIPAL_STAGE_REQUIRED',allCandidatesPendingUntilApproved:true}})
+   }catch(e){if(opened)await c.query('ROLLBACK').catch(()=>{});console.error('Academic catalog preview:',e.code||'QUERY_FAILED');return res.status(503).json({success:false,code:'CATALOG_PREVIEW_UNAVAILABLE'})}
+   finally{if(c)c.release()}
+ })
+@@ -373,6 +394,8 @@
+   await c.query('SELECT pg_advisory_xact_lock($1::bigint)',[500000000+Number(actor.school)*100000+examId])
+   const p=await proposedCatalog(c,actor.school,examId)
+   if(p.error)return {error:p.error,status:p.status||409}
++  // Fail closed before ANY INSERT or audit row if one active school cohort is absent.
++  if(p.uncoveredCohorts.length)return {error:'ASSESSMENT_COHORT_COVERAGE_INCOMPLETE',status:409}
+   const exists=await c.query("SELECT COUNT(*)::int AS n FROM exam_subjects WHERE school_id=$1 AND exam_id=$2",[actor.school,examId])
+   if(Number(exists.rows[0].n)!==0)return {error:'ASSESSMENT_CATALOG_ALREADY_EXISTS',status:409}
+   const cohortKeys=new Set()

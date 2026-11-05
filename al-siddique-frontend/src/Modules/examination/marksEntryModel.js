@@ -56,6 +56,7 @@ export const marksSubjectsForClass = ({exam, className, academicSubjects=[]}) =>
   const name = String(exam?.name || '').trim().replace(/\s+/g,' ').toLowerCase()
   const session = String(exam?.session || '').trim()
   const type = String(exam?.type || '')
+  const isAssessment = type === 'AS' || type === 'Assessment'
   const officialTerm = name === 'first term exam' && session === '2026-2027' &&
     (type === 'Term Exam' || type === 'TE')
   // An explicit empty offering list from the signed school API means NO subject
@@ -72,11 +73,14 @@ export const marksSubjectsForClass = ({exam, className, academicSubjects=[]}) =>
         seen.add(key)
         return true
       })
-    // Preserve legacy assessments that have no exam_subjects records at all:
-    // only the official First Term exam's explicit missing class mapping is a
-    // hard block. Do not erase configured ordinary assessment subjects.
-    if (subjects.length || officialTerm) return subjects
+    // A new Assessment requires genuinely approved exam_subjects. The marks
+    // backend rejects unsanctioned writes; do not advertise unrelated academic
+    // subjects in the picker when the signed exam catalog is empty.
+    if (subjects.length || officialTerm || isAssessment) return subjects
   }
+  // If a legacy client omitted include_subjects, fail closed for Assessments.
+  // Existing First Term result viewing remains unaffected.
+  if (isAssessment) return []
   if (officialTerm) {
     const official = OFFICIAL_FIRST_TERM_SUBJECTS_2026[normalizeMarksClass(className)]
     if (Array.isArray(official) && official.length) return official
