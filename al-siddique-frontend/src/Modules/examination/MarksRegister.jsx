@@ -95,11 +95,18 @@ export default function MarksRegister(){
 
  useEffect(()=>{
   let live=true
-  api.get('/api/exams',{params:{include_subjects:'1'},marksReviewReadOnly401:true}).then(r=>{
+  api.get('/api/exams',{params:{include_subjects:'1',include_saved_counts:'1'},marksReviewReadOnly401:true}).then(r=>{
    if(!live)return
    if(!Array.isArray(r.data?.data))throw new Error('Exam catalog unavailable.')
-   setExams(r.data.data)
-   selectExam(text(r.data.data[0]?.id))
+   // A newly-created Assessment has no saved marks yet. Showing it by
+   // default previously left Class/Section/Subject dropdowns blank even
+   // while First Term results were already in the database.
+   const available = r.data.data
+   const firstWithMarks = available.find(e=>Number(e.saved_scored_count)>0)
+     || available.find(e=>Number(e.saved_result_count)>0)
+     || available[0]
+   setExams(available)
+   selectExam(text(firstWithMarks?.id))
   }).catch(err=>live&&setError(err?.response?.data?.message||err?.message||'Could not load exams.')).finally(()=>live&&setLoadingExams(false))
   return()=>{live=false}
  },[selectExam])
@@ -142,7 +149,7 @@ export default function MarksRegister(){
   </div>
   <div className="mr-info"><ShieldCheck size={16}/> Read-only review never changes a student's saved score. Corrections use the protected marks workflow; an existing official score requires audited Principal revision.</div>
   <div className="mr-controls">
-   <label>Examination<select value={examId} onChange={e=>selectExam(e.target.value)} disabled={loadingExams}><option value="">Select examination</option>{exams.map(e=><option key={e.id} value={e.id}>{e.name} {e.session?'· '+e.session:''}</option>)}</select></label>
+   <label>Examination<select value={examId} onChange={e=>selectExam(e.target.value)} disabled={loadingExams}><option value="">Select examination</option>{exams.map(e=><option key={e.id} value={e.id}>{e.name} {e.session?'· '+e.session:''} · {Number(e.saved_scored_count||0)} saved mark(s)</option>)}</select></label>
    <label>Class<select value={classFilter} onChange={e=>{setClassFilter(e.target.value);setSectionFilter('');setSubjectFilter('')}}><option value="">All classes</option>{classes.map(x=><option key={x}>{x}</option>)}</select></label>
    <label>Section<select value={sectionFilter} onChange={e=>{setSectionFilter(e.target.value);setSubjectFilter('')}}><option value="">All sections</option>{sections.map(x=><option key={x}>{x}</option>)}</select></label>
    <label>Subject<select value={subjectFilter} onChange={e=>setSubjectFilter(e.target.value)}><option value="">All subjects</option>{subjects.map(x=><option key={x}>{x}</option>)}</select></label>
@@ -158,7 +165,7 @@ export default function MarksRegister(){
   </div>
   <div className="mr-panel">
    <div className="mr-panel-top"><div><h2><FileSpreadsheet size={20}/> Official Marks Sheet</h2><p>{currentExam?.name || 'Select an examination'} · {matrix.subjects.length} recorded subject(s)</p></div><span className="mr-readonly"><Eye size={14}/> Live saved records</span></div>
-   {loading||loadingExams?<div className="mr-empty">Loading saved examination records…</div>:!visible.length?<div className="mr-empty">No saved entries match these filters. Blank is not zero. Select an examination or change filters.</div>:
+   {loading||loadingExams?<div className="mr-empty">Loading saved examination records…</div>:!visible.length?<div className="mr-empty">{rows.length ? 'No saved entries match these filters. Change class, section or subject.' : 'This examination has no saved marks yet. Choose an examination showing saved marks above. Blank is never zero.'}</div>:
    <div className="mr-tablewrap"><table><thead><tr><th>#</th><th>Roll / GR</th><th className="mr-left">Student</th><th>Class</th><th>Section</th>{matrix.subjects.map(s=><th key={s}>{s}</th>)}<th>Saved total</th><th>Action</th></tr></thead><tbody>{matrix.students.map((student,i)=>{
     let max=0,obt=0,n=0
     const cells=matrix.subjects.map(subject=>{

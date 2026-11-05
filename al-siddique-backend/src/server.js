@@ -39,7 +39,13 @@ app.use(helmet({ crossOriginResourcePolicy: false }))
 
 const generalLimiter = rateLimit({
   windowMs: 60 * 1000,
-  max: 120,
+  // Normal multi-tab academic use creates overlapping roster/results/dashboard
+  // GETs. Still bounded per REAL client IP (Nginx trusts Cloudflare edge only).
+  max: 600,
+  // Authentication submissions have a separate strict 15-minute limiter below.
+  // Do not let an unrelated burst of dashboard GETs lock a legitimate login.
+  skip: (req) => req.method === 'POST' &&
+    /^\/api\/(?:admin\/)?auth\/(?:login|forgot[^/]*|reset[^/]*)\/?$/i.test(req.path || ''),
   standardHeaders: true,
   legacyHeaders: false,
   message: { success: false, message: 'Too many requests. Please try again later.' },
@@ -47,9 +53,16 @@ const generalLimiter = rateLimit({
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10,
+  max: 60,
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => {
+    // Only rate-limit login and password reset submissions; never block /me, /session, /refresh, /logout
+    const path = (req.path || '').toLowerCase();
+    const isLogin = path === '/login' || path === '/login/' || path.endsWith('/login');
+    const isAuthAction = isLogin || path.includes('forgot') || path.includes('reset');
+    return !(req.method === 'POST' && isAuthAction);
+  },
   message: { success: false, message: 'Too many authentication attempts. Please try again later.' },
 })
 

@@ -1443,10 +1443,44 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       doc.open()
       doc.write(printDoc)
       doc.close()
-      setTimeout(() => {
-        iframe.contentWindow.focus()
-        iframe.contentWindow.print()
-      }, 350)
+      // Chrome/HP can spool fallback glyphs when the hidden print iframe is
+      // printed before Urdu fonts or the crest are ready. Unlike a fixed 350ms
+      // delay, this blocks malformed print jobs instead of sending garbage.
+      const printSequence = String(Number(iframe.dataset.printSequence || 0) + 1)
+      iframe.dataset.printSequence = printSequence
+      const printWhenReady = async () => {
+        try {
+          const printWindow = iframe.contentWindow
+          const printDocument = printWindow.document
+          const images = Array.from(printDocument.images)
+          const assets = Promise.all([
+            Promise.resolve(printDocument.fonts?.ready),
+            ...images.map(image => image.complete ? Promise.resolve()
+              : new Promise(resolve => {
+                image.addEventListener('load', resolve, { once: true })
+                image.addEventListener('error', resolve, { once: true })
+              }))
+          ])
+          const ready = await Promise.race([
+            assets.then(() => true),
+            new Promise(resolve => setTimeout(() => resolve(false), 8500))
+          ])
+          if (iframe.dataset.printSequence !== printSequence) return
+          if (!ready) {
+            setStatus('Print blocked: Urdu fonts or logo are still loading. Check your connection and try again.')
+            return
+          }
+          if (images.some(image => image.src && !image.naturalWidth)) {
+            setStatus('Print blocked: school logo has not loaded. Check the logo and retry.')
+            return
+          }
+          printWindow.focus()
+          printWindow.print()
+        } catch (error) {
+          setStatus('Print blocked: printing assets could not be prepared. ' + (error?.message || 'Retry from print preview.'))
+        }
+      }
+      setTimeout(() => { void printWhenReady() }, 120)
     } catch {
       window.print()
     }

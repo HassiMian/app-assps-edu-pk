@@ -156,6 +156,30 @@ router.get('/', protect, requireScopeForServiceOnly('school.results.read'), asyn
     const tenant = await tenantClause(req, { table: 'exams', paramIndex: 1 })
     sql += tenant.clause + ' ORDER BY created_at DESC'
     const result = await query(sql, tenant.params)
+    // Read-only Marks Review counts: never assume latest exam has saved scores.
+    // Counts are restricted to authorized school and returned exam IDs.
+    if (req.query.include_saved_counts === '1' && result.rows.length) {
+      const schoolId = currentSchoolId(req)
+      if (!Number.isSafeInteger(Number(schoolId)) || Number(schoolId) <= 0) {
+        return res.status(403).json({ success: false, code: 'MARKS_REVIEW_SCHOOL_REQUIRED' })
+      }
+      const ids = result.rows.map(exam => Number(exam.id))
+        .filter(id => Number.isSafeInteger(id) && id > 0)
+      const savedCounts = ids.length ? await query(
+        `SELECT exam_id, COUNT(*)::int AS saved_result_count,
+                COUNT(marks_obtained)::int AS saved_scored_count
+         FROM exam_results
+         WHERE school_id=$1 AND exam_id=ANY($2::int[])
+         GROUP BY exam_id`,
+        [schoolId, ids]
+      ) : { rows: [] }
+      const byExamId = new Map(savedCounts.rows.map(row => [Number(row.exam_id), row]))
+      for (const exam of result.rows) {
+        const counts = byExamId.get(Number(exam.id))
+        exam.saved_result_count = Number(counts?.saved_result_count || 0)
+        exam.saved_scored_count = Number(counts?.saved_scored_count || 0)
+      }
+    }
     // Optional authoritative class/section-specific exam subject catalog.
     // Existing clients continue receiving the original exam records. Results
     // stay school-scoped by BOTH the validated JWT and FORCE RLS policies.
