@@ -2333,3 +2333,37 @@
 .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-student-name-field .dd-student-val{
   letter-spacing:-.04em!important;
 }
+
+/* A205 — optical print consistency, not a redesign.
+ * The 8-up print page is downscaled in Chrome's PDF thumbnail.
+ * One CSS pixel becomes <1 device pixel, so pale pastel separators
+ * flicker or disappear at different fractional card positions.
+ * Keep layout, column fractions, colors, fonts and outside frames untouched.
+ */
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 {
+  --dd-print-grid-ink:color-mix(in srgb,var(--line) 22%,var(--accent) 78%);
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-table-head {
+  border-bottom:2px solid var(--dd-print-grid-ink)!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-table-head span+span {
+  border-left:2px solid var(--dd-print-grid-ink)!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-rows>.dd-row+.dd-row {
+  border-top:2px solid var(--dd-print-grid-ink)!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-rows>.dd-row .dd-sub-cell {
+  border-right:2px solid var(--dd-print-grid-ink)!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-rows>footer.dd-table-footer {
+  border-top:2px solid var(--dd-print-grid-ink)!important;
+}
+@media print {
+  .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-table-head,
+  .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-row,
+  .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-sub-cell,
+  .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-table-footer {
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
+}

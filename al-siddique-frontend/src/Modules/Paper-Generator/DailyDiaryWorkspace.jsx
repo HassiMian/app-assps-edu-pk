@@ -1526,11 +1526,11 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   box-shadow:none!important;
 }
 .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-rows>.dd-row+.dd-row{
- border-top:1px solid var(--line)!important;
+ border-top:1px solid color-mix(in srgb,var(--line) 40%,var(--accent) 60%)!important;
  print-color-adjust:exact!important;
 }
 .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-sub-cell{
-  border-right:1px solid var(--line)!important;
+  border-right:1px solid color-mix(in srgb,var(--line) 40%,var(--accent) 60%)!important;
 }
 /* A real, final full-width footer row INSIDE the original table body. */
 .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-rows>footer.dd-table-footer{
@@ -1540,7 +1540,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   min-height:0!important;
   padding:.45mm 1mm!important;
   border:0!important;
-  border-top:1px solid var(--line)!important;
+  border-top:1px solid color-mix(in srgb,var(--line) 40%,var(--accent) 60%)!important;
   border-radius:0!important;
   background:color-mix(in srgb,var(--soft) 72%,white)!important;
   display:flex!important;
@@ -1559,10 +1559,44 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   border-right:1px solid var(--line)!important;
   border-bottom:1px solid var(--line)!important;
 }
-
 /* Retain full school-name text in one line without reducing its font size. */
 .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-student-name-field .dd-student-val{
   letter-spacing:-.04em!important;
+}
+
+
+/* A205 — optical print consistency, not a redesign.
+ * The 8-up print page is downscaled in Chrome's PDF thumbnail.
+ * One CSS pixel becomes <1 device pixel, so pale pastel separators
+ * flicker or disappear at different fractional card positions.
+ * Keep layout, column fractions, colors, fonts and outside frames untouched.
+ */
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 {
+  --dd-print-grid-ink:color-mix(in srgb,var(--line) 22%,var(--accent) 78%);
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-table-head {
+  border-bottom:2px solid var(--dd-print-grid-ink)!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-table-head span+span {
+  border-left:2px solid var(--dd-print-grid-ink)!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-rows>.dd-row+.dd-row {
+  border-top:2px solid var(--dd-print-grid-ink)!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-rows>.dd-row .dd-sub-cell {
+  border-right:2px solid var(--dd-print-grid-ink)!important;
+}
+.dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-rows>footer.dd-table-footer {
+  border-top:2px solid var(--dd-print-grid-ink)!important;
+}
+@media print {
+  .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-table-head,
+  .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-row,
+  .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-sub-cell,
+  .dd-card.dd-card-premium.dd-card-studio.dd-density-8 .dd-table-footer {
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+  }
 }
 
   </style>
