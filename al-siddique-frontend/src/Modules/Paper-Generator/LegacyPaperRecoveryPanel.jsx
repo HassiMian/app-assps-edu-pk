@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react'
-import { encryptedLegacyPaperBackup, verifyEncryptedLegacyPaperBackup, inspectPaperRecoverySources, sameAuthorizedRecoveryActor } from './legacyPaperRecovery.js'
+import { encryptedLegacyPaperBackup, verifyEncryptedLegacyPaperBackup, inspectPaperRecoverySources, attestPaperRecoverySources, sameAuthorizedRecoveryActor } from './legacyPaperRecovery.js'
 
 const labels = {
   'legacy-local': 'Older browser store — local storage',
   'legacy-session': 'Older browser store — emergency session',
   'current-local': 'Current school-scoped store — local storage',
   'current-session': 'Current school-scoped store — emergency session',
+  'prior-school-local': 'Earlier same-school ID store — local storage',
+  'prior-school-session': 'Earlier same-school ID store — emergency session',
 }
 const border = '1px solid #d9e2ec'
 const button = { border, borderRadius: 9, padding: '9px 14px', background: '#edf3f9', color: '#133455', fontWeight: 700, cursor:'pointer' }
@@ -48,7 +50,9 @@ export default function LegacyPaperRecoveryPanel({ user, verifyActor }) {
     setWorking(true)
     try {
       await checkServerIdentity()
-      const report = inspectPaperRecoverySources({ user, storage: getAreas() })
+      const storage = getAreas()
+      const discovered = inspectPaperRecoverySources({ user, storage })
+      const report = await attestPaperRecoverySources({ user, storage, cryptography:window.crypto, report:discovered })
     setInventory(report)
     setVerifiedOwner(false)
     setPassphrase('')
@@ -72,8 +76,11 @@ export default function LegacyPaperRecoveryPanel({ user, verifyActor }) {
     setStatus('')
     try {
       await checkServerIdentity()
+      const inspectedSource = inventory?.sources?.find(row => row.id === selected && row.state === 'valid')
+      if (!inspectedSource?.rawSha256) throw new Error('PAPER_SOURCE_NOT_ATTESTED')
       const backup = await encryptedLegacyPaperBackup({
         user, source: selected, confirmedOwner: verifiedOwner,
+        expectedOriginalSha256:inspectedSource.rawSha256,
         passphrase, cryptography: window.crypto,
         storage: getAreas(), now: new Date().toISOString(),
       })
@@ -90,7 +97,7 @@ export default function LegacyPaperRecoveryPanel({ user, verifyActor }) {
       setVerifiedOwner(false)
       setStatus(`Encrypted local backup prepared for ${backup.count} papers. Store the passphrase securely; it cannot be recovered from the file. No server upload or import occurred.`)
     } catch (e) {
-      const allowed = new Set(['SCHOOL_OWNERSHIP_CONFIRMATION_REQUIRED','BACKUP_PASSPHRASE_AT_LEAST_14_CHARACTERS','PAPER_SOURCE_UNAVAILABLE','NO_VALID_SOURCE_PAPERS','SECURE_BROWSER_REQUIRED','ACCOUNT_RECHECK_REQUIRED','ACCOUNT_SCHOOL_OR_ROLE_CHANGED'])
+      const allowed = new Set(['SCHOOL_OWNERSHIP_CONFIRMATION_REQUIRED','BACKUP_PASSPHRASE_AT_LEAST_14_CHARACTERS','PAPER_SOURCE_UNAVAILABLE','NO_VALID_SOURCE_PAPERS','SECURE_BROWSER_REQUIRED','ACCOUNT_RECHECK_REQUIRED','ACCOUNT_SCHOOL_OR_ROLE_CHANGED','PAPER_SOURCE_CHANGED_SINCE_INSPECTION','PAPER_SOURCE_NOT_ATTESTED'])
       setStatus(allowed.has(e?.message) ? e.message.replaceAll('_',' ') : 'Unable to prepare encrypted backup. Original browser storage was not changed.')
     } finally {
       setWorking(false)
@@ -115,7 +122,7 @@ export default function LegacyPaperRecoveryPanel({ user, verifyActor }) {
     } finally { setWorking(false) }
   }
 
-  const exportable = inventory?.sources?.filter(s => s.state === 'valid' && s.count > 0) || []
+  const exportable = inventory?.sources?.filter(s => s.state === 'valid' && s.count > 0 && s.rawSha256) || []
   return (
     <section aria-label="Read-only saved paper recovery" style={{ background:'#f8fbff', color:'#193954', border, borderRadius:14, padding:'15px 18px', marginBottom:16 }}>
       <strong style={{ fontSize:15 }}>Saved Papers — Local Recovery Inspection</strong>

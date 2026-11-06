@@ -10,7 +10,10 @@ const AUTHORITIES = new Set(['principal', 'admin', 'school_admin'])
 
 export function recoveryActorScope(user) {
   if (!user || !AUTHORITIES.has(String(user.role || '').toLowerCase())) return null
-  if (!Number.isSafeInteger(Number(user.school_id)) || Number(user.school_id) < 1) return null
+  const schoolId = user.school_id
+  if (!((typeof schoolId === 'number' && Number.isSafeInteger(schoolId) && schoolId > 0) ||
+        (typeof schoolId === 'string' && /^[1-9][0-9]*$/.test(schoolId) &&
+          Number.isSafeInteger(Number(schoolId)) && Number(schoolId) > 0))) return null
   const scope = getTenantScope(user)
   if (!/^(?:tenant|school|code)-[a-z0-9_-]+$/.test(scope)) return null
   return scope
@@ -29,6 +32,11 @@ export function recoverySourceKey(source, user) {
   if (!scope) return null
   if (source === 'legacy-local' || source === 'legacy-session') return BASE
   if (source === 'current-local' || source === 'current-session') return tenantStorageKey(BASE, user)
+  // The auth profile may acquire a tenant ID after papers were originally saved
+  // under the authenticated school's numeric school-id namespace. This is the
+  // SAME school, never an arbitrary historical tenant or a wildcard key search.
+  if (source === 'prior-school-local' || source === 'prior-school-session')
+    return `${BASE}__school-${Number(user.school_id)}`
   return null
 }
 
@@ -38,8 +46,10 @@ function getStorage(source, { localStorage, sessionStorage }) {
 
 function snapshot(raw) {
   if (raw === null || typeof raw !== 'string') return { available: false, count: 0, state: 'absent', bytes: 0 }
+  // Reject oversized input BEFORE materializing an unbounded encoded copy.
+  if (raw.length > MAX_RAW_LENGTH) return { available: true, count: null, state: 'oversize', bytes: null }
   const bytes = new TextEncoder().encode(raw).length
-  if (raw.length > MAX_RAW_LENGTH) return { available: true, count: null, state: 'oversize', bytes }
+  if (bytes > MAX_RAW_LENGTH) return { available: true, count: null, state: 'oversize', bytes }
   try {
     const data = JSON.parse(raw)
     if (!data || typeof data !== 'object' || Array.isArray(data) || !Array.isArray(data.savedPapers))
@@ -56,7 +66,16 @@ export function inspectPaperRecoverySources({ user, storage }) {
   const scope = recoveryActorScope(user)
   if (!scope) return { authorized: false, scope: null, sources: [] }
   const sources = ['legacy-local', 'legacy-session', 'current-local', 'current-session']
-    .map(id => {
+  if (scope !== `school-${Number(user.school_id)}`) {
+    sources.push('prior-school-local', 'prior-school-session')
+  }
+  const unique = new Set()
+  const entries = sources.filter(id => {
+    const fullKey = `${id.endsWith('-local') ? 'local' : 'session'}:${recoverySourceKey(id,user)}`
+    if (unique.has(fullKey)) return false
+    unique.add(fullKey)
+    return true
+  }).map(id => {
       const key = recoverySourceKey(id, user)
       try {
         const area = getStorage(id, storage)
@@ -66,7 +85,32 @@ export function inspectPaperRecoverySources({ user, storage }) {
         return { id, available: false, count: null, state: 'storage-denied', bytes: 0 }
       }
     })
-  return { authorized: true, scope, sources, autoMigrated: false, originalKeysChanged: false }
+  return { authorized: true, scope, sources: entries, autoMigrated: false, originalKeysChanged: false }
+}
+
+// A212: bind each export to the EXACT bytes observed during Principal inventory.
+// The digest remains in React memory, not in visible output or localStorage.
+async function sha256Raw(raw, crypto) {
+  if (!crypto?.subtle) throw new Error('SECURE_BROWSER_REQUIRED')
+  const digest = new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(raw)))
+  return Array.from(digest, x => x.toString(16).padStart(2, '0')).join('')
+}
+
+export async function attestPaperRecoverySources({ user, storage, cryptography, report }) {
+  const scope = recoveryActorScope(user)
+  if (!scope || !report?.authorized || report.scope !== scope || !Array.isArray(report.sources))
+    throw new Error('RECOVERY_IDENTITY_REVIEW_REQUIRED')
+  const sources = await Promise.all(report.sources.map(async entry => {
+    if (entry.state !== 'valid' || entry.count <= 0) return entry
+    const key = recoverySourceKey(entry.id, user)
+    const area = getStorage(entry.id, storage)
+    const raw = key && area?.getItem(key)
+    const current = snapshot(raw)
+    if (current.state !== 'valid' || current.bytes !== entry.bytes || current.count !== entry.count)
+      return { ...entry, state: 'changed-since-inspection', rawSha256: null }
+    return { ...entry, rawSha256: await sha256Raw(raw, cryptography) }
+  }))
+  return { ...report, sources, inspectionProofVersion: 1 }
 }
 
 function encode64(bytes) {
@@ -78,7 +122,7 @@ function encode64(bytes) {
   return btoa(result)
 }
 
-export async function encryptedLegacyPaperBackup({ user, source, passphrase, confirmedOwner, storage, cryptography, now }) {
+export async function encryptedLegacyPaperBackup({ user, source, passphrase, confirmedOwner, storage, cryptography, now, expectedOriginalSha256 }) {
   const scope = recoveryActorScope(user)
   if (!scope || confirmedOwner !== true) throw new Error('SCHOOL_OWNERSHIP_CONFIRMATION_REQUIRED')
   if (typeof passphrase !== 'string' || passphrase.length < 14 || passphrase.length > 256)
@@ -89,10 +133,17 @@ export async function encryptedLegacyPaperBackup({ user, source, passphrase, con
   const original = area.getItem(key)
   const metadata = snapshot(original)
   if (metadata.state !== 'valid' || metadata.count === 0) throw new Error('NO_VALID_SOURCE_PAPERS')
+  // Optional for low-level backward compatibility; the A212 UI requires
+  // a valid inspection digest, blocking another tab's replacement of papers.
+  if (expectedOriginalSha256 !== undefined &&
+      (!/^[a-f0-9]{64}$/.test(String(expectedOriginalSha256)) ||
+       await sha256Raw(original, cryptography) !== expectedOriginalSha256))
+    throw new Error('PAPER_SOURCE_CHANGED_SINCE_INSPECTION')
   const parsed = JSON.parse(original)
   const payload = JSON.stringify({ papers: parsed.savedPapers, originalSourceKey: key, sourceType: source, capturedAt: now, schoolScope: scope, originalCount: metadata.count })
   const encoder = new TextEncoder()
   const bytes = encoder.encode(payload)
+  if (bytes.length > MAX_RAW_LENGTH) throw new Error('PAPER_BACKUP_TOO_LARGE')
   const crypto = cryptography
   if (!crypto?.subtle || !crypto?.getRandomValues) throw new Error('SECURE_BROWSER_REQUIRED')
   const salt = crypto.getRandomValues(new Uint8Array(16))
@@ -147,6 +198,7 @@ export async function verifyEncryptedLegacyPaperBackup({ user, backup, passphras
   try { payload = JSON.parse(new TextDecoder().decode(clear)) }
   catch { throw new Error('INVALID_ENCRYPTED_BACKUP') }
   if (payload.schoolScope !== scope || payload.originalSourceKey !== sourceKey || payload.sourceType !== backup.source ||
+      payload.capturedAt !== backup.capturedAt ||
       !Array.isArray(payload.papers) || payload.papers.length !== Number(backup.count) || payload.originalCount !== Number(backup.count))
     throw new Error('BACKUP_CONTENT_SCOPE_OR_COUNT_MISMATCH')
   return { verified:true, paperCount:payload.papers.length, schoolScope:scope, source:backup.source, integrityHash:calculated,

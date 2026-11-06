@@ -99,3 +99,48 @@ test('Principal browser inventory remains locked after server-confirmed school s
  assert.equal(await page.getByRole('button',{name:'Download encrypted local backup'}).count(),0)
  assert.equal(await page.evaluate(()=>localStorage.getItem('al_siddique_paper_store')),original)
 })
+test('tenant-ID upgrade shows same-school prior school-ID papers without scanning other tenant keys',async t=>{
+ const {page}=await begin(t,5927)
+ await page.goto('http://127.0.0.1:5927/a211-recovery-test.html?tenantId=OfficialAlpha')
+ await page.evaluate(()=>{
+   localStorage.setItem('al_siddique_paper_store__school-1',JSON.stringify({savedPapers:[{id:'school-1-old',name:'Old Same School Exam'}]}))
+   localStorage.setItem('al_siddique_paper_store__school-2',JSON.stringify({savedPapers:[{id:'wrong-school',name:'Never visible'}]}))
+ })
+ await page.getByRole('button',{name:'Inspect this browser only'}).click()
+ await page.getByText('Earlier same-school ID store — local storage',{exact:true}).waitFor({timeout:20000})
+ const sourceOption=page.getByRole('option',{name:/Earlier same-school ID store — local storage — 1 papers/})
+ assert.equal(await sourceOption.count(),1)
+ assert.equal(await page.getByText('Never visible',{exact:true}).count(),0)
+ assert.equal(await page.getByText('Old Same School Exam',{exact:true}).count(),0)
+ await page.locator('#paperRecoverySource').selectOption('prior-school-local')
+ await page.getByRole('checkbox').check()
+ await page.locator('#paperRecoveryPassphrase').fill(passphrase)
+ const downloaded=page.waitForEvent('download',{timeout:30000})
+ await page.getByRole('button',{name:'Download encrypted local backup'}).click()
+ const file=await downloaded
+ const backup=JSON.parse(await readFile(await file.path(),'utf8'))
+ assert.equal(backup.count,1);assert.equal(backup.schoolScope,'tenant-officialalpha')
+ const plaintext=await decrypt(backup)
+ assert.equal(plaintext.originalSourceKey,'al_siddique_paper_store__school-1')
+ assert.equal(plaintext.papers[0].id,'school-1-old')
+ assert.equal(await page.evaluate(()=>localStorage.getItem('al_siddique_paper_store__school-2')!==null),true)
+})
+test('browser rejects changed paper contents after read-only inspection rather than encrypting wrong data',async t=>{
+ const {page}=await begin(t,5928)
+ await page.goto('http://127.0.0.1:5928/a211-recovery-test.html')
+ await page.getByRole('button',{name:'Inspect this browser only'}).click()
+ await page.getByRole('checkbox').check()
+ await page.locator('#paperRecoveryPassphrase').fill(passphrase)
+ await page.evaluate(()=>{
+   const key='al_siddique_paper_store'
+   const parsed=JSON.parse(localStorage.getItem(key))
+   parsed.savedPapers[0].name='Changed after Principal inspection'
+   localStorage.setItem(key,JSON.stringify(parsed))
+ })
+ let downloaded=0
+ page.on('download',()=>downloaded++)
+ await page.getByRole('button',{name:'Download encrypted local backup'}).click()
+ await page.getByText('PAPER SOURCE CHANGED SINCE INSPECTION',{exact:false}).waitFor({timeout:20000})
+ assert.equal(downloaded,0)
+ assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('al_siddique_paper_store')).savedPapers[0].name),'Changed after Principal inspection')
+})

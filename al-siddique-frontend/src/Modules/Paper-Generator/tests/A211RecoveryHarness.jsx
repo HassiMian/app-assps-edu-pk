@@ -3,5 +3,5 @@ import { createRoot } from 'react-dom/client'
 import LegacyPaperRecoveryPanel from '../LegacyPaperRecoveryPanel'
 const params = new URL(location.href).searchParams
 const role = params.get('role') || 'principal'
-const actor = { role, id: 5, school_id: 1 }
+const actor = { role, id: 5, school_id: 1, ...(params.get('tenantId') ? {tenant_id:params.get('tenantId')}: {}) }
 createRoot(document.getElementById('root')).render(<LegacyPaperRecoveryPanel user={actor} verifyActor={async () => ({...actor, school_id:Number(params.get('verifiedSchool')||1)})} />)

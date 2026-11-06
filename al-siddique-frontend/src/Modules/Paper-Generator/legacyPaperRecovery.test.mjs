@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 import { webcrypto } from 'node:crypto'
-import { recoveryActorScope, recoverySourceKey, inspectPaperRecoverySources, encryptedLegacyPaperBackup, verifyEncryptedLegacyPaperBackup, sameAuthorizedRecoveryActor } from './legacyPaperRecovery.js'
+import { recoveryActorScope, recoverySourceKey, inspectPaperRecoverySources, encryptedLegacyPaperBackup, verifyEncryptedLegacyPaperBackup, sameAuthorizedRecoveryActor, attestPaperRecoverySources } from './legacyPaperRecovery.js'
 class Store { constructor(){this.values=new Map()} getItem(k){return this.values.has(k)?this.values.get(k):null} setItem(k,v){this.values.set(k,String(v))} removeItem(k){this.values.delete(k)} }
 const user={role:'principal',id:5,school_id:1}
 function fixture(){const localStorage=new Store(),sessionStorage=new Store();localStorage.setItem('al_siddique_paper_store',JSON.stringify({savedPapers:[{id:'p1',name:'Urdu paper',questions:[{text:'original question'}]},{id:'p2',name:'English paper'}],paperSettings:{privateConfiguration:'DO_NOT_EXPORT'}}));return {localStorage,sessionStorage}}
@@ -48,4 +48,77 @@ test('offline verifier rejects edited paper counts and unsupported KDF settings'
  const settings={user,backup:b,passphrase:'correct-horse-battery-staple',cryptography:webcrypto}
  await assert.rejects(verifyEncryptedLegacyPaperBackup({...settings,backup:{...b,count:99}}),/BACKUP_CONTENT_SCOPE_OR_COUNT_MISMATCH/)
  await assert.rejects(verifyEncryptedLegacyPaperBackup({...settings,backup:{...b,iterations:1}}),/UNSUPPORTED_ENCRYPTED_BACKUP/)
+})
+test('authentic tenant-id upgrade also inspects same-school prior school-id store',()=>{
+ const s=fixture();s.localStorage.setItem('al_siddique_paper_store__school-1',JSON.stringify({savedPapers:[{id:'older-school-1'}]}))
+ const updated={...user,tenant_id:'OfficialCampusA'}
+ const report=inspectPaperRecoverySources({user:updated,storage:s})
+ assert.equal(report.scope,'tenant-officialcampusa')
+ assert.equal(recoverySourceKey('prior-school-local',updated),'al_siddique_paper_store__school-1')
+ assert.equal(report.sources.find(x=>x.id==='prior-school-local').count,1)
+ assert.equal(report.sources.length,6)
+ assert.equal(recoverySourceKey('prior-school-local',{...updated,school_id:2}),'al_siddique_paper_store__school-2')
+})
+test('existing school-id scope shows no duplicate prior-school entries',()=>{
+ const report=inspectPaperRecoverySources({user,storage:fixture()})
+ assert.equal(report.sources.length,4)
+ assert.equal(report.sources.some(x=>x.id.startsWith('prior-school')),false)
+})
+test('SHA256 inventory attests exact local browser bytes with no storage writes',async()=>{
+ const s=fixture()
+ const before=s.localStorage.getItem('al_siddique_paper_store')
+ const inventory=inspectPaperRecoverySources({user,storage:s})
+ const report=await attestPaperRecoverySources({user,storage:s,cryptography:webcrypto,report:inventory})
+ assert.match(report.sources[0].rawSha256,/^[a-f0-9]{64}$/)
+ assert.equal(report.sources[0].count,2)
+ assert.equal(report.sources[1].rawSha256,undefined)
+ assert.equal(s.localStorage.getItem('al_siddique_paper_store'),before)
+})
+test('export blocks changed content after Principal has inspected browser storage',async()=>{
+ const s=fixture()
+ const inspected=await attestPaperRecoverySources({user,storage:s,cryptography:webcrypto,report:inspectPaperRecoverySources({user,storage:s})})
+ const expectedOriginalSha256=inspected.sources[0].rawSha256
+ // Another open browser tab may replace this key while retaining same paper count.
+ s.localStorage.setItem('al_siddique_paper_store',JSON.stringify({savedPapers:[{id:'replaced'},{id:'replaced-2'}]}))
+ await assert.rejects(encryptedLegacyPaperBackup(config(s,{expectedOriginalSha256})),/PAPER_SOURCE_CHANGED_SINCE_INSPECTION/)
+ assert.equal(JSON.parse(s.localStorage.getItem('al_siddique_paper_store')).savedPapers[0].id,'replaced')
+})
+test('successful backup can bind to the inspected SHA256 and remains verifiable',async()=>{
+ const s=fixture()
+ const inspection=await attestPaperRecoverySources({user,storage:s,cryptography:webcrypto,report:inspectPaperRecoverySources({user,storage:s})})
+ const envelope=await encryptedLegacyPaperBackup(config(s,{expectedOriginalSha256:inspection.sources[0].rawSha256}))
+ const result=await verifyEncryptedLegacyPaperBackup({user,backup:envelope,passphrase:'correct-horse-battery-staple',cryptography:webcrypto})
+ assert.equal(result.paperCount,2)
+})
+test('a tampered inventory attestation cannot authorize a later export',async()=>{
+ await assert.rejects(encryptedLegacyPaperBackup(config(fixture(),{expectedOriginalSha256:'0'.repeat(64)})),/PAPER_SOURCE_CHANGED_SINCE_INSPECTION/)
+})
+test('school mismatch prohibits attest and enumeration of any browser keys',async()=>{
+ const s=fixture()
+ const review=inspectPaperRecoverySources({user,storage:s})
+ await assert.rejects(attestPaperRecoverySources({user:{...user,school_id:2},storage:s,cryptography:webcrypto,report:review}),/RECOVERY_IDENTITY_REVIEW_REQUIRED/)
+})
+test('malformed numeric school ID, boolean and exponential notation never gain Principal browser inspection',()=>{
+ for(const school_id of [true,false,'1e3','+1','001','1.0',1.5,-1,'0',null,{},[]]){
+   const actor={...user,school_id}
+   assert.equal(recoveryActorScope(actor),null,String(school_id))
+   assert.equal(inspectPaperRecoverySources({user:actor,storage:fixture()}).authorized,false)
+ }
+})
+test('recognized numeric-string school IDs preserve exact matching verified school boundary',()=>{
+ assert.equal(recoveryActorScope({...user,school_id:'1'}),'school-1')
+ assert.equal(sameAuthorizedRecoveryActor(user,{...user,school_id:'1'}),true)
+})
+test('oversize browser paper store is not parsed or overwritten',()=>{
+ const storage=fixture()
+ const giant='x'.repeat(16*1024*1024+1)
+ storage.localStorage.setItem('al_siddique_paper_store',giant)
+ const found=inspectPaperRecoverySources({user,storage}).sources[0]
+ assert.equal(found.state,'oversize')
+ assert.equal(found.count,null)
+ assert.equal(storage.localStorage.getItem('al_siddique_paper_store'),giant)
+})
+test('backup verifier rejects an edited capturedAt provenance timestamp',async()=>{
+ const backup=await encryptedLegacyPaperBackup(config(fixture()))
+ await assert.rejects(verifyEncryptedLegacyPaperBackup({user,backup:{...backup,capturedAt:'2026-11-07T00:00:00Z'},passphrase:'correct-horse-battery-staple',cryptography:webcrypto}),/BACKUP_CONTENT_SCOPE_OR_COUNT_MISMATCH/)
 })
