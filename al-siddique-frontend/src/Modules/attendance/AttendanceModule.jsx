@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
  Check, CheckCircle2, X, Clock, Users, Calendar,
  ChevronDown, Save, Search, UserCheck, UserX, CalendarOff, QrCode, BarChart3, MessageSquare
@@ -9,6 +9,7 @@ import { DonutChart, BarChart, ChartLegend } from "../../components/Charts";
 import { useAcademicStore } from "../../services/useAcademicStore";
 import { getPakistanDateString } from "../../utils/dateUtils";
 import { emitAttendanceUpdated } from "../../utils/attendanceEvents";
+import { reconcileAttendanceRoster } from "./attendanceRosterGuard.js";
 
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -80,6 +81,13 @@ export default function AttendanceModule() {
  const [selectedClass, setSelectedClass] = useState(defaultClass);
  const [selectedSection, setSelectedSection] = useState(() => sectionsForClass(defaultClass)[0] || "");
  const [selectedDate, setSelectedDate] = useState(getPakistanDateString());
+ // Academic class options arrive asynchronously from the official server.
+ // A state initializer alone can remain empty permanently on a first login.
+ useEffect(() => {
+   if (CLASSES.length && (!selectedClass || !CLASSES.includes(selectedClass))) {
+     setSelectedClass(CLASSES[0])
+   }
+ }, [CLASSES, selectedClass])
  const [students, setStudents] = useState([]);
  const [attendance, setAttendance] = useState({});
  const [saved, setSaved] = useState(false);
@@ -92,14 +100,19 @@ export default function AttendanceModule() {
  const [saveError, setSaveError] = useState('');
  const [loadedScopeKey, setLoadedScopeKey] = useState('');
  const currentScopeKey = `${selectedClass}::${selectedSection}::${selectedDate}`;
+ const requestSerialRef = useRef(0)
+ const selectedScopeRef = useRef(currentScopeKey)
+ selectedScopeRef.current = currentScopeKey
  const scopeMatches = loadedScopeKey === currentScopeKey;
  const visibleStudents = scopeMatches ? students : [];
  const visibleAttendance = scopeMatches ? attendance : {};
  const scopeUnavailable = Boolean(loadError && !scopeMatches);
 
  const loadAttendance = async () => {
- if (!selectedClass || !selectedSection) {
- setLoadError(selectedClass ? 'No section is configured for this class in Academic Setup.' : 'No active class is configured in Academic Setup.')
+ const serial = ++requestSerialRef.current
+ const configuredSections = attendanceSectionsForClass(selectedClass, sectionsForClass)
+ if (!selectedClass || !selectedSection || !CLASSES.includes(selectedClass) || !configuredSections.includes(selectedSection)) {
+ setLoadError(selectedClass ? 'Attendance blocked: selected section does not belong to this class in Academic Setup.' : 'No active class is configured in Academic Setup.')
  return
  }
  const requestScopeKey = currentScopeKey
@@ -113,19 +126,17 @@ export default function AttendanceModule() {
 
  const attendanceData = Array.isArray(attendanceRes.data?.data) ? attendanceRes.data.data : []
  const studentData = Array.isArray(studentRes.data?.data) ? studentRes.data.data : []
- const markMap = {}
- attendanceData.forEach((row) => {
- const sid = row.student_id || row.id
- if (sid && row.status) markMap[sid] = row.status
- })
- setStudents(studentData.map(transformStudent))
- setAttendance(markMap)
+ if (serial !== requestSerialRef.current || selectedScopeRef.current !== requestScopeKey) return
+ const verified = reconcileAttendanceRoster(studentData,attendanceData,selectedClass,selectedSection)
+ setStudents(verified.students.map(transformStudent))
+ setAttendance(verified.marks)
  setLoadedScopeKey(requestScopeKey)
  } catch (err) {
+ if (serial !== requestSerialRef.current || selectedScopeRef.current !== requestScopeKey) return
  console.error('Could not load attendance', err)
- setLoadError(err.response?.data?.message || 'Attendance data could not be refreshed. Existing loaded attendance was preserved for its original class, section and date.')
+ setLoadError(err.message?.startsWith('ATTENDANCE_') ? 'Attendance roster or grade mismatch. Cross-class marks were not loaded.' : (err.response?.data?.message || 'Attendance data could not be refreshed. Existing loaded attendance was preserved for its original class, section and date.'))
  } finally {
- setLoading(false)
+ if (serial === requestSerialRef.current && selectedScopeRef.current === requestScopeKey) setLoading(false)
  }
  }
 

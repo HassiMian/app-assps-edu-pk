@@ -18,6 +18,7 @@ import {
 import api from '../../services/api'
 import { getPakistanDateString } from '../../utils/dateUtils'
 import { emitAttendanceUpdated } from '../../utils/attendanceEvents'
+import { reconcileAttendanceRoster } from './attendanceRosterGuard.js'
 
 // Removed hardcoded CLASSES and SECTIONS
 
@@ -172,6 +173,9 @@ export default function MarkAttendance() {
  const [saving, setSaving] = useState(false)
  const [message, setMessage] = useState('')
  const loadedScopeRef = useRef('')
+ const requestSerialRef = useRef(0)
+ const selectedScopeRef = useRef('')
+ selectedScopeRef.current = `${selectedClass}|${selectedSection}|${date}`
 
  // Academic classes hydrate from the server after the first render. A useState
  // initializer alone leaves the class picker blank even when the API succeeds.
@@ -183,11 +187,13 @@ export default function MarkAttendance() {
  }, [CLASSES, selectedClass])
 
  const loadStudents = () => {
- if (!selectedClass || !selectedSection) {
+ const serial = ++requestSerialRef.current
+ const configuredSections = attendanceSectionsForClass(selectedClass, sectionsForClass)
+ if (!selectedClass || !selectedSection || !CLASSES.includes(selectedClass) || !configuredSections.includes(selectedSection)) {
  setStudents([])
  setAttendance({})
  loadedScopeRef.current = ''
- setMessage(selectedClass ? 'Failed to load: no section is configured for this class.' : 'Failed to load: no active class is configured in Academic Setup.')
+ setMessage(selectedClass ? 'Attendance blocked: class and section must match official Academic Setup.' : 'Failed to load: no active class is configured in Academic Setup.')
  return
  }
  const scopeKey = `${selectedClass}|${selectedSection}|${date}`
@@ -202,29 +208,25 @@ export default function MarkAttendance() {
  api.get('/api/attendance', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, date } }),
  ])
  .then(([stuRes, attRes]) => {
+ if (serial !== requestSerialRef.current || selectedScopeRef.current !== scopeKey) return
  const list = Array.isArray(stuRes.data?.data) ? stuRes.data.data : []
  const attList = Array.isArray(attRes.data?.data) ? attRes.data.data : []
- const attMap = {}
- attList.forEach((row) => {
- const sid = row.student_id || row.id
- if (sid && row.status) attMap[sid] = row.status
- })
- setStudents(list)
- const initialMarks = {}
- list.forEach((student) => {
- if (attMap[student.id]) initialMarks[student.id] = attMap[student.id]
- })
- setAttendance(initialMarks)
+ const verified = reconcileAttendanceRoster(list,attList,selectedClass,selectedSection)
+ setStudents(verified.students)
+ setAttendance(verified.marks)
  loadedScopeRef.current = scopeKey
  })
  .catch((err) => {
+ if (serial !== requestSerialRef.current || selectedScopeRef.current !== scopeKey) return
  console.error('Attendance roster load failed', err)
- const detail = err.response?.data?.message || err.message || 'server unavailable'
+ const detail = err.message?.startsWith('ATTENDANCE_') ? 'Attendance roster or grade mismatch; no cross-class marks were loaded' : (err.response?.data?.message || err.message || 'server unavailable')
  setMessage(loadedScopeRef.current === scopeKey
  ? `Attendance refresh failed: ${detail}. Existing loaded roster and marks were preserved.`
  : `Attendance data for the selected class, section and date is temporarily unavailable: ${detail}`)
  })
- .finally(() => setLoading(false))
+ .finally(() => {
+ if (serial === requestSerialRef.current && selectedScopeRef.current === scopeKey) setLoading(false)
+ })
  }
 
  useEffect(() => {

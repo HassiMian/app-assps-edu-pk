@@ -10,7 +10,7 @@ const exam=(extra={})=>({id:14,name:'Assessment 1',type:'AS',class:'All Classes'
 const term={id:9,name:'First Term Exam',type:'TE',class:'All Classes',session:'2026-2027',total_marks:20,pass_marks:8}
 const json=(r,status,data)=>r.fulfill({status,contentType:'application/json',body:JSON.stringify(data)})
 const begin=async t=>{
- const port = 5941 + ((Math.random()*30)|0)
+ const port = 6100 + ((Math.random()*120)|0)
  const vite=await createServer({root,server:{host:'127.0.0.1',port,strictPort:true,proxy:{}}})
  await vite.listen()
  const browser=await chromium.launch({headless:true,executablePath:browserPath,args:['--no-sandbox']})
