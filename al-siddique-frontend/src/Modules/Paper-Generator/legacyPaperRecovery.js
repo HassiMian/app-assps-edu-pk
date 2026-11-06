@@ -85,7 +85,7 @@ export function inspectPaperRecoverySources({ user, storage }) {
         return { id, available: false, count: null, state: 'storage-denied', bytes: 0 }
       }
     })
-  return { authorized: true, scope, sources: entries, autoMigrated: false, originalKeysChanged: false }
+  return { authorized: true, scope, sourceSchoolId: Number(user.school_id), sourceActorId: Number(user.id), sources: entries, autoMigrated: false, originalKeysChanged: false }
 }
 
 // A212: bind each export to the EXACT bytes observed during Principal inventory.

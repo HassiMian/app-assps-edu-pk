@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { comparePaperRecoverySources } from './paperRecoveryReconciliation.js'
 import { encryptedLegacyPaperBackup, verifyEncryptedLegacyPaperBackup, inspectPaperRecoverySources, attestPaperRecoverySources, sameAuthorizedRecoveryActor } from './legacyPaperRecovery.js'
 
 const labels = {
@@ -21,6 +22,7 @@ const getAreas = () => {
 
 export default function LegacyPaperRecoveryPanel({ user, verifyActor }) {
   const [inventory, setInventory] = useState(null)
+  const [reconciliation, setReconciliation] = useState(null)
   const [selected, setSelected] = useState('')
   const [verifiedOwner, setVerifiedOwner] = useState(false)
   const [passphrase, setPassphrase] = useState('')
@@ -31,6 +33,7 @@ export default function LegacyPaperRecoveryPanel({ user, verifyActor }) {
 
   useEffect(() => {
     setInventory(null)
+    setReconciliation(null)
     setVerifyFile(null)
     setVerifyPassphrase('')
     setSelected('')
@@ -53,6 +56,8 @@ export default function LegacyPaperRecoveryPanel({ user, verifyActor }) {
       const storage = getAreas()
       const discovered = inspectPaperRecoverySources({ user, storage })
       const report = await attestPaperRecoverySources({ user, storage, cryptography:window.crypto, report:discovered })
+      const review = await comparePaperRecoverySources({ user, storage, cryptography:window.crypto, report })
+      setReconciliation(review)
     setInventory(report)
     setVerifiedOwner(false)
     setPassphrase('')
@@ -61,10 +66,11 @@ export default function LegacyPaperRecoveryPanel({ user, verifyActor }) {
       setStatus(report.authorized ? 'Verified school account. Browser-only inventory complete; original data has not been moved.' : 'Verified school Principal or Administrator account required.')
     } catch {
       setInventory(null)
+      setReconciliation(null)
       setSelected('')
       setVerifiedOwner(false)
       setPassphrase('')
-      setStatus('Server-backed school identity could not be verified. Recovery remains locked.')
+      setStatus('Identity, paper source, or original SHA-256 changed during verification. Recovery stays locked; no browser data was modified.')
     } finally {
       setWorking(false)
     }
@@ -137,6 +143,14 @@ export default function LegacyPaperRecoveryPanel({ user, verifyActor }) {
           <span>{labels[source.id]}</span>
           <strong>{source.state === 'valid' ? `${source.count} papers` : source.state === 'absent' ? 'Not found' : source.state}</strong>
         </div>)}
+        {reconciliation && <div aria-label="Read-only paper version comparison" style={{ padding:11, border:'1px solid #d6dfec', borderRadius:10, background:'#fff', display:'grid', gap:5 }}>
+          <strong style={{ fontSize:12 }}>Read-only source reconciliation — {reconciliation.uniquePaperIds} distinct paper IDs across {reconciliation.sourceCount} inspected source(s)</strong>
+          {reconciliation.pairwise.map(pair => <div key={pair.sourceA + pair.sourceB} style={{ fontSize:11, lineHeight:1.5 }}>
+            {labels[pair.sourceA]} ({pair.countA}) vs {labels[pair.sourceB]} ({pair.countB}): {pair.sharedIds} shared IDs, {pair.differentBodies} revision conflicts, {pair.onlyA} only in first, {pair.onlyB} only in second.
+          </div>)}
+          {reconciliation.requiresOwnerRevisionReview && <strong style={{ fontSize:12, color:'#8a4b0c' }}>Different versions or missing IDs detected. Preserve each source separately. Nothing has been merged or overwritten.</strong>}
+          <span style={{ fontSize:11, color:'#5b6d81' }}>Other Chrome/Edge profiles are not visible here. Confirm every original profile and its paper versions before importing anything.</span>
+        </div>}
         {exportable.length>0 && <div style={{ marginTop:8, display:'grid', gap:9 }}>
           <label style={{ fontSize:12, fontWeight:700 }} htmlFor="paperRecoverySource">Backup source</label>
           <select id="paperRecoverySource" value={selected} onChange={e => setSelected(e.target.value)} style={{ border, borderRadius:8, padding:8, background:'#fff', color:'#193954' }}>
