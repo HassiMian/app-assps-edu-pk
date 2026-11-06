@@ -5,6 +5,7 @@ import Portal from '../../components/Portal'
 import { usePaperStore } from './usePaperStore'
 import { canDuplicatePaperInWorkspace } from './paperCreationDraft.js'
 import { useAuth } from '../../context/AuthContext'
+import LegacyPaperRecoveryPanel from './LegacyPaperRecoveryPanel'
 import { inferOfficialSectionKind, countOfficialMcqs, countNumberedItems } from './officialSectionSemantics.js'
 
 const C = {
@@ -88,7 +89,7 @@ function categoryStats(paper = {}) {
 
 export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
  const { savedPapers, deleteSavedPaper, renameSavedPaper } = usePaperStore()
- const { isTeacher } = useAuth()
+ const { isTeacher, isAdmin, user, refreshUser } = useAuth()
  const [renaming, setRenaming] = useState(null) // paper id
  const [renameVal, setRenameVal] = useState('')
  const [search, setSearch] = useState('')
@@ -116,6 +117,7 @@ export default function SavedPapersTab({ onLoadPaper, onDuplicatePaper }) {
 
  return (
  <div>
+ {isAdmin && ['admin', 'principal', 'school_admin'].includes(user?.role) && <LegacyPaperRecoveryPanel user={user} verifyActor={refreshUser} />}
  {/* Delete confirm modal */}
  {confirmDelete && (
  <Portal>
