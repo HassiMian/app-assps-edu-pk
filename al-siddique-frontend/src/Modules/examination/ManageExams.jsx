@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Plus, RefreshCw } from 'lucide-react'
 import api from '../../services/api'
@@ -6,6 +6,7 @@ import { C, card, btnPrimary, btnSecondary, input, select, labelStyle, sectionHe
 import { useAcademicStore } from '../../services/useAcademicStore'
 import { resolveExamSession, validateExamCreation, nextAssessmentName } from './examCreationModel'
 import AssessmentCatalogReview from './AssessmentCatalogReview'
+import { examMarksUiAction } from './assessmentMarksReadiness'
 
 const EXAM_TYPES = ['Term Exam', 'Assessment', 'Quiz', 'Annual Exam', 'Monthly Test']
 const emptyForm = { name: '', type: EXAM_TYPES[0], class: 'All Classes', session: '', total_marks: '', pass_marks: '' }
@@ -35,6 +36,7 @@ export default function ManageExams() {
  const activeSession = sessionStart && sessionEnd ? `${String(sessionStart).slice(0,4)}-${String(sessionEnd).slice(0,4)}` : ''
  const CLASS_OPTIONS = ['All Classes', ...classNames]
  const [exams, setExams] = useState([])
+ const latestExamCatalogRequest = useRef(0)
  const [loading, setLoading] = useState(true)
  const [saving, setSaving] = useState(false)
  const [reviewAssessment, setReviewAssessment] = useState(null)
@@ -42,23 +44,37 @@ export default function ManageExams() {
  const [form, setForm] = useState(() => ({ ...emptyForm, session: activeSession }))
 
  const load = async () => {
+ // Every response is bound to the newest request. Earlier HTTP successes must
+ // never resurrect obsolete signed Assessment offerings after an error or
+ // a fresh reload has invalidated them.
+ const seq = ++latestExamCatalogRequest.current
  setLoading(true)
  setMessage('')
  try {
- const res = await api.get('/api/exams')
+ const res = await api.get('/api/exams', { params: { include_subjects: '1' } })
+ if (seq !== latestExamCatalogRequest.current) return false
  const saved = (res.data.data || []).map(normalizeExam)
  setExams(saved)
  return true
  } catch {
- setMessage('Refresh failed. Existing loaded exams were preserved; please check the backend connection.')
+ if (seq !== latestExamCatalogRequest.current) return false
+ // Preserve existing header identity, but revoke UI-only Assessment marks
+ // permission immediately. A failed refresh is NOT proof that a previously
+ // approved catalog is still approved or belongs to the current school.
+ setExams(previous => previous.map(exam =>
+   exam.type === 'Assessment' ? { ...exam, subject_offerings: null } : exam
+ ))
+ setMessage('Refresh failed. Exam headers were preserved; Assessment marks remain locked until the signed subject catalog is verified again.')
+ return false
  } finally {
- setLoading(false)
+ if (seq === latestExamCatalogRequest.current) setLoading(false)
  }
  }
 
  useEffect(() => {
  // eslint-disable-next-line react-hooks/set-state-in-effect
  load()
+ return () => { latestExamCatalogRequest.current += 1 }
  }, [])
 
  const set = (key) => (event) => {
@@ -95,7 +111,9 @@ export default function ManageExams() {
  setForm(prev => ({ ...prev, name: nextAssessmentName(form.name), session: effectiveSession }))
  const refreshed = await load()
  setMessage(refreshed
-   ? `${form.name.trim()} added. Select Enter Marks to record scores.`
+   ? resolvedType === 'AS'
+     ? `${form.name.trim()} saved as an Assessment header. Review its academic catalog; authenticated Principal subject approval is required before marks entry.`
+     : `${form.name.trim()} added. Select Enter Marks to record scores.`
    : `${form.name.trim()} was created, but the exam list could not refresh. Please refresh before adding it again.`)
  } catch (err) {
  setMessage(err.response?.data?.message || 'Failed to add exam.')
@@ -215,7 +233,11 @@ export default function ManageExams() {
  <td style={{ padding: '14px 16px' }}>{exam.session || '—'}</td>
  <td style={{ padding: '14px 16px' }}>
  <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
-  <button type="button" style={btnSecondary} onClick={() => navigate(`/exams/marks?exam_id=${encodeURIComponent(exam.id)}`)}>Enter Marks</button>
+  <button type="button" style={btnSecondary} disabled={!examMarksUiAction(exam).canEnter}
+    title={examMarksUiAction(exam).message || 'Open authorized marks entry'}
+    onClick={() => navigate(`/exams/marks?exam_id=${encodeURIComponent(exam.id)}`)}>
+    {examMarksUiAction(exam).actionLabel}
+  </button>
   {exam.type === 'Assessment' && <button type="button" style={btnSecondary} onClick={() => setReviewAssessment(exam)} aria-label={`Review ${exam.name} academic catalog`}>Review Catalog</button>}
  </div>
  </td>

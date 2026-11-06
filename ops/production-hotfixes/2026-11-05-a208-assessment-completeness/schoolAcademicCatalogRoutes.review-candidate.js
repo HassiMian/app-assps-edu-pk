@@ -102,7 +102,14 @@ router.get('/assessment-catalog/readiness',protect,requireRoles('admin','princip
        JOIN employees ep ON ep.id=a.employee_id AND ep.user_id=u.id AND ep.school_id=a.school_id AND ep.is_active=true
        WHERE a.school_id=s.school_id AND a.is_active=true
        AND ${sqlCanonicalClass('a.class_name')}=${sqlCanonicalClass('s.class')}
-       AND LOWER(BTRIM(a.section))=LOWER(BTRIM(s.section))) AS reviewed_staffed
+       AND LOWER(BTRIM(a.section))=LOWER(BTRIM(s.section))
+       AND BTRIM(COALESCE(a.subject,''))<>''
+       AND EXISTS (SELECT 1 FROM timetable t
+          WHERE t.school_id=a.school_id AND t.teacher_id=a.teacher_user_id
+            AND t.staff_identity_reviewed=true
+            AND LOWER(BTRIM(t.class_name))=LOWER(BTRIM(a.class_name))
+            AND LOWER(BTRIM(t.section))=LOWER(BTRIM(a.section))
+            AND LOWER(BTRIM(t.subject))=LOWER(BTRIM(a.subject)))) AS reviewed_staffed
     FROM students s WHERE s.school_id=$1 AND s.is_active=true
     GROUP BY s.school_id,s.class,s.section ORDER BY s.class,s.section
   `,[school])).rows
@@ -117,6 +124,17 @@ router.get('/assessment-catalog/readiness',protect,requireRoles('admin','princip
   const records=(await c.query("SELECT COUNT(*)::int AS n,COUNT(*) FILTER(WHERE marks_obtained=0)::int AS genuine_zeros FROM exam_results WHERE school_id=$1",[school])).rows[0]
   const profiles=(await c.query("SELECT COUNT(*)::int AS total FROM lesson_plans WHERE school_id=$1",[school])).rows[0].total
   const vault=(await c.query("SELECT COUNT(*)::int AS total FROM paper_vault WHERE school_id=$1 AND deleted_at IS NULL",[school])).rows[0].total
+  // Read-only storage inventory, not a deduplicated school paper library.
+  // These four repositories have different authorities and life cycles.
+  // In particular, the number in Paper Vault must not be reported as all
+  // historical Saved Papers without a verified migration manifest.
+  const paperStores=(await c.query(`
+    SELECT
+      (SELECT COUNT(*)::int FROM saved_papers WHERE school_id=$1) AS legacy_saved_rows,
+      (SELECT COUNT(*)::int FROM paper_documents WHERE school_id=$1 AND deleted_at IS NULL) AS canonical_document_rows,
+      (SELECT COUNT(*)::int FROM assessment_papers WHERE school_id=$1) AS assessment_paper_headers,
+      (SELECT COUNT(*)::int FROM assessment_paper_revisions WHERE school_id=$1) AS assessment_revision_rows
+  `,[school])).rows[0]
   const assessments=[]
   for(const exam of exams){
    const count=counts.filter(x=>Number(x.exam_id)===Number(exam.id))
@@ -135,12 +153,24 @@ router.get('/assessment-catalog/readiness',protect,requireRoles('admin','princip
   res.set('Cache-Control','private, no-store')
   return res.json({success:true,data:{
    reviewOnly:true,academicApprovalCreated:false,
+   verifiedTeachingPolicy:'active_teacher_employee_and_reviewed_timetable',
+   studentCoverageReportIsNotASignedAcademicApproval:true,
    schoolId:school,activeStudents:population.reduce((n,x)=>n+x.students,0),
    unstaffedStudents:unstaffed.reduce((n,x)=>n+x.students,0),
    unstaffedCohorts:unstaffed.map(x=>({className:x.class_name,section:x.section,activeStudents:x.students})),
    firstTermResultRecords:records.n,genuineZeroMarks:records.genuine_zeros,
    historicalGradeDiscrepancies:sourceGrades,investigativeHints:summarizeMismatchHints(gradeRows),academicApprovalEvents:approvedEvents,academicApprovalAuditStatus:approvalAuditStatus,
    savedVaultPapers:vault,lessonPlanRecords:profiles,assessments,
+   savedPaperStorageReconciliation:{
+     activeVaultPapers:vault,
+     legacySavedPapers:Number(paperStores.legacy_saved_rows||0),
+     canonicalPaperDocuments:Number(paperStores.canonical_document_rows||0),
+     assessmentPaperHeaders:Number(paperStores.assessment_paper_headers||0),
+     assessmentRevisionRows:Number(paperStores.assessment_revision_rows||0),
+     sourcesNotDeduplicated:true,
+     historicalMigrationCompleteness:'NOT_CERTIFIED',
+     paperContentRestorationVerified:false
+   },
    releaseStatus:'PRINCIPAL_SOURCE_APPROVAL_AND_AUTHENTIC_ACCEPTANCE_REQUIRED',
    forbiddenAutomation:'NO_AUTO_SUBJECT_APPROVAL_OR_TEACHER_ASSIGNMENT'
   }})
