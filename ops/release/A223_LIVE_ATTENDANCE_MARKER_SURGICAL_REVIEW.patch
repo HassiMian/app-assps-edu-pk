@@ -1,0 +1,41 @@
+--- live-attendanceRoutes.js@pinned
++++ review-attendanceRoutes.js@a223
+@@ -4,6 +4,7 @@
+ const { pool, query, applyTenantContext } = require('../config/database')
+ const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
+ const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
++const { resolveAuthenticatedAttendanceMarker } = require('./attendanceMarkerIdentity')
+ const { teacherStudentScopeClause, getTeacherAssignments } = require('../services/teacherAssignmentService')
+ const {
+   getTwilioConfigForSchool,
+@@ -361,7 +362,7 @@
+ 
+ // POST /api/attendance/mark â€” bulk mark
+ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
+-  const { records, marked_by } = req.body
++  const { records } = req.body
+   const inputRecords = Array.isArray(records)
+     ? records
+     : (req.body.student_id || req.body.studentId ? [req.body] : null)
+@@ -496,10 +497,17 @@
+ 
+     // 2. Atomic upsert loop inside transaction
+     let saved = 0
+-    const authenticatedActorId = Number.isInteger(Number(req.user?.id)) ? Number(req.user.id) : null
+-    const markedByUserId = actorRole === 'teacher'
+-      ? authenticatedActorId
+-      : (Number.isInteger(Number(marked_by)) ? Number(marked_by) : authenticatedActorId)
++    // All roles: record the authenticated caller, never a client-supplied marked_by.
++    // Legacy administrative delegation must have a distinct approved audit contract.
++    const markedByUserId = resolveAuthenticatedAttendanceMarker(req.user)
++    if (markedByUserId === null) {
++      await client.query('ROLLBACK')
++      return res.status(403).json({
++        success: false,
++        error: 'ATTENDANCE_MARKER_NOT_AUTHENTICATED',
++        saved: 0,
++      })
++    }
+ 
+     for (const r of persistableRecords) {
+       const student = studentMap.get(Number(r.student_id))
