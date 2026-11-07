@@ -47,3 +47,11 @@ Exit codes: 0 = complete source parity for independent Core review (NOT deployme
 7. Recover disk capacity to approved reserve of at least 16 GiB plus measured production build headroom. Signed SaaS Core release authorization required.
 
 An automated source-parity PASS alone never authorizes production deployment.
+
+## Ancillary non-JS runtime and schema custody
+
+A second read-only gate, ops/release/a225_ancillary_runtime_custody.py, checks CJS/MJS executable modules, JSON/YAML config, SQL/Prisma schema, TypeScript and shell assets under src. It deliberately excludes env secrets, student CSV, cached dependencies and documentation.
+
+At A225 initial evidence: live 403 permitted ancillary files, incremental candidate 6 files; 398 missing and 2 differing. Of these, 219 missing files are CJS/MJS executable modules and 10 are SQL/Prisma schema files. Three permitted assets match exactly. This additional gap reinforces that an attendance-focused source patch is NOT a complete backend production release. The gate always returns HOLD because no live authorization, offhost recovery, published frontend coverage, or role/tenant integration is certified by static ancillary parity.
+
+Do not copy these production files blindly. Credentials, student data, backup archives and source code content were not uploaded to GitHub. Detailed private manifests contain only relative file paths, hashes, and file sizes.
