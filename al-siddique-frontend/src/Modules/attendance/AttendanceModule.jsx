@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
  Check, X, Clock, Users, Calendar,
  ChevronDown, Save, Search, UserCheck, UserX, CalendarOff, QrCode, BarChart3, MessageSquare
@@ -9,6 +9,7 @@ import { DonutChart, BarChart, ChartLegend } from "../../components/Charts";
 import { useAcademicStore } from "../../services/useAcademicStore";
 import { getPakistanDateString } from "../../utils/dateUtils";
 import { emitAttendanceUpdated } from "../../utils/attendanceEvents";
+import { reconcileAttendanceRoster } from "./attendanceRosterGuard.js";
 
 const MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 
@@ -56,23 +57,10 @@ const selectStyle = {
  color: "#C0C8D8", fontSize: 14, outline: "none", cursor: "pointer",
 };
 
-const ATTENDANCE_CLASS_LABEL_FIXES = {
- "Pre Nine": "Nine",
-};
-
-function attendanceClassLabel(value) {
- return ATTENDANCE_CLASS_LABEL_FIXES[value] || value;
-}
-
-function attendanceApiClass(value) {
- return value === "Pre Nine" ? "Nine" : value;
-}
-
+function attendanceClassLabel(value) { return value; }
+function attendanceApiClass(value) { return value; }
 function attendanceSectionsForClass(className, sectionsForClass) {
- const direct = sectionsForClass(className);
- if (direct.length) return direct;
- if (className === "Nine") return sectionsForClass("Pre Nine");
- return [];
+ return sectionsForClass(className);
 }
 
 export default function AttendanceModule() {
@@ -95,41 +83,54 @@ export default function AttendanceModule() {
  const [attendance, setAttendance] = useState({});
  const [saved, setSaved] = useState(false);
  const [loading, setLoading] = useState(false);
+ const requestSerialRef = useRef(0);
+ const loadedScopeRef = useRef("");
+ const selectedScopeRef = useRef("");
+ selectedScopeRef.current = selectedClass + "|" + selectedSection + "|" + selectedDate;
+
+ useEffect(() => {
+  if (CLASSES.length && (!selectedClass || !CLASSES.includes(selectedClass))) {
+   setSelectedClass(CLASSES[0]);
+  }
+ }, [CLASSES, selectedClass]);
 
  const loadAttendance = async () => {
- setLoading(true)
+ const scopeKey = selectedClass + "|" + selectedSection + "|" + selectedDate;
+ const requestSerial = ++requestSerialRef.current;
+ loadedScopeRef.current = "";
+ setStudents([]);
+ setAttendance({});
+ setLoading(true);
  try {
- const [attendanceRes, studentRes] = await Promise.all([
- api.get('/api/attendance', {
- params: { class: attendanceApiClass(selectedClass), section: selectedSection, date: selectedDate },
- }).catch(() => ({ data: { data: [] } })),
- api.get('/api/students', {
- params: { class: attendanceApiClass(selectedClass), section: selectedSection },
- }).catch(() => ({ data: { data: [] } })),
- ])
-
- const attendanceData = attendanceRes.data?.data || []
- const studentData = studentRes.data?.data || []
-
- const markMap = {}
- attendanceData.forEach((row) => {
- const sid = row.student_id || row.id
- if (sid) markMap[sid] = row.status
- })
-
- setStudents(studentData.map(transformStudent))
- setAttendance(markMap)
- } catch (err) {
- console.error('Could not load attendance', err)
+  const [attendanceRes, studentRes] = await Promise.all([
+   api.get("/api/attendance", { params: {
+     class: attendanceApiClass(selectedClass), section: selectedSection, date: selectedDate
+   }}),
+   api.get("/api/students", { params: {
+     class: attendanceApiClass(selectedClass), section: selectedSection
+   }})
+  ]);
+  if (requestSerial !== requestSerialRef.current || selectedScopeRef.current !== scopeKey) return;
+  const verified = reconcileAttendanceRoster(studentRes.data?.data,
+    attendanceRes.data?.data, selectedClass, selectedSection);
+  setStudents(verified.students.map(transformStudent));
+  setAttendance(verified.marks);
+  loadedScopeRef.current = scopeKey;
+ } catch(err) {
+  if (requestSerial !== requestSerialRef.current || selectedScopeRef.current !== scopeKey) return;
+  console.error("Attendance scope verification failed", err);
+  setStudents([]);
+  setAttendance({});
  } finally {
- setLoading(false)
+  if (requestSerial === requestSerialRef.current && selectedScopeRef.current === scopeKey) setLoading(false);
  }
  }
 
  useEffect(() => {
  if (!selectedClass) return
  const availableSections = attendanceSectionsForClass(selectedClass, sectionsForClass)
- if (availableSections.length && !availableSections.includes(selectedSection)) {
+ if (!CLASSES.includes(selectedClass) || !availableSections.length) return;
+ if (!availableSections.includes(selectedSection)) {
  setSelectedSection(availableSections[0])
  return
  }
@@ -155,7 +156,14 @@ export default function AttendanceModule() {
  const unmarked = students.length - Object.keys(attendance).length;
 
  const handleSave = async () => {
- const entries = Object.entries(attendance).filter(([_, status]) => !!status)
+ const scopeKey = selectedClass + "|" + selectedSection + "|" + selectedDate;
+ if (loadedScopeRef.current !== scopeKey) {
+  alert("Load and verify this class and section before saving.");
+  return;
+ }
+ const currentRoster = new Set(students.map(student => Number(student.id)));
+ const entries = Object.entries(attendance)
+  .filter(([id, status]) => currentRoster.has(Number(id)) && !!status)
  if (!entries.length) {
  alert('Please select attendance status for at least one student before saving.')
  return

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useRef } from 'react'
 import { useAcademicStore } from '../../services/useAcademicStore'
 import {
  Calendar,
@@ -18,6 +18,7 @@ import {
 import api from '../../services/api'
 import { getPakistanDateString } from '../../utils/dateUtils'
 import { emitAttendanceUpdated } from '../../utils/attendanceEvents'
+import { reconcileAttendanceRoster } from './attendanceRosterGuard.js'
 
 // Removed hardcoded CLASSES and SECTIONS
 
@@ -91,23 +92,10 @@ const statusMeta = {
  },
 }
 
-const ATTENDANCE_CLASS_LABEL_FIXES = {
- 'Pre Nine': 'Nine',
-}
-
-function attendanceClassLabel(value) {
- return ATTENDANCE_CLASS_LABEL_FIXES[value] || value
-}
-
-function attendanceApiClass(value) {
- return value === 'Pre Nine' ? 'Nine' : value
-}
-
+function attendanceClassLabel(value) { return value }
+function attendanceApiClass(value) { return value }
 function attendanceSectionsForClass(className, sectionsForClass) {
- const direct = sectionsForClass(className)
- if (direct.length) return direct
- if (className === 'Nine') return sectionsForClass('Pre Nine')
- return []
+ return sectionsForClass(className)
 }
 
 function Panel({ children, accent = C.blue, style = {}, className = '' }) {
@@ -167,43 +155,53 @@ export default function MarkAttendance() {
  const [loading, setLoading] = useState(false)
  const [saving, setSaving] = useState(false)
  const [message, setMessage] = useState('')
+ const requestSerialRef = useRef(0)
+ const loadedScopeRef = useRef('')
+ const selectedScopeRef = useRef('')
+ selectedScopeRef.current = selectedClass + "|" + selectedSection + "|" + date
+
+ useEffect(() => {
+  if (CLASSES.length && (!selectedClass || !CLASSES.includes(selectedClass))) {
+   setSelectedClass(CLASSES[0])
+  }
+ }, [CLASSES, selectedClass])
 
  const loadStudents = () => {
+ const scopeKey = selectedClass + "|" + selectedSection + "|" + date
+ const requestSerial = ++requestSerialRef.current
+ loadedScopeRef.current = ''
+ setStudents([])
+ setAttendance({})
  setLoading(true)
  setMessage('')
  Promise.all([
- api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } }).catch(() => ({ data: { data: [] } })),
- api.get('/api/attendance', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, date } }).catch(() => ({ data: { data: [] } })),
+  api.get('/api/students', { params: { class: attendanceApiClass(selectedClass), section: selectedSection } }),
+  api.get('/api/attendance', { params: { class: attendanceApiClass(selectedClass), section: selectedSection, date } })
  ])
  .then(([stuRes, attRes]) => {
- const list = stuRes.data?.data || []
- const attList = attRes.data?.data || []
- const attMap = {}
- attList.forEach((row) => {
- const sid = row.student_id || row.id
- if (sid) attMap[sid] = row.status
+  if (requestSerial !== requestSerialRef.current || selectedScopeRef.current !== scopeKey) return
+  const verified = reconcileAttendanceRoster(stuRes.data?.data,
+   attRes.data?.data, selectedClass, selectedSection)
+  setStudents(verified.students)
+  setAttendance(verified.marks)
+  loadedScopeRef.current = scopeKey
  })
- setStudents(list)
- const initialMarks = {}
- list.forEach((s) => {
- initialMarks[s.id] = attMap[s.id] || 'present'
+ .catch((err) => {
+  if (requestSerial !== requestSerialRef.current || selectedScopeRef.current !== scopeKey) return
+  console.error('Attendance scope verification failed', err)
+  setStudents([])
+  setAttendance({})
+  setMessage('Unable to verify the selected attendance roster.')
  })
- setAttendance(initialMarks)
+ .finally(() => {
+  if (requestSerial === requestSerialRef.current && selectedScopeRef.current === scopeKey) setLoading(false)
  })
- .catch(() => {
- setStudents([])
- setAttendance({})
- })
- .finally(() => setLoading(false))
  }
 
  useEffect(() => {
- loadStudents()
- }, [])
-
- useEffect(() => {
  const available = attendanceSectionsForClass(selectedClass, sectionsForClass)
- if (available.length && !available.includes(selectedSection)) {
+ if (!CLASSES.includes(selectedClass) || !available.length) return
+ if (!available.includes(selectedSection)) {
  setSelectedSection(available[0])
  return
  }
@@ -218,9 +216,20 @@ export default function MarkAttendance() {
  }
 
  const saveAttendance = async () => {
+ const scopeKey = selectedClass + "|" + selectedSection + "|" + date
+ if (loadedScopeRef.current !== scopeKey) {
+  setMessage('Load and verify this exact class, section and date before saving.')
+  return
+ }
+ const records = students
+  .filter(student => attendance[student.id] && attendance[student.id] !== 'unmarked')
+  .map(student => ({ student_id: student.id, date, status: attendance[student.id] }))
+ if (!records.length) {
+  setMessage('Mark at least one student before saving.')
+  return
+ }
  setSaving(true)
  try {
- const records = students.map((student) => ({ student_id: student.id, date, status: attendance[student.id] || 'present' }))
  await api.post('/api/attendance/mark', { records })
  emitAttendanceUpdated({ date, count: records.length })
  setMessage('Attendance saved successfully.')
@@ -597,8 +606,8 @@ export default function MarkAttendance() {
  </thead>
  <tbody>
  {students.map((student) => {
- const status = attendance[student.id] || 'present'
- const meta = statusMeta[status]
+ const status = attendance[student.id] || 'unmarked'
+ const meta = statusMeta[status] || { color: C.muted, bg: 'rgba(148,163,184,0.09)', border: 'rgba(148,163,184,0.24)', icon: ShieldCheck }
  const StatusIcon = meta.icon
 
  return (
