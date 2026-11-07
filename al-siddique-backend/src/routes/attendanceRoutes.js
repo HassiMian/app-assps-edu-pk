@@ -4,6 +4,7 @@ const router = express.Router()
 const { pool, query } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
+const { resolveAuthenticatedAttendanceMarker } = require('./attendanceMarkerIdentity')
 const {
   getTwilioConfigForSchool,
   buildTwilioClient,
@@ -218,7 +219,7 @@ router.get('/', protect, requireScopeForServiceOnly('school.attendance.read'), a
 
 // POST /api/attendance/mark â€” bulk mark
 router.post('/mark', protect, canMarkAttendance, async (req, res) => {
-  const { records, marked_by } = req.body
+  const { records } = req.body
   const inputRecords = Array.isArray(records)
     ? records
     : (req.body.student_id || req.body.studentId ? [req.body] : null)
@@ -296,9 +297,12 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
 
     // 2. Atomic upsert loop inside transaction
     let saved = 0
-    const markedByUserId = Number.isInteger(Number(marked_by))
-      ? Number(marked_by)
-      : (Number.isInteger(Number(req.user?.id)) ? Number(req.user.id) : null)
+    // Attribution must come from authenticated middleware, never client-provided marked_by.
+    const markedByUserId = resolveAuthenticatedAttendanceMarker(req.user)
+    if (markedByUserId === null) {
+      await client.query('ROLLBACK')
+      return res.status(403).json({ success: false, error: 'ATTENDANCE_MARKER_NOT_AUTHENTICATED' })
+    }
 
     for (const r of normalizedRecords) {
       const student = studentMap.get(Number(r.student_id))

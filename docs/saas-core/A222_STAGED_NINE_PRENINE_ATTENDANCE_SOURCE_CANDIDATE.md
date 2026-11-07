@@ -25,3 +25,11 @@ Do not run an additional production-style frontend build at root free disk below
 5. Preserve First Term 1854-row historical digest and issue a Core-signed rollback-ready release certificate.
 
 This worktree is a proposal for follow-on review. No tool in this patch performs a production deploy, database write, archive cleanup or financial action.
+
+## Additional backend audit-attribution safety patch
+
+The bulk attendance POST handler accepted a client-controlled marked_by field and preferred it over the authenticated request user's ID. This creates a potential audit-trail spoofing path even when tenant membership for students is separately checked.
+
+The review-only A222 backend patch now ignores the client-controlled field for bulk saves and derives the marker exclusively from the authenticated middleware user. Missing or invalid user identity is rejected HTTP 403 after rolling back the transaction. Focused Node tests cover spoofed marker fields, invalid IDs, integer overflow and edge cases.
+
+Existing DB integration tests use destructive fixtures and must NOT run against the live school database. Only SaaS Core may run integration tests against a separately restored isolated DB and verify legitimate staff writes plus cross-school/role negative cases. No production backend process was restarted or replaced.
