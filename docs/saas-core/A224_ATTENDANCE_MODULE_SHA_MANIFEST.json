@@ -1,0 +1,93 @@
+{
+  "mission": "A224_CANDIDATE_LIVE_DEPENDENCY_CLOSURE",
+  "createdUtc": "2026-11-07T03:14:39.760595+00:00",
+  "canonicalMainBase": "b47941ac7867af1b96664c53fd4428a59ccd5055",
+  "liveAttendanceRoutePinnedSha256": "13a15287442c3db5ed7494e1f448cff402232cdc8196a222b918f78945bb81fd",
+  "A223AuthenticatedActorReviewSha256": "9ea239d871a735283858e63d2b36f4fa5743ff5b98818caf0a8cd22fd1fd1f27",
+  "candidateModuleCount": 11,
+  "heuristicSecretsScanPassed": true,
+  "reconciledToLiveDependencyGraph": true,
+  "candidateModules": [
+    {
+      "file": "routes/attendanceRoutes.js",
+      "originalLiveSha256": "13a15287442c3db5ed7494e1f448cff402232cdc8196a222b918f78945bb81fd",
+      "expectedCandidateSha256": "9ea239d871a735283858e63d2b36f4fa5743ff5b98818caf0a8cd22fd1fd1f27",
+      "existsInCanonicalMain": true,
+      "canonicalMainOriginalSha256": "d03bd536f6075ef5194d30ff379b7bc0635f04b41eca40885f2b38bcf49b9718"
+    },
+    {
+      "file": "config/database.js",
+      "originalLiveSha256": "d51ba7dfa8cae2c1f8c62df16bb15b59e4f8334b7e946362af01cd62b2164070",
+      "expectedCandidateSha256": "d51ba7dfa8cae2c1f8c62df16bb15b59e4f8334b7e946362af01cd62b2164070",
+      "existsInCanonicalMain": true,
+      "canonicalMainOriginalSha256": "7550ca2696f82b25b63c2e81ade53b83dd5edcdcf08b500e514ee90a2af3194a"
+    },
+    {
+      "file": "middleware/auth.js",
+      "originalLiveSha256": "0609650bffb14b1516b9382bf833310d50a107657caec9034e228d135a0a84f8",
+      "expectedCandidateSha256": "0609650bffb14b1516b9382bf833310d50a107657caec9034e228d135a0a84f8",
+      "existsInCanonicalMain": true,
+      "canonicalMainOriginalSha256": "877795bed986f1a9e9b5e3865143e4836a9180bac97dd484c8763a6744b9ffa9"
+    },
+    {
+      "file": "middleware/tenant.js",
+      "originalLiveSha256": "f583dfc56c88ddd665d04e1d2bbcb84d93144ba6dd5f8cf58174885545f97e01",
+      "expectedCandidateSha256": "f583dfc56c88ddd665d04e1d2bbcb84d93144ba6dd5f8cf58174885545f97e01",
+      "existsInCanonicalMain": true,
+      "canonicalMainOriginalSha256": "88b80c7b6a5c05c61203f9b1f43df696f79a46b83d8951eeca7d86a75f33d95a"
+    },
+    {
+      "file": "services/teacherAssignmentService.js",
+      "originalLiveSha256": "9609c158f4ea1cbbda04d799fcb1e6e46272f23f579fe5607e0a1ec42a209355",
+      "expectedCandidateSha256": "9609c158f4ea1cbbda04d799fcb1e6e46272f23f579fe5607e0a1ec42a209355",
+      "existsInCanonicalMain": false,
+      "canonicalMainOriginalSha256": null
+    },
+    {
+      "file": "services/twilioSettings.js",
+      "originalLiveSha256": "974299ccbeadebb687559d3c7e431051a4a22da04d3cf6698e01ef2aace3fbdf",
+      "expectedCandidateSha256": "974299ccbeadebb687559d3c7e431051a4a22da04d3cf6698e01ef2aace3fbdf",
+      "existsInCanonicalMain": true,
+      "canonicalMainOriginalSha256": "974299ccbeadebb687559d3c7e431051a4a22da04d3cf6698e01ef2aace3fbdf"
+    },
+    {
+      "file": "services/whatsapp/whatsappSender.js",
+      "originalLiveSha256": "caaa563bd1f18c7a655e12b514249e4f1cc24aea4fdce29bfab13c76d51c4490",
+      "expectedCandidateSha256": "caaa563bd1f18c7a655e12b514249e4f1cc24aea4fdce29bfab13c76d51c4490",
+      "existsInCanonicalMain": false,
+      "canonicalMainOriginalSha256": null
+    },
+    {
+      "file": "services/security/coreSignedTenantContext.js",
+      "originalLiveSha256": "9c08410dd064322ea01d4087e06dc4a048351678b9e6524a31f75761315d83cf",
+      "expectedCandidateSha256": "9c08410dd064322ea01d4087e06dc4a048351678b9e6524a31f75761315d83cf",
+      "existsInCanonicalMain": false,
+      "canonicalMainOriginalSha256": null
+    },
+    {
+      "file": "services/security/strictSchoolIdentity.js",
+      "originalLiveSha256": "383c7231c52459d17034254b45af734aec8083ce2f65d95bf9c2280e69909214",
+      "expectedCandidateSha256": "383c7231c52459d17034254b45af734aec8083ce2f65d95bf9c2280e69909214",
+      "existsInCanonicalMain": false,
+      "canonicalMainOriginalSha256": null
+    },
+    {
+      "file": "services/academicClassKey.js",
+      "originalLiveSha256": "7584ba13678581f988a24a02adab26551cde8148598cd8378d41077127cc9fcd",
+      "expectedCandidateSha256": "7584ba13678581f988a24a02adab26551cde8148598cd8378d41077127cc9fcd",
+      "existsInCanonicalMain": false,
+      "canonicalMainOriginalSha256": null
+    },
+    {
+      "file": "routes/attendanceMarkerIdentity.js",
+      "originalLiveSha256": null,
+      "expectedCandidateSha256": "7932c8296125cd6a092ade4f4925781a31eb3082f76957fd5ee2bb45433d2669",
+      "existsInCanonicalMain": false,
+      "canonicalMainOriginalSha256": null
+    }
+  ],
+  "backendBuildAndRealDbIntegrationSignedOff": false,
+  "ownerApprovedProductionDeploy": false,
+  "writeActionsOrServiceRestarts": 0,
+  "release": "HOLD"
+}

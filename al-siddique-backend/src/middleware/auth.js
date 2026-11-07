@@ -1,6 +1,7 @@
 const crypto = require('crypto')
+const { strictPositiveSchoolId } = require('../services/security/strictSchoolIdentity')
 const jwt = require('jsonwebtoken')
-const { query } = require('../config/database')
+const { query, tenantContext } = require('../config/database')
 
 const JWT_SECRET = process.env.JWT_SECRET || (process.env.NODE_ENV === 'production' ? '' : 'dev-jwt-secret')
 
@@ -94,7 +95,7 @@ async function authenticateServiceToken(token, req) {
 
   const serviceIdentity = configuredIdentity || 'JARVIS_SCHOOL_SERVICE'
   const tenantId = configuredTenantId || 'assps'
-  const schoolId = Number.parseInt(configuredSchoolId || '1', 10)
+  const schoolId = strictPositiveSchoolId(configuredSchoolId || '1')
   if (!Number.isFinite(schoolId) || schoolId <= 0) {
     return { errorStatus: 403, message: 'Service school claim is invalid.' }
   }
@@ -134,18 +135,8 @@ async function fetchSchoolById(schoolId) {
     const result = await query('SELECT id, name, code, tenant_id, status, feature_flags FROM schools WHERE id = $1 LIMIT 1', [schoolId])
     return result.rows[0] || null
   } catch (err) {
-    if (process.env.NODE_ENV === 'production') {
-      console.error('Database connection failed in fetchSchoolById:', err.message)
-      return null
-    }
-    console.error('Database connection failed in fetchSchoolById, returning development mock active school:', err.message)
-    return {
-      id: schoolId || 1,
-      name: 'Al Siddique Scholars Public School',
-      code: 'assps',
-      status: 'active',
-      feature_flags: ['paper_generator', 'ai_analytics', 'attendance_qr', 'fees_view', 'employees']
-    }
+    console.error('Database connection failed in fetchSchoolById:', err.message)
+    return null
   }
 }
 
@@ -154,8 +145,19 @@ function isSchoolActive(school) {
 }
 
 function normalizeSchoolId(value) {
-  const parsed = Number.parseInt(value, 10)
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : null
+  return strictPositiveSchoolId(value)
+}
+
+function activateRequestRlsContext(req) {
+  const ctx = tenantContext.getStore()
+  if (!ctx) return
+  const role = String(req.user?.role || '').toLowerCase()
+  const isSuperAdmin = role === 'super_admin' || role === 'platform_owner'
+  ctx.rlsEnabled = true
+  ctx.actorId = Number.parseInt(req.user?.id,10) || null
+  ctx.isSuperAdmin = isSuperAdmin
+  ctx.tenantId = isSuperAdmin ? null : normalizeSchoolId(req.school_id || req.user?.school_id)
+  ctx.tenantKey = isSuperAdmin ? null : String(req.tenant_id || req.user?.tenant_id || req.school?.tenant_id || '').trim() || null
 }
 
 function buildUserContext(user, school = null) {
@@ -172,10 +174,10 @@ function buildUserContext(user, school = null) {
 }
 
 async function fetchActiveUserById(userId) {
-  const parsedId = Number.parseInt(userId, 10)
-  if (!Number.isFinite(parsedId)) return null
+  const parsedId = strictPositiveSchoolId(userId)
+  if (parsedId === null) return null
   const result = await query(
-    `SELECT id, school_id, name, email, role, designation
+    `SELECT id, school_id, tenant_id, name, email, role, designation
      FROM users
      WHERE id = $1 AND is_active = true
      LIMIT 1`,
@@ -184,10 +186,14 @@ async function fetchActiveUserById(userId) {
   return result.rows[0] || null
 }
 
-async function fetchVirtualBranchUserByEmail(email) {
+async function fetchVirtualBranchUserByEmail(email, signedSchoolId = null) {
   const normalizedEmail = String(email || '').trim().toLowerCase()
   if (!normalizedEmail) return null
-  const result = await query('SELECT school_id, school_access FROM settings WHERE school_access IS NOT NULL')
+  // Signed-tenant candidate uses a bounded school lookup. Never scan a
+  // different school's virtual branch settings under its authenticated role.
+  const result = signedSchoolId
+    ? await query('SELECT school_id, school_access FROM settings WHERE school_id=$1 AND school_access IS NOT NULL', [signedSchoolId])
+    : await query('SELECT school_id, school_access FROM settings WHERE school_access IS NOT NULL')
   for (const row of result.rows) {
     if (!Array.isArray(row.school_access)) continue
     const branch = row.school_access.find(item => {
@@ -213,7 +219,10 @@ async function protect(req, res, next) {
   if (!token) return sendJson(res, 401, { message: 'Token required' })
 
   const serviceAuth = await authenticateServiceToken(token, req)
-  if (serviceAuth === true) return next()
+  if (serviceAuth === true) {
+    activateRequestRlsContext(req)
+    return next()
+  }
   if (serviceAuth && serviceAuth.errorStatus) {
     return sendJson(res, serviceAuth.errorStatus, { message: serviceAuth.message })
   }
@@ -231,17 +240,39 @@ async function protect(req, res, next) {
     req.school_id = 1
     req.school = await fetchSchoolById(1)
     req.school_code = req.school?.code || 'assps'
+    activateRequestRlsContext(req)
     return next()
   }
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET, { algorithms: ['HS256'] })
+    // Opt-in candidate boundary: use ONLY the verified, signed tenant claim
+    // to restrict the first DB lookup. With a non-BYPASS LOGIN, the legacy
+    // unscoped lookup cannot read users. Never accept a header/query tenant.
+    // Platform-wide accounts without a school must be explicitly redesigned
+    // before enabling this flag in production.
+    const prebindTenant = process.env.DB_AUTH_USE_SIGNED_TENANT_CONTEXT === 'true'
+    const verifiedClaimSchoolId = normalizeSchoolId(decoded?.school_id)
+    if (prebindTenant) {
+      const context = tenantContext.getStore()
+      if (!context || !verifiedClaimSchoolId) {
+        return sendJson(res, 401, { message: 'Signed school context is required.' })
+      }
+      context.rlsEnabled = true
+      context.actorId = Number.parseInt(decoded?.id,10) || null
+      context.isSuperAdmin = false
+      context.tenantId = verifiedClaimSchoolId
+      context.tenantKey = String(decoded?.tenant_id || '').trim() || null
+    }
     let activeUser = await fetchActiveUserById(decoded?.id)
     if (!activeUser) {
-      activeUser = await fetchVirtualBranchUserByEmail(decoded?.email)
+      activeUser = await fetchVirtualBranchUserByEmail(decoded?.email, prebindTenant ? verifiedClaimSchoolId : null)
     }
     if (!activeUser) {
       return sendJson(res, 401, { message: 'Invalid or expired token.' })
+    }
+    if (prebindTenant && normalizeSchoolId(activeUser.school_id) !== verifiedClaimSchoolId) {
+      return sendJson(res, 401, { message: 'Signed school context does not match the active user.' })
     }
     if (decoded?.email && activeUser.email && String(decoded.email).toLowerCase() !== String(activeUser.email).toLowerCase()) {
       return sendJson(res, 401, { message: 'Invalid or expired token.' })
@@ -257,6 +288,21 @@ async function protect(req, res, next) {
       const school = await fetchSchoolById(req.school_id)
       if (!school) {
         return sendJson(res, 403, { message: 'School context not found. Please contact support.' })
+      }
+      if (prebindTenant) {
+        // The signed token may contain an additional tenant key, but only
+        // verified database identity/school attributes are authoritative.
+        // Reject disagreement rather than carrying a forged tenant key into
+        // any policy that checks app.tenant_key.
+        const canonicalUserTenant = String(activeUser.tenant_id || '').trim()
+        const canonicalSchoolTenant = String(school.tenant_id || '').trim()
+        const claimTenant = String(decoded.tenant_id || '').trim()
+        if ((canonicalUserTenant && canonicalSchoolTenant && canonicalUserTenant !== canonicalSchoolTenant) ||
+            (claimTenant && claimTenant !== (canonicalUserTenant || canonicalSchoolTenant))) {
+          return sendJson(res, 401, { message: 'Signed tenant context does not match the active school.' })
+        }
+        const ctx = tenantContext.getStore()
+        if (ctx) ctx.tenantKey = canonicalUserTenant || canonicalSchoolTenant || null
       }
       req.school = school
       req.school_code = school?.code || req.user.school_code || null
@@ -284,6 +330,7 @@ async function protect(req, res, next) {
       }
     }
 
+    activateRequestRlsContext(req)
     return next()
   } catch (err) {
     console.warn('JWT verification failed:', err.name || 'JwtError')

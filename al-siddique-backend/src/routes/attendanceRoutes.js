@@ -1,18 +1,20 @@
 require('dotenv').config()
 const express = require('express')
 const router = express.Router()
-const { pool, query } = require('../config/database')
+const { pool, query, applyTenantContext } = require('../config/database')
 const { protect, requireRoles, requireScopeForServiceOnly, hasServiceScope } = require('../middleware/auth')
 const { tenantClause, currentSchoolId, currentTenantId, hasColumn } = require('../middleware/tenant')
+const { resolveAuthenticatedAttendanceMarker } = require('./attendanceMarkerIdentity')
+const { teacherStudentScopeClause, getTeacherAssignments } = require('../services/teacherAssignmentService')
 const {
   getTwilioConfigForSchool,
   buildTwilioClient,
 } = require('../services/twilioSettings')
+const { sendWhatsAppMessage } = require('../services/whatsapp/whatsappSender')
 
-const ALLOW_MOCK_FALLBACK = process.env.ALLOW_MOCK_FALLBACK === 'true' && process.env.NODE_ENV !== 'production'
 const canMarkAttendance = requireRoles('super_admin', 'admin', 'principal', 'teacher')
 const ATTENDANCE_STATUSES = ['present', 'absent', 'leave', 'late']
-const ATTENDANCE_READ_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin', 'teacher'])
+const ATTENDANCE_READ_ROLES = new Set(['super_admin', 'admin', 'principal', 'school_admin'])
 
 function getPakistanDateOnly(date = new Date()) {
   try {
@@ -27,10 +29,30 @@ function getPakistanDateOnly(date = new Date()) {
   }
 }
 
+async function requireTeacherAssignmentsForAttendance(req, res) {
+  if (String(req.user?.role || '').toLowerCase() !== 'teacher') return true
+  const schoolId = currentSchoolId(req)
+  if (!schoolId) {
+    res.status(403).json({ success: false, code: 'SCHOOL_CONTEXT_REQUIRED', message: 'A school context is required for teacher attendance access.' })
+    return false
+  }
+  const assignments = await getTeacherAssignments({ schoolId, teacherUserId: req.user?.id })
+  if (!assignments.length) {
+    res.status(409).json({
+      success: false,
+      code: 'TEACHER_ASSIGNMENTS_REQUIRED',
+      message: 'No active class assignments are configured for this teacher. Ask an administrator to configure the teaching scope before using attendance.',
+    })
+    return false
+  }
+  return true
+}
+
 function scopedAttendanceReadClause(req, alias = 's', startIndex = 1) {
   const role = String(req.user?.role || '').toLowerCase()
   const prefix = alias ? `${alias}.` : ''
   if (ATTENDANCE_READ_ROLES.has(role)) return { clause: '', params: [], nextIndex: startIndex }
+  if (role === 'teacher') return teacherStudentScopeClause(req, alias || 'students', startIndex)
   if (req.user?.account_type === 'service' && hasServiceScope(req, 'school.attendance.read')) {
     return { clause: '', params: [], nextIndex: startIndex }
   }
@@ -120,30 +142,199 @@ function normalizePakistanPhone(phone) {
   return `+92${String(phone).replace(/^0/, '').replace(/\D/g, '')}`
 }
 
-async function notifyParent(phone, studentName, status, date, twilioClient, twilioConfig) {
-  if (!twilioClient || !twilioConfig?.waFrom || !phone) return
-  const statusLabel = status === 'absent' ? 'Absent' : status === 'late' ? 'Late' : null
-  if (!statusLabel) return
+async function notifyParent({ studentId, phone, studentName, fatherName, className, section, status, date, schoolId = 1, schoolName, twilioClient, twilioConfig }) {
+  const statusLabel = status === 'absent' ? 'Absent' : status === 'late' ? 'Late' : null;
+  if (!statusLabel || !phone) return { status: 'skipped', reason: 'No attendance alert is required.' };
 
-  const formattedPhone = `whatsapp:${normalizePakistanPhone(phone)}`
-  const dateStr = new Date(date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
-  const msg = `*Al Siddique Scholars Public School*\n\nAttendance Alert - ${dateStr}\n\nStudent: *${studentName}*\nStatus: *${statusLabel}*\n\nFor queries, contact the school office.`
+  const dateStr = date ? new Date(date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0];
 
-  twilioClient.messages.create({
-    to: formattedPhone,
-    from: twilioConfig.waFrom,
-    body: msg,
-  }).catch(() => {})
+  // 1. DEDUPLICATION CHECK: Check if alert already sent today for this student & status
+  try {
+    const existing = await query(`
+      SELECT id FROM notification_log
+      WHERE student_id = $1
+        AND type = $2
+        AND (metadata->>'date' = $3 OR sent_at::date = $3::date)
+        AND status = 'sent'
+      LIMIT 1;
+    `, [studentId, `attendance_${status}`, dateStr]);
+
+    if (existing.rows.length > 0) {
+      console.log(`[Attendance Deduplication] Alert already sent for student ${studentId} on ${dateStr}. Skipping duplicate.`);
+      return { status: 'already_sent', reason: 'Alert already delivered today.' };
+    }
+  } catch (chkErr) {
+    console.warn('[Attendance Deduplication Check Error]', chkErr.message);
+  }
+
+  // 2. Compose message with standardized labels
+  const isLate = status === 'late';
+  const fatherLine = fatherName ? `\n👨‍👦 *Father's Name:* *${fatherName}*` : '';
+  const classLine = className ? `\n🏫 *Class:* ${className}${section ? ` (${section})` : ''}` : '';
+
+  const romanUrduMsg = `⚠️ *AL-SIDDIQUE SCHOLARS PUBLIC SCHOOL — HAZIRI (ATTENDANCE) ALERT*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Mohtaram Walidain, Assalam-o-Alaikum!
+
+Aap ko muttala kiya jata hai ke aap ka bacha aaj school ${isLate ? 'taakheer se (Late)' : 'ghair-hazir (Absent)'} hai:
+
+👤 *Student Name:* *${studentName}*${fatherLine}${classLine}
+📅 *Tareekh:* *${dateStr}*
+${isLate ? '🟡 *Status:* *LATE (Taakheer)*' : '🔴 *Status:* *ABSENT (Ghair-Hazir)*'}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📌 Taleemi tasalsul aur behtareen nataij ke liye bache ki waqt par rozana haziri intehayi zaroori hai.
+
+${isLate ? 'Baraye meharbani bache ko subah assembly aur pehlay period se qabal school bhejein.' : 'Agar bacha kisi bimari ya zaroori majboori ki wajah se hazir nahi ho saka to baraye meharbani school office/helpline par ittila dein ya leave application submit karwayein.'}
+
+School Helpline / Principal:
+📞 0300-1291959 | 0301-4986453
+Al-Siddique Scholars Public School, Raya Khas
+
+Shukriya,
+*Admin & Attendance Branch — ASSPS*
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━`;
+
+  try {
+    const waRes = await sendWhatsAppMessage(phone, romanUrduMsg);
+    const isSent = Boolean(waRes && waRes.success);
+
+      // 3. LOG TO notification_log FOR DEDUPLICATION & AUDIT
+      await query(`
+        INSERT INTO notification_log (
+          school_id, student_id, type, channel, phone, message, status, title, metadata, provider_sid, sent_at
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW())
+      `, [
+        schoolId,
+        studentId,
+        `attendance_${status}`,
+        'whatsapp',
+        phone,
+        romanUrduMsg,
+        isSent ? 'sent' : 'failed',
+        `Haziri Alert — ${statusLabel}`,
+        JSON.stringify({ date: dateStr, studentName, fatherName, className, section }),
+        waRes?.messageId || null
+      ]).catch(logErr => console.error('[Notification Log Insert Error]', logErr.message));
+
+      if (isSent) {
+        return { status: 'sent', provider: 'whatsapp_meta', messageId: waRes.messageId };
+      }
+    } catch (waErr) {
+      console.warn('Meta WhatsApp attendance alert failed, trying fallback:', waErr.message);
+    }
+
+  // Fallback to Twilio if configured
+  if (twilioClient && twilioConfig?.waFrom) {
+    const formattedPhone = `whatsapp:${normalizePakistanPhone(phone)}`;
+    const dateFormatted = new Date(date).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    const safeSchoolName = String(schoolName || '').trim() || 'School';
+    const msg = `*${safeSchoolName}*\n\nAttendance Alert - ${dateFormatted}\n\nStudent: *${studentName}*\nStatus: *${statusLabel}*\n\nFor queries, contact the school office.`;
+
+    try {
+      const providerMessage = await twilioClient.messages.create({
+        to: formattedPhone,
+        from: twilioConfig.waFrom,
+        body: msg,
+      });
+      return { status: providerMessage?.status || 'sent', sid: providerMessage?.sid || null };
+    } catch (error) {
+      console.error('Attendance parent notification failed:', error.message);
+      return { status: 'failed', reason: error.message || 'Provider rejected attendance alert.' };
+    }
+  }
+
+  return { status: 'skipped', reason: 'Notification processed' };
 }
+
+// GET /api/attendance/monthly-class-summary — canonical month aggregate by class
+router.get('/monthly-class-summary', protect, requireAttendanceAnalyticsAccess, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const year = Number(req.query.year || new Date().getFullYear())
+    const month = Number(req.query.month || new Date().getMonth() + 1)
+    if (!Number.isInteger(year) || year < 2000 || year > 2100 || !Number.isInteger(month) || month < 1 || month > 12) {
+      return res.status(400).json({ success: false, message: 'Valid year and month are required.' })
+    }
+
+    const result = await query(`
+      SELECT
+        s.class,
+        COUNT(a.student_id)::int AS total,
+        SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END)::int AS present,
+        CASE WHEN COUNT(a.student_id) > 0
+          THEN ROUND(SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END) * 100.0 / COUNT(a.student_id))::int
+          ELSE 0 END AS percent
+      FROM attendance a
+      JOIN students s ON s.id = a.student_id AND s.school_id = a.school_id
+      WHERE s.school_id = $1
+        AND a.date >= make_date($2, $3, 1)
+        AND a.date < (make_date($2, $3, 1) + INTERVAL '1 month')::date
+      GROUP BY s.class
+      ORDER BY MIN(s.id), s.class
+    `, [schoolId, year, month])
+
+    res.json({ success: true, data: result.rows })
+  } catch (err) {
+    console.error('Monthly class attendance summary error:', err.message)
+    res.status(500).json({ success: false, message: 'Failed to load class attendance summary.' })
+  }
+})
+
+// GET /api/attendance/monthly — canonical monthly trend for one class/section
+router.get('/monthly', protect, requireAttendanceAnalyticsAccess, async (req, res) => {
+  try {
+    const schoolId = currentSchoolId(req)
+    const cls = String(req.query.class || '').trim()
+    const section = String(req.query.section || '').trim()
+    const year = Number(req.query.year || new Date().getFullYear())
+    const month = Number(req.query.month || new Date().getMonth() + 1)
+    if (!cls || !section || !Number.isInteger(year) || month < 1 || month > 12) {
+      return res.status(400).json({ success: false, message: 'class, section, year and month are required.' })
+    }
+
+    const result = await query(`
+      WITH dates AS (
+        SELECT generate_series(
+          make_date($4, $5, 1),
+          (make_date($4, $5, 1) + INTERVAL '1 month - 1 day')::date,
+          '1 day'::interval
+        )::date AS d
+      )
+      SELECT d.d::text AS date,
+             COALESCE(SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END), 0)::int AS present,
+             COALESCE(COUNT(a.student_id), 0)::int AS total,
+             CASE WHEN COUNT(a.student_id) > 0
+               THEN ROUND(SUM(CASE WHEN a.status = 'present' THEN 1 ELSE 0 END) * 100.0 / COUNT(a.student_id))::int
+               ELSE 0 END AS percent
+      FROM dates d
+      LEFT JOIN (
+        SELECT a.student_id, a.date, a.status
+        FROM attendance a
+        JOIN students s ON s.id = a.student_id AND s.school_id = a.school_id
+        WHERE s.school_id = $1
+          AND s.class = $2
+          AND s.section = $3
+      ) a ON a.date = d.d
+      GROUP BY d.d
+      ORDER BY d.d
+    `, [schoolId, cls, section, year, month])
+
+    res.json({ success: true, data: result.rows })
+  } catch (err) {
+    console.error('Monthly attendance analytics error:', err.message)
+    res.status(500).json({ success: false, message: 'Failed to load monthly attendance analytics.' })
+  }
+})
 
 // GET /api/attendance
 router.get('/', protect, requireScopeForServiceOnly('school.attendance.read'), async (req, res) => {
   try {
+    if (!(await requireTeacherAssignmentsForAttendance(req, res))) return
     const { class: cls, section, date } = req.query
     let sql = `
       SELECT a.*, s.name, s.gr_number, s.roll_number, s.class, s.section
       FROM attendance a
-      JOIN students s ON a.student_id = s.id
+      JOIN students s ON a.student_id = s.id AND a.school_id = s.school_id
       WHERE 1=1
     `
     const params = []
@@ -165,60 +356,13 @@ router.get('/', protect, requireScopeForServiceOnly('school.attendance.read'), a
     res.json({ success: true, count: result.rowCount, data: result.rows })
   } catch (err) {
     console.error('Attendance GET error:', err.message)
-    if (!ALLOW_MOCK_FALLBACK) {
-      return res.status(503).json({ success: false, message: 'Database unavailable. Please try again later.' })
-    }
-
-    const mockAttendance = [
-      {
-        id: 1,
-        student_id: 1,
-        date: req.query.date || new Date().toISOString().split('T')[0],
-        status: 'present',
-        marked_by: 'Ahmed Raza',
-        name: 'Muhammad Ali',
-        gr_number: 'GR-1001',
-        roll_number: '1',
-        class: '10',
-        section: 'A',
-      },
-      {
-        id: 2,
-        student_id: 2,
-        date: req.query.date || new Date().toISOString().split('T')[0],
-        status: 'absent',
-        marked_by: 'Ahmed Raza',
-        name: 'Ayesha Fatima',
-        gr_number: 'GR-1002',
-        roll_number: '2',
-        class: '10',
-        section: 'A',
-      },
-      {
-        id: 3,
-        student_id: 3,
-        date: req.query.date || new Date().toISOString().split('T')[0],
-        status: 'late',
-        marked_by: 'Ahmed Raza',
-        name: 'Zainab Bibi',
-        gr_number: 'GR-1003',
-        roll_number: '5',
-        class: '9',
-        section: 'B',
-      }
-    ]
-
-    let filtered = mockAttendance
-    const { class: cls, section } = req.query
-    if (cls) filtered = filtered.filter(a => a.class === cls)
-    if (section) filtered = filtered.filter(a => a.section === section)
-    return res.json({ success: true, count: filtered.length, data: filtered })
+    return res.status(503).json({ success: false, message: 'Database unavailable. Attendance could not be loaded.' })
   }
 })
 
 // POST /api/attendance/mark â€” bulk mark
 router.post('/mark', protect, canMarkAttendance, async (req, res) => {
-  const { records, marked_by } = req.body
+  const { records } = req.body
   const inputRecords = Array.isArray(records)
     ? records
     : (req.body.student_id || req.body.studentId ? [req.body] : null)
@@ -238,6 +382,19 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
   try {
     const schoolId = currentSchoolId(req)
     const tenantId = currentTenantId(req)
+    const actorRole = String(req.user?.role || '').toLowerCase()
+    if (!(await requireTeacherAssignmentsForAttendance(req, res))) return
+    let schoolName = ''
+    if (schoolId) {
+      const schoolIdentity = await query(`
+        SELECT COALESCE(NULLIF(TRIM(st.school_name), ''), s.name) AS school_name
+        FROM schools s
+        LEFT JOIN settings st ON st.school_id = s.id
+        WHERE s.id = $1
+        LIMIT 1
+      `, [schoolId])
+      schoolName = String(schoolIdentity.rows[0]?.school_name || '').trim()
+    }
     const twilioConfig = await getTwilioConfigForSchool(schoolId)
     const twilioClient = buildTwilioClient(twilioConfig)
     const supportsStudentSchool = await hasColumn('students', 'school_id')
@@ -245,13 +402,28 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
     const supportsAttendanceSchool = await hasColumn('attendance', 'school_id')
     const supportsAttendanceTenant = await hasColumn('attendance', 'tenant_id')
     const supportsAttendanceNote = await hasColumn('attendance', 'note')
+
+    if (!supportsStudentSchool && !supportsStudentTenant) {
+      return res.status(503).json({ success: false, error: 'STUDENT_TENANT_SCHEMA_REQUIRED', message: 'Student storage is not tenant-safe for attendance writes.' })
+    }
+    if (!supportsAttendanceSchool && !supportsAttendanceTenant) {
+      return res.status(503).json({ success: false, error: 'ATTENDANCE_TENANT_SCHEMA_REQUIRED', message: 'Attendance storage is not tenant-safe for writes.' })
+    }
+    if (req.user?.role !== 'super_admin') {
+      const hasStudentContext = (supportsStudentTenant && tenantId) || (supportsStudentSchool && schoolId)
+      const hasAttendanceContext = (supportsAttendanceTenant && tenantId) || (supportsAttendanceSchool && schoolId)
+      if (!hasStudentContext || !hasAttendanceContext) {
+        return res.status(403).json({ success: false, error: 'TENANT_CONTEXT_REQUIRED', message: 'A valid school or tenant context is required to mark attendance.' })
+      }
+    }
     const toNotify = []
 
-    const studentColumns = ['id', 'name', 'parent_phone']
+    const studentColumns = ['id', 'name', 'parent_phone', 'father_name', 'class', 'section']
     if (supportsStudentSchool) studentColumns.push('school_id')
     if (supportsStudentTenant) studentColumns.push('tenant_id')
 
     await client.query('BEGIN')
+    await applyTenantContext(client)
 
     // 1. Bulk pre-validate all requested student IDs
     const requestedIds = [...new Set(normalizedRecords.map(r => Number(r.student_id)).filter(id => Number.isInteger(id)))]
@@ -278,36 +450,78 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
         rosterParams.push(schoolId)
       }
     }
+    if (actorRole === 'teacher') {
+      const teacherScope = teacherStudentScopeClause(req, 'students', pIdx)
+      rosterSql += teacherScope.clause
+      rosterParams.push(...teacherScope.params)
+      pIdx = teacherScope.nextIndex
+    }
 
     const rosterResult = await client.query(rosterSql, rosterParams)
     const studentMap = new Map(rosterResult.rows.map(s => [Number(s.id), s]))
     const invalidIds = requestedIds.filter(id => !studentMap.has(Number(id)))
 
-    if (invalidIds.length > 0) {
+    // Struck-off students can linger in a stale browser roster. Ignore ONLY
+    // explicitly inactive members of the authenticated school, never missing
+    // or foreign-tenant students. Keep the remaining batch atomic.
+    const skippedInactiveIds = []
+    if (invalidIds.length && schoolId) {
+      const inactiveParams = [invalidIds, schoolId]
+      let inactiveSql = 'SELECT id FROM students WHERE id = ANY($1::int[]) AND school_id = $2 AND is_active = false'
+      if (supportsStudentTenant && tenantId) {
+        inactiveSql += ' AND (tenant_id = $3 OR tenant_id IS NULL)'
+        inactiveParams.push(tenantId)
+      }
+      if (actorRole === 'teacher') {
+        const teacherScope = teacherStudentScopeClause(req, 'students', inactiveParams.length + 1)
+        inactiveSql += teacherScope.clause
+        inactiveParams.push(...teacherScope.params)
+      }
+      const inactiveMatches = await client.query(inactiveSql, inactiveParams)
+      const inactiveIdSet = new Set(inactiveMatches.rows.map(row => Number(row.id)))
+      skippedInactiveIds.push(...invalidIds.filter(id => inactiveIdSet.has(id)))
+    }
+    const skippedInactiveSet = new Set(skippedInactiveIds)
+    const unauthorizedIds = invalidIds.filter(id => !skippedInactiveSet.has(id))
+    if (unauthorizedIds.length > 0) {
       await client.query('ROLLBACK')
       return res.status(400).json({
         success: false,
         error: 'INVALID_STUDENT_IDS',
-        message: `Attendance rejected: ${invalidIds.length} student(s) do not exist, are inactive, or are unauthorized for your school/tenant.`,
-        invalidIds,
+        message: `Attendance rejected: ${unauthorizedIds.length} student(s) do not exist or are unauthorized for your school/tenant.`,
+        invalidIds: unauthorizedIds,
+        saved: 0,
+      })
+    }
+    const persistableRecords = normalizedRecords.filter(r => studentMap.has(Number(r.student_id)))
+
+    // 2. Atomic upsert loop inside transaction
+    let saved = 0
+    // All roles: record the authenticated caller, never a client-supplied marked_by.
+    // Legacy administrative delegation must have a distinct approved audit contract.
+    const markedByUserId = resolveAuthenticatedAttendanceMarker(req.user)
+    if (markedByUserId === null) {
+      await client.query('ROLLBACK')
+      return res.status(403).json({
+        success: false,
+        error: 'ATTENDANCE_MARKER_NOT_AUTHENTICATED',
         saved: 0,
       })
     }
 
-    // 2. Atomic upsert loop inside transaction
-    let saved = 0
-    const markedByUserId = Number.isInteger(Number(marked_by))
-      ? Number(marked_by)
-      : (Number.isInteger(Number(req.user?.id)) ? Number(req.user.id) : null)
-
-    for (const r of normalizedRecords) {
+    for (const r of persistableRecords) {
       const student = studentMap.get(Number(r.student_id))
       if ((r.status === 'absent' || r.status === 'late') && student.parent_phone) {
         toNotify.push({
+          studentId: student.id,
           name: student.name,
+          fatherName: student.father_name,
+          className: student.class,
+          section: student.section,
           phone: student.parent_phone,
           status: r.status,
           date: r.date,
+          schoolId: student.school_id || schoolId,
         })
       }
 
@@ -318,13 +532,13 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
       if (supportsAttendanceSchool) {
         columns.push('school_id')
         values.push(`$${attendanceParams.length + 1}`)
-        attendanceParams.push(student.school_id || schoolId || null)
+        attendanceParams.push(student.school_id || schoolId)
       }
 
       if (supportsAttendanceTenant) {
         columns.push('tenant_id')
         values.push(`$${attendanceParams.length + 1}`)
-        attendanceParams.push(student.tenant_id || tenantId || null)
+        attendanceParams.push(student.tenant_id || tenantId)
       }
 
       columns.push('student_id', 'date', 'status', 'marked_by')
@@ -360,28 +574,50 @@ router.post('/mark', protect, canMarkAttendance, async (req, res) => {
       }
     }
 
-    if (saved !== normalizedRecords.length) {
+    if (saved !== persistableRecords.length) {
       await client.query('ROLLBACK')
       return res.status(500).json({
         success: false,
         error: 'INCOMPLETE_BATCH_PERSISTENCE',
-        message: `Attendance batch failed invariant check: requested ${normalizedRecords.length}, persisted ${saved}. Rolled back completely.`,
+        message: `Attendance batch failed invariant check: requested ${persistableRecords.length}, persisted ${saved}. Rolled back completely.`,
         saved: 0,
       })
     }
 
     await client.query('COMMIT')
 
-    res.json({
+    const notificationResults = await Promise.all(
+      toNotify.map(item => notifyParent({
+        studentId: item.studentId,
+        phone: item.phone,
+        studentName: item.name,
+        fatherName: item.fatherName,
+        className: item.className,
+        section: item.section,
+        status: item.status,
+        date: item.date,
+        schoolId: item.schoolId,
+        schoolName,
+        twilioClient,
+        twilioConfig
+      }))
+    )
+    const notificationSummary = notificationResults.reduce((summary, item) => {
+      const key = item?.status || 'unknown'
+      summary[key] = (summary[key] || 0) + 1
+      return summary
+    }, {})
+
+    return res.json({
       success: true,
-      message: `${saved} records save ho gaye`,
+      message: `${saved} attendance records saved.${skippedInactiveIds.length ? ` ${skippedInactiveIds.length} inactive student(s) excluded.` : ''}`,
       savedCount: saved,
       requestedCount: normalizedRecords.length,
+      skippedInactiveCount: skippedInactiveIds.length,
+      skippedInactiveIds,
+      notificationRequestedCount: toNotify.length,
+      notificationSummary,
     })
-
-    for (const item of toNotify) {
-      void notifyParent(item.phone, item.name, item.status, item.date, twilioClient, twilioConfig)
-    }
   } catch (err) {
     await client.query('ROLLBACK').catch(() => {})
     console.error('Attendance mark error:', err.message)
@@ -408,7 +644,17 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
     const supportsStudentSchool = await hasColumn('students', 'school_id')
     const supportsStudentTenant = await hasColumn('students', 'tenant_id')
 
-    let studentSql = `SELECT id, name, gr_number, class, section, parent_phone FROM students WHERE LOWER(TRIM(gr_number)) = LOWER(TRIM($1)) AND is_active = true`
+    if (!supportsStudentSchool && !supportsStudentTenant) {
+      return res.status(503).json({ success: false, error: 'STUDENT_TENANT_SCHEMA_REQUIRED', message: 'Student storage is not tenant-safe for attendance scanning.' })
+    }
+    if (req.user?.role !== 'super_admin' && !((supportsStudentTenant && tenantId) || (supportsStudentSchool && schoolId))) {
+      return res.status(403).json({ success: false, error: 'TENANT_CONTEXT_REQUIRED', message: 'A valid school or tenant context is required to scan attendance.' })
+    }
+
+    const studentColumns = ['id', 'name', 'gr_number', 'class', 'section', 'parent_phone']
+    if (supportsStudentSchool) studentColumns.push('school_id')
+    if (supportsStudentTenant) studentColumns.push('tenant_id')
+    let studentSql = `SELECT ${studentColumns.join(', ')} FROM students WHERE LOWER(TRIM(gr_number)) = LOWER(TRIM($1)) AND is_active = true`
     const params = [gr_number]
     let idx = 2
     if (req.user?.role !== 'super_admin') {
@@ -432,6 +678,12 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
 
     const supportsAttendanceSchool = await hasColumn('attendance', 'school_id')
     const supportsAttendanceTenant = await hasColumn('attendance', 'tenant_id')
+    if (!supportsAttendanceSchool && !supportsAttendanceTenant) {
+      return res.status(503).json({ success: false, error: 'ATTENDANCE_TENANT_SCHEMA_REQUIRED', message: 'Attendance storage is not tenant-safe for scanning.' })
+    }
+    if (req.user?.role !== 'super_admin' && !((supportsAttendanceTenant && tenantId) || (supportsAttendanceSchool && schoolId))) {
+      return res.status(403).json({ success: false, error: 'TENANT_CONTEXT_REQUIRED', message: 'A valid school or tenant context is required to store scanned attendance.' })
+    }
 
     const cols = ['student_id', 'date', 'status', 'marked_by']
     const vals = ['$1', '$2', '$3', '$4']
@@ -441,12 +693,12 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
     if (supportsAttendanceSchool) {
       cols.push('school_id')
       vals.push(`$${attParams.length + 1}`)
-      attParams.push(student.school_id || schoolId || null)
+      attParams.push(student.school_id || schoolId)
     }
     if (supportsAttendanceTenant) {
       cols.push('tenant_id')
       vals.push(`$${attParams.length + 1}`)
-      attParams.push(student.tenant_id || tenantId || null)
+      attParams.push(student.tenant_id || tenantId)
     }
 
     const updateParts = ['status = EXCLUDED.status', 'marked_by = EXCLUDED.marked_by']
@@ -465,7 +717,7 @@ router.post('/mark-by-gr', protect, canMarkAttendance, async (req, res) => {
     })
   } catch (err) {
     console.error('mark-by-gr error:', err)
-    return res.status(500).json({ success: false, message: err.message || 'Failed to mark attendance by GR' })
+    return res.status(500).json({ success: false, message: 'Failed to mark attendance by GR.' })
   }
 })
 
@@ -507,7 +759,7 @@ router.get('/history', protect, requireScopeForServiceOnly('school.attendance.re
         s.class,
         s.section
       FROM attendance a
-      JOIN students s ON a.student_id = s.id
+      JOIN students s ON a.student_id = s.id AND a.school_id = s.school_id
       WHERE a.date >= $1 AND a.date <= $2
     `
     const params = [fromDate, toDate]
@@ -575,7 +827,7 @@ router.get('/history', protect, requireScopeForServiceOnly('school.attendance.re
     })
   } catch (err) {
     console.error('Attendance history query error:', err.message)
-    res.status(500).json({ success: false, message: err.message || 'Failed to load attendance history' })
+    res.status(500).json({ success: false, message: 'Failed to load attendance history.' })
   }
 })
 
@@ -589,7 +841,7 @@ router.get('/history/:studentId', protect, requireScopeForServiceOnly('school.at
         a.id, a.date, a.status, a.marked_by, a.created_at,
         s.name, s.class, s.section, s.gr_number
       FROM attendance a
-      JOIN students s ON a.student_id = s.id
+      JOIN students s ON a.student_id = s.id AND a.school_id = s.school_id
       WHERE a.student_id = $1
     `
     const params = [studentId]
