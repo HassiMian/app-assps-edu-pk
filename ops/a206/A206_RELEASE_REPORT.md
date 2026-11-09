@@ -11,3 +11,8 @@ Scope: exactly eight existing Studio designs, all seven A4 densities (2/3/4/5/6/
 - Staged candidate: /var/www/assps-releases/assps-diary-a206-all-template-grid-20261109
 - Rollback release: /var/www/assps-releases/assps-diary-a205-grid-visibility-20261105
 - Candidate is asset-only relative to live: existing asset dependency names untouched, new JS/stylesheet and index reference only.
+
+## Production outcome
+A206 activated on 2026-11-09 at 16:48:30 UTC, after successful Nginx syntax check and atomic root change. Public Cloudflare index returns A206 JS + CSS references; new stylesheet HTTP 200; origin JS/CSS HTTP 200. A205 remains intact for immediate rollback. Backend and stored diary data untouched.
+
+Physical Epson print output is not independently verified; automated Chromium print-medium and 55-student page-fit checks passed.
