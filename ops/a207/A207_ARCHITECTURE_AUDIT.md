@@ -21,3 +21,6 @@
 - Screenshot Letter vs A4 remains a printer setting. Explicit warning rather than false enforcement.
 - A206 unrelated legacy test/guard baseline mismatches were previously diagnosed, and are outside scope.
 - A206 retained as rollback. Assets isolated with hardlinked staging; no other modules modified.
+
+## Production release
+A207 activated on 2026-11-09 17:15:27 UTC; Nginx passed validation and reload. A207 JS/CSS origin HTTP 200. A206 retained as rollback. No database mutations. Chrome/Epson physical printing still needs user verification with A4 selected.
