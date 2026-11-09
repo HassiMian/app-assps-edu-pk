@@ -22,3 +22,6 @@ User screenshot, Chrome print panel:
 - Candidate bundled module import and independent stylesheet smoke: PASS, computed 3mm.
 - A207 live preserved for rollback, release staged with new JS/CSS and index reference only.
 - Potential printer nonprinting edges: a 2 mm margin is not guaranteed on every physical model; use 3 mm for normal printing. Physical paper output not independently checked.
+
+## Production outcome
+A208 promoted at 2026-11-09T17:35:06Z. Nginx syntax and reload PASS, origin JS/CSS HTTP 200, public Cloudflare page references A208 JS/CSS, public stylesheet HTTP 200. A207 preserved for rollback. No backend/database changes. Browser Paper size A4 and Margins None must still be selected manually; Epson nonprinting margins are hardware dependent.
