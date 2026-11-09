@@ -2367,3 +2367,48 @@
     print-color-adjust:exact!important;
   }
 }
+
+/* A206: structural divider restoration for ALL eight Studio designs and every
+ * A4 density (2/3/4/5/6/8/10). Limited to the diary grid; branding,
+ * student metadata, typography, palettes and outer frames stay untouched.
+ * 2 CSS-pixel print-safe strokes survive Chromium fractional scaling. */
+.dd-card.dd-card-premium.dd-card-studio {
+  --dd-print-grid-ink: color-mix(in srgb, var(--line) 22%, var(--accent) 78%);
+}
+.dd-card.dd-card-premium.dd-card-studio .dd-table-head {
+  border-bottom: 2px solid var(--dd-print-grid-ink) !important;
+}
+.dd-card.dd-card-premium.dd-card-studio .dd-table-head span + span {
+  border-left: 2px solid var(--dd-print-grid-ink) !important;
+}
+.dd-card.dd-card-premium.dd-card-studio .dd-rows {
+  gap: 0 !important;
+}
+.dd-card.dd-card-premium.dd-card-studio .dd-rows > .dd-row {
+  border-top: 0 !important;
+  border-bottom: 2px solid var(--dd-print-grid-ink) !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+  break-inside: avoid !important;
+}
+.dd-card.dd-card-premium.dd-card-studio .dd-rows > .dd-row:first-child {
+  border-top: 2px solid var(--dd-print-grid-ink) !important;
+}
+.dd-card.dd-card-premium.dd-card-studio .dd-rows > .dd-row .dd-sub-cell {
+  border-right: 2px solid var(--dd-print-grid-ink) !important;
+}
+.dd-card.dd-card-premium.dd-card-studio .dd-rows > footer.dd-table-footer {
+  border-top: 2px solid var(--dd-print-grid-ink) !important;
+}
+.dd-card.dd-card-premium.dd-card-studio .dd-rows:has(> footer.dd-table-footer) > .dd-row:last-of-type {
+  border-bottom: 0 !important;
+}
+@media print {
+  .dd-card.dd-card-premium.dd-card-studio .dd-table-head,
+  .dd-card.dd-card-premium.dd-card-studio .dd-row,
+  .dd-card.dd-card-premium.dd-card-studio .dd-sub-cell,
+  .dd-card.dd-card-premium.dd-card-studio .dd-table-footer {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
