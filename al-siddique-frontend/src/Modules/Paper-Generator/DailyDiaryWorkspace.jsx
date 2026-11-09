@@ -52,6 +52,7 @@ import './DailyDiaryWorkspace.css'
 
 const DRAFT_KEY = 'assps_daily_diary_workspace_v3'
 const CARD_COUNTS = [2, 3, 4, 5, 6, 8, 10, 12]
+const PRINT_MARGIN_MM = [5, 3, 2] // Normal, Narrow, Minimum; printer hardware may need 3mm+
 
 const PALETTES = [
   // Eight architecturally distinct Studio editions; preserve original templates.
@@ -427,6 +428,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   const [date, setDate] = useState(initialDraft.date || today())
   const [rows, setRows] = useState(Array.isArray(initialDraft.rows) && initialDraft.rows.length ? initialDraft.rows : DEFAULT_ROWS)
   const [cardsPerPage, setCardsPerPage] = useState(CARD_COUNTS.includes(Number(initialDraft.cardsPerPage)) ? Number(initialDraft.cardsPerPage) : 6)
+  const [pageMarginMm, setPageMarginMm] = useState(PRINT_MARGIN_MM.includes(Number(initialDraft.pageMarginMm)) ? Number(initialDraft.pageMarginMm) : 3)
   const [paletteId, setPaletteId] = useState(PALETTES.some(p => p.id === Number(initialDraft.paletteId)) ? Number(initialDraft.paletteId) : 31)
   const [studioColorId, setStudioColorId] = useState(STUDIO_COLORS.some(item => item.id === initialDraft.studioColorId) ? initialDraft.studioColorId : 'jade')
   const [footerText, setFooterText] = useState(initialDraft.footerText || 'Please review the assigned work and keep this card in the notebook.')
@@ -505,14 +507,14 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   useEffect(() => {
     try {
       setTenantStorageItem(DRAFT_KEY, JSON.stringify({
-        mode, classLevel, section, date, rows, cardsPerPage, paletteId, studioColorId, footerText,
+        mode, classLevel, section, date, rows, cardsPerPage, pageMarginMm, paletteId, studioColorId, footerText,
         subjectColWidth, headerScalePercent, rowHeightMm, fontStyleId, headerPreset,
         schoolNameFontSize, logoSizeMm, activeSavedDiaryId,
         globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold,
         tableHeaderFontSize, tableHeaderBold, footerFontSize, editorFontSize
       }))
     } catch { /* Preserve editor state */ }
-  }, [mode, classLevel, section, date, rows, cardsPerPage, paletteId, studioColorId, footerText, subjectColWidth, headerScalePercent, rowHeightMm, fontStyleId, headerPreset, schoolNameFontSize, logoSizeMm, activeSavedDiaryId, globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold, tableHeaderFontSize, tableHeaderBold, footerFontSize, editorFontSize])
+  }, [mode, classLevel, section, date, rows, cardsPerPage, pageMarginMm, paletteId, studioColorId, footerText, subjectColWidth, headerScalePercent, rowHeightMm, fontStyleId, headerPreset, schoolNameFontSize, logoSizeMm, activeSavedDiaryId, globalDiaryFontSize, globalSubjectFontSize, globalSubjectBold, tableHeaderFontSize, tableHeaderBold, footerFontSize, editorFontSize])
 
   useEffect(() => {
     let cancelled = false
@@ -718,6 +720,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     if (record.diary_date) setDate(String(record.diary_date).slice(0, 10))
     if (Array.isArray(record.rows)) setRows(record.rows)
     if (CARD_COUNTS.includes(Number(record.slips_per_page))) setCardsPerPage(Number(record.slips_per_page))
+    if (PRINT_MARGIN_MM.includes(Number(record.style_settings?.pageMarginMm))) setPageMarginMm(Number(record.style_settings.pageMarginMm))
     if (PALETTES.some(p => p.id === Number(record.style_settings?.paletteId || record.template_id))) {
       setPaletteId(Number(record.style_settings?.paletteId || record.template_id))
     }
@@ -800,6 +803,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
         style_settings: {
           workspaceVersion: 3,
           section,
+          pageMarginMm,
           paletteId,
           studioColorId,
           mode: 'diary',
@@ -925,7 +929,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
       height: ${cardsPerPage === 12 ? '210mm' : '297mm'} !important;
       transform: none !important;
       margin: 0 !important;
-      padding: 4mm !important;
+      padding: ${pageMarginMm}mm !important;
       box-shadow: none !important;
       break-after: page !important;
       page-break-after: always !important;
@@ -1707,6 +1711,26 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
  }
 }
 
+/* A208: synchronized page-box padding: preview, isolated print and print-to-PDF.
+ * Existing designs, fonts, row heights, and 2px dividers remain unchanged. */
+.dd-a4-page {
+  padding: var(--dd-page-margin-mm, 3mm) !important;
+}
+.dd-a4-page:has(.dd-density-12) {
+  padding: var(--dd-page-margin-mm, 3mm) !important;
+}
+.dd-margin-controls { margin-top: 8px; padding: 10px; background: #f5fafc; border: 1px solid #d1e1e7; border-radius: 9px; display: grid; gap: 7px; }
+.dd-margin-label { color: #294b62; font-size: 12px; font-weight: 800; }
+.dd-margin-options { display: flex; flex-wrap: wrap; gap: 5px; }
+.dd-margin-options button { border: 1px solid #b9d0dc; border-radius: 6px; padding: 6px 9px; background: white; color: #274355; font-size: 11px; font-weight: 750; cursor: pointer; }
+.dd-margin-options button.active { background: #d9f0ec; border-color: #447b75; color: #164d49; }
+.dd-margin-controls small { font-size: 10px; color: #5b6e7d; line-height: 1.45; }
+@media print {
+  .dd-a4-page, .dd-a4-page:has(.dd-density-12) {
+    padding: var(--dd-page-margin-mm, 3mm) !important;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -2187,6 +2211,24 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
                   ? `High-density: 12 diaries per A4 LANDSCAPE page (3 × 4). ${pages.length} sheet(s) for ${cardPopulation.length} selected student(s). Set printer paper to A4 and orientation to Landscape; printing is blocked if cards overflow.`
                   : `A4 PORTRAIT: ${cardsPerPage} diaries per sheet. ${pages.length} sheet(s) for ${cardPopulation.length} selected student(s). In Chrome Print, select Paper size: A4 (not Letter).`}
               </p>
+              <div className="dd-margin-controls" role="group" aria-label="A4 page margins">
+                <span className="dd-margin-label">Paper margins · Word-style</span>
+                <div className="dd-margin-options">
+                  {[
+                    { mm: 5, label: 'Normal · 5mm' },
+                    { mm: 3, label: 'Narrow · 3mm' },
+                    { mm: 2, label: 'Minimum · 2mm' },
+                  ].map(option => (
+                    <button key={option.mm} type="button" data-page-margin={option.mm}
+                      aria-pressed={pageMarginMm === option.mm}
+                      className={pageMarginMm === option.mm ? 'active' : ''}
+                      onClick={() => setPageMarginMm(option.mm)}>
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+                <small>Chrome Print: Paper size A4; Margins → None. Minimum 2mm may clip on printers without borderless support.</small>
+              </div>
             </label>
 
             <div className="dd-config-row">
@@ -2513,7 +2555,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
                 <div
                   className={`dd-a4-page ${layout.landscape ? 'dd-a4-landscape' : ''}`}
                   key={pageIndex}
-                  style={{ '--cols': layout.cols, '--rows': layout.rows, '--gap-mm': `${layout.gap}mm` }}
+                  style={{ '--cols': layout.cols, '--rows': layout.rows, '--gap-mm': `${Math.min(layout.gap, pageMarginMm === 5 ? layout.gap : pageMarginMm === 3 ? 1.2 : .8)}mm`, '--dd-page-margin-mm': `${pageMarginMm}mm` }}
                   data-a4-page
                 >
                   {page.map((student, index) => (
