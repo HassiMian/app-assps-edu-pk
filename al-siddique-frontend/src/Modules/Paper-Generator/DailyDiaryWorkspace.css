@@ -2412,3 +2412,67 @@
     print-color-adjust: exact !important;
   }
 }
+
+/* A207 — opt-in A4 landscape 12-up; existing 2–10-up untouched.
+ * 3x4 cards, ~94mm wide: preserves the existing 10-up text scale.
+ * Compact repeated metadata only; never hide student identity or homework.
+ */
+.dd-a4-page:has(.dd-density-12) {
+  width: 297mm !important;
+  height: 210mm !important;
+  padding: 3mm !important;
+  transform: scale(var(--preview-zoom, 1));
+  margin-bottom: calc((210mm * (var(--preview-zoom, 1) - 1)) + 18px);
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-head-meta-row {
+  display: none !important; /* date remains in calendar; class remains in student strip */
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-motto-tag {
+  display: none !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-card-head {
+  padding-top: .65mm !important;
+  padding-bottom: .6mm !important;
+  gap: .3mm !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-brand-badge-row {
+  min-height: 0 !important;
+  margin: 0 !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-premium-calendar {
+  min-height: 0 !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-student-strip {
+  padding-top: .3mm !important;
+  padding-bottom: .3mm !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-table-head span {
+  padding-top: .35mm !important;
+  padding-bottom: .35mm !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-sub-cell,
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-diary-cell {
+  padding-top: .2mm !important;
+  padding-bottom: .2mm !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 footer {
+  padding-top: .2mm !important;
+  padding-bottom: .2mm !important;
+}
+@media print {
+ .dd-a4-page:has(.dd-density-12) {
+   width: 297mm !important;
+   height: 210mm !important;
+   padding: 3mm !important;
+   transform: none !important;
+   margin: 0 !important;
+   break-after: page !important;
+   page-break-after: always !important;
+ }
+ .dd-a4-page:has(.dd-density-12):last-child {
+   break-after: auto !important;
+   page-break-after: auto !important;
+ }
+}
+
+.dd-capacity-hint{display:block;margin:6px 0 0;line-height:1.45;padding:8px 10px;border:1px solid #ccdfe6;border-radius:8px;background:#f5fafc;color:#36576a;font-size:11px;font-weight:650;}

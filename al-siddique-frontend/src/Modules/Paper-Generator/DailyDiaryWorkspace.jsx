@@ -51,7 +51,7 @@ import { buildStudentTermDiary3Up, validateStudentTermDiary3UpLayout } from './s
 import './DailyDiaryWorkspace.css'
 
 const DRAFT_KEY = 'assps_daily_diary_workspace_v3'
-const CARD_COUNTS = [2, 3, 4, 5, 6, 8, 10]
+const CARD_COUNTS = [2, 3, 4, 5, 6, 8, 10, 12]
 
 const PALETTES = [
   // Eight architecturally distinct Studio editions; preserve original templates.
@@ -156,6 +156,7 @@ function computeA4Layout(count) {
     6: { cols: 2, rows: 3, gap: 2.2, scale: .86, baseSubjectSize: 10.5, headerScale: .9 },
     8: { cols: 2, rows: 4, gap: 1.8, scale: .76, baseSubjectSize: 10, headerScale: .82 },
     10: { cols: 2, rows: 5, gap: 1.5, scale: .69, baseSubjectSize: 9.5, headerScale: .75 },
+    12: { cols: 3, rows: 4, gap: 1.45, scale: .69, baseSubjectSize: 9.5, headerScale: .75, landscape: true },
   }
   return map[count] || map[4]
 }
@@ -903,7 +904,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    @page { size: A4 portrait; margin: 0; }
+    @page { size: A4 ${cardsPerPage === 12 ? 'landscape' : 'portrait'}; margin: 0; }
     *, *::before, *::after { box-sizing: border-box; }
     html, body {
       margin: 0;
@@ -915,13 +916,13 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
     }
     .dd-page-stage {
       display: block;
-      width: 210mm;
+      width: ${cardsPerPage === 12 ? '297mm' : '210mm'};
       margin: 0 auto;
       padding: 0;
     }
     .dd-a4-page {
-      width: 210mm !important;
-      height: 297mm !important;
+      width: ${cardsPerPage === 12 ? '297mm' : '210mm'} !important;
+      height: ${cardsPerPage === 12 ? '210mm' : '297mm'} !important;
       transform: none !important;
       margin: 0 !important;
       padding: 4mm !important;
@@ -1644,6 +1645,68 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
   }
 }
 
+/* A207 — opt-in A4 landscape 12-up; existing 2–10-up untouched.
+ * 3x4 cards, ~94mm wide: preserves the existing 10-up text scale.
+ * Compact repeated metadata only; never hide student identity or homework.
+ */
+.dd-a4-page:has(.dd-density-12) {
+  width: 297mm !important;
+  height: 210mm !important;
+  padding: 3mm !important;
+  transform: scale(var(--preview-zoom, 1));
+  margin-bottom: calc((210mm * (var(--preview-zoom, 1) - 1)) + 18px);
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-head-meta-row {
+  display: none !important; /* date remains in calendar; class remains in student strip */
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-motto-tag {
+  display: none !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-card-head {
+  padding-top: .65mm !important;
+  padding-bottom: .6mm !important;
+  gap: .3mm !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-brand-badge-row {
+  min-height: 0 !important;
+  margin: 0 !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-premium-calendar {
+  min-height: 0 !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-student-strip {
+  padding-top: .3mm !important;
+  padding-bottom: .3mm !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-table-head span {
+  padding-top: .35mm !important;
+  padding-bottom: .35mm !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-sub-cell,
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 .dd-diary-cell {
+  padding-top: .2mm !important;
+  padding-bottom: .2mm !important;
+}
+.dd-a4-page:has(.dd-density-12) .dd-card.dd-density-12 footer {
+  padding-top: .2mm !important;
+  padding-bottom: .2mm !important;
+}
+@media print {
+ .dd-a4-page:has(.dd-density-12) {
+   width: 297mm !important;
+   height: 210mm !important;
+   padding: 3mm !important;
+   transform: none !important;
+   margin: 0 !important;
+   break-after: page !important;
+   page-break-after: always !important;
+ }
+ .dd-a4-page:has(.dd-density-12):last-child {
+   break-after: auto !important;
+   page-break-after: auto !important;
+ }
+}
+
   </style>
 </head>
 <body>
@@ -2115,10 +2178,15 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
                     className={cardsPerPage === count ? 'active' : ''}
                     onClick={() => setCardsPerPage(count)}
                   >
-                    {count}
+                    {count}{count === 12 ? ' · L' : ''}
                   </button>
                 ))}
               </div>
+              <p className="dd-capacity-hint" data-a4-paper-guidance>
+                {cardsPerPage === 12
+                  ? `High-density: 12 diaries per A4 LANDSCAPE page (3 × 4). ${pages.length} sheet(s) for ${cardPopulation.length} selected student(s). Set printer paper to A4 and orientation to Landscape; printing is blocked if cards overflow.`
+                  : `A4 PORTRAIT: ${cardsPerPage} diaries per sheet. ${pages.length} sheet(s) for ${cardPopulation.length} selected student(s). In Chrome Print, select Paper size: A4 (not Letter).`}
+              </p>
             </label>
 
             <div className="dd-config-row">
@@ -2443,7 +2511,7 @@ export default function DailyDiaryWorkspace({ initialMode = 'diary', initialLess
               const layout = computeA4Layout(cardsPerPage)
               return (
                 <div
-                  className="dd-a4-page"
+                  className={`dd-a4-page ${layout.landscape ? 'dd-a4-landscape' : ''}`}
                   key={pageIndex}
                   style={{ '--cols': layout.cols, '--rows': layout.rows, '--gap-mm': `${layout.gap}mm` }}
                   data-a4-page
