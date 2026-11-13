@@ -99,3 +99,17 @@ test('undelivered password reset challenges are revoked and never returned', () 
   const successResponse = request.indexOf('return sendJson(res, 200', failed);
   assert.ok(failed >= 0 && revoke > failed && failResponse > revoke && successResponse > failResponse);
 });
+test('successful token refresh rotates HttpOnly auth cookie across every supported refresh branch', () => {
+  const start = source.indexOf("router.post('/refresh'");
+  const end = source.indexOf("router.post('/logout'", start);
+  const refresh = source.slice(start, end);
+  assert.ok(start >= 0 && end > start);
+  assert.equal((refresh.match(/setLoginCookies\(res,/g) || []).length, 5);
+  assert.match(refresh, /setLoginCookies\(res, refreshedUser, token\)/);
+  assert.match(refresh, /setLoginCookies\(res, virtualPayload, newToken\)/);
+  assert.match(refresh, /setLoginCookies\(res, newPayload, newToken\)/);
+  const cookieFn = source.slice(source.indexOf('function setLoginCookies('), source.indexOf('async function findVirtualBranchUser('));
+  assert.match(cookieFn, /httpOnly:\s*true/);
+  assert.match(cookieFn, /sameSite:\s*'lax'/);
+  assert.match(cookieFn, /secure:\s*process\.env\.NODE_ENV === 'production'/);
+});

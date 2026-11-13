@@ -695,6 +695,7 @@ router.post('/refresh', async (req, res) => {
     }
     const newToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id, school_code: newPayload.school_code }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN })
     const newRefreshToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id, school_code: newPayload.school_code }, JWT_REFRESH_SECRET, { expiresIn: JWT_REFRESH_EXPIRES_IN })
+    setLoginCookies(res, newPayload, newToken)
     return sendJson(res, 200, {
       message: 'Token refreshed successfully (Demo Mock).',
       token: newToken,
@@ -733,6 +734,7 @@ router.post('/refresh', async (req, res) => {
         }
         const newToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id, school_code: newPayload.school_code }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN })
         const newRefreshToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id, school_code: newPayload.school_code }, JWT_REFRESH_SECRET, { expiresIn: JWT_REFRESH_EXPIRES_IN })
+        setLoginCookies(res, newPayload, newToken)
         return sendJson(res, 200, {
           message: 'Token refreshed successfully (Demo).',
           token: newToken,
@@ -749,11 +751,13 @@ router.post('/refresh', async (req, res) => {
       if (virtualUser) {
         const newToken = createAccessToken(virtualUser)
         const newRefreshToken = createRefreshToken(virtualUser)
+        const virtualPayload = buildUserPayload(virtualUser)
+        setLoginCookies(res, virtualPayload, newToken)
         return sendJson(res, 200, {
           message: 'Token refreshed successfully (Branch Admin).',
           token: newToken,
           refreshToken: newRefreshToken,
-          user: buildUserPayload(virtualUser),
+          user: virtualPayload,
           schoolBranding: buildSchoolBranding(virtualUser.branchDetails),
         })
       }
@@ -770,6 +774,7 @@ router.post('/refresh', async (req, res) => {
         }
         const newToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN })
         const newRefreshToken = jwt.sign({ id: 999, email: newPayload.email, role: newPayload.role, school_id: newPayload.school_id }, JWT_REFRESH_SECRET, { expiresIn: JWT_REFRESH_EXPIRES_IN })
+        setLoginCookies(res, newPayload, newToken)
         return sendJson(res, 200, {
           message: 'Token refreshed successfully (Demo).',
           token: newToken,
@@ -790,6 +795,7 @@ router.post('/refresh', async (req, res) => {
       code: refreshedSchool?.code || null,
     })
 
+    setLoginCookies(res, refreshedUser, token)
     return sendJson(res, 200, {
       message: 'Token refreshed successfully.',
       token,
