@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { shouldClearSessionOn401 } from './auth401Policy'
 import { getTenantStorageItem, setTenantStorageItem } from './tenantStorage'
 
 const api = axios.create({
@@ -87,7 +88,7 @@ export function setAuthSession(token, refreshToken, user) {
  if (token) storage.setItem('al_siddique_token', token)
  if (refreshToken) storage.setItem('al_siddique_refresh_token', refreshToken)
  if (user) storage.setItem('al_siddique_user', JSON.stringify(user))
- } catch {}
+ } catch { /* Browser storage can be unavailable in privacy modes. */ }
 }
 
 export function clearAuthSession() {
@@ -97,7 +98,7 @@ export function clearAuthSession() {
  storage.removeItem('al_siddique_token')
  storage.removeItem('al_siddique_refresh_token')
  storage.removeItem('al_siddique_user')
- } catch {}
+ } catch { /* Browser storage can be unavailable in privacy modes. */ }
 }
 
 // JWT interceptor — har request mein token lagao + cache check
@@ -402,9 +403,15 @@ api.interceptors.response.use(
     const method = (config.method || 'get').toLowerCase()
 
     if (err.response?.status === 401) {
-      localStorage.removeItem('al_siddique_token')
-      localStorage.removeItem('al_siddique_user')
-      window.location.href = '/login'
+      if (shouldClearSessionOn401({
+        status: err.response.status,
+        requestUrl: url,
+        sentAuthorization: config.headers?.Authorization ?? config.headers?.authorization,
+        currentToken: getAuthToken(),
+      })) {
+        clearAuthSession()
+        window.location.href = '/login'
+      }
       return Promise.reject(err)
     }
 
