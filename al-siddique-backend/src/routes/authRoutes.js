@@ -58,8 +58,10 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
 
-function isValidPassword(password) {
-  return typeof password === 'string' && password.length >= 8
+function isAcceptableLoginPassword(password) {
+  // Existing password hashes should be verified, even for legacy short credentials.
+  // Enrollment/reset length requirements remain enforced separately.
+  return typeof password === 'string' && password.length > 0 && password.length <= 1024
 }
 
 function loginAliases(loginId, schoolCode = null) {
@@ -168,11 +170,12 @@ function normalizePakPhone(phone) {
 async function sendPasswordOtp(user, otp) {
   const phone = user.phone || user.parent_phone || user.parent_whatsapp
   const message = `Al Siddique password reset OTP: ${otp}. It expires in 10 minutes.`
+  const auditMessage = 'Password reset requested; OTP omitted from audit log.'
   try {
     await query(
       `INSERT INTO notification_log (school_id, recipient_role, title, message, type, channel, phone, sent_at, metadata)
        VALUES ($1, $2, 'Password Reset OTP', $3, 'security', 'sms', $4, NOW(), $5::jsonb)`,
-      [normalizeSchoolId(user.school_id), user.role || 'user', message, phone || null, JSON.stringify({ user_id: user.id, reset: true })],
+      [normalizeSchoolId(user.school_id), user.role || 'user', auditMessage, phone || null, JSON.stringify({ user_id: user.id, reset: true })],
     )
   } catch (err) {
     console.error('Password reset notification log error:', err.message)
@@ -321,13 +324,23 @@ function isSchoolActive(school) {
   return school && ['active', 'trial'].includes(String(school.status || '').toLowerCase())
 }
 
-function getClientKey(req) {
-  return req.headers['x-forwarded-for']?.split(',')[0]?.trim() || req.ip || 'unknown'
+function getClientKey(req, loginId) {
+  // Express trust-proxy=1 resolves the trusted nearest proxy hop; never trust raw user-supplied XFF first entry.
+  const ip = String(req.ip || req.socket?.remoteAddress || 'unknown')
+  // Shared school IPs must not lock unrelated accounts; store no raw login identifier.
+  const accountKey = crypto.createHash('sha256').update(normalizeLoginId(loginId).toLowerCase()).digest('hex').slice(0, 24)
+  return `${ip}:${accountKey}`
 }
 
 function getLoginAttempt(key) {
   const entry = loginAttempts.get(key)
   if (!entry) return { count: 0, blockedUntil: 0 }
+  const now = Date.now()
+  if ((entry.blockedUntil && now >= entry.blockedUntil) ||
+      (!entry.blockedUntil && entry.lastFailedAt && now - entry.lastFailedAt >= BLOCK_DURATION_MS)) {
+    loginAttempts.delete(key)
+    return { count: 0, blockedUntil: 0 }
+  }
   return entry
 }
 
@@ -336,6 +349,7 @@ function recordLoginFailure(key) {
   const next = {
     count: current.count + 1,
     blockedUntil: current.count + 1 >= MAX_LOGIN_ATTEMPTS ? Date.now() + BLOCK_DURATION_MS : current.blockedUntil,
+    lastFailedAt: Date.now(),
   }
   loginAttempts.set(key, next)
 }
@@ -499,12 +513,12 @@ async function createDemoSession(email) {
 
 router.post('/login', async (req, res) => {
   try {
-    const ipKey = getClientKey(req)
+    const loginId = normalizeLoginId(req.body?.email || req.body?.username || req.body?.loginId)
+    const ipKey = getClientKey(req, loginId)
     if (isBlocked(ipKey)) {
       return sendJson(res, 429, { message: 'Too many failed login attempts. Please wait 15 minutes and try again.' })
     }
 
-    const loginId = normalizeLoginId(req.body?.email || req.body?.username || req.body?.loginId)
     const email = normalizeEmail(loginId)
     const password = req.body?.password
     const requestedRole = String(req.body?.role || '').trim().toLowerCase() || null
@@ -515,8 +529,8 @@ router.post('/login', async (req, res) => {
     if (loginId.includes('@') && !isValidEmail(email)) {
       return sendJson(res, 400, { message: 'Please provide a valid email address.' })
     }
-    if (!isValidPassword(password)) {
-      return sendJson(res, 400, { message: 'Password must be at least 8 characters long.' })
+    if (!isAcceptableLoginPassword(password)) {
+      return sendJson(res, 400, { message: 'Invalid password format.' })
     }
 
     let requestedSchool = await resolveRequestedSchool(req)
@@ -832,6 +846,11 @@ router.post('/password-reset/request', async (req, res) => {
     })
 
     const delivery = await sendPasswordOtp(user, otp)
+    if (!delivery.sent) {
+      // Never keep a usable reset challenge when no delivery channel succeeded.
+      passwordResetOtps.delete(resetToken)
+      return sendJson(res, 503, { message: delivery.message || 'OTP delivery unavailable. Contact your administrator.' })
+    }
     return sendJson(res, 200, {
       message: delivery.message || `OTP sent to ${maskPhone(user.phone)}.`,
       resetToken,
