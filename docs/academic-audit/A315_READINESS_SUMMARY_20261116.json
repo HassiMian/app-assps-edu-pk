@@ -1,0 +1,26 @@
+{
+  "schema": "ASSPS_A315_READ_ONLY_ACADEMIC_RELEASE_READINESS",
+  "school_id": 1,
+  "exam_id": 9,
+  "exam9_rows": 1854,
+  "exam9_students": 303,
+  "actual_zero_marks": 213,
+  "late_admission_after_exam": 1,
+  "subject_score_40_to_49_pct": 52,
+  "stored_grades_outside_configured_policy": 97,
+  "configured_grade_policy_missing_rows": 0,
+  "subjects_with_mixed_maximum": 1,
+  "subjects_without_scores": 19,
+  "subject_configurations_approved": 0,
+  "approved_grade910_questions": 9,
+  "approved_grade910_questions_missing_evidence": 9,
+  "grade_mismatch_by_class": {
+    "Starter": 34,
+    "Flyer": 24,
+    "One": 1,
+    "Six": 4,
+    "Mover": 34
+  },
+  "academic_release_decision": "HOLD",
+  "production_mutations": false
+}

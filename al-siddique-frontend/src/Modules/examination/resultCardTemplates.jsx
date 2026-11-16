@@ -1,6 +1,7 @@
 import React from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
+import { gradeForPercentage, passingThreshold, gradeDisagreesWithPolicy } from './gradePolicy.mjs'
 
 export const RESULT_TEMPLATES = [
  { id: 'reference', label: 'Template 1', name: 'Reference Clone' },
@@ -37,13 +38,8 @@ const termFields = [
  ['includeFinalTerm', 'finalTermMarks', 'Final Term'],
 ]
 
-export function gradeLabel(pct) {
- if (pct >= 90) return 'A+'
- if (pct >= 80) return 'A'
- if (pct >= 70) return 'B'
- if (pct >= 60) return 'C'
- if (pct >= 50) return 'D'
- return 'F'
+export function gradeLabel(pct, gradeBands) {
+ return gradeForPercentage(pct, gradeBands) || '—'
 }
 
 function currentTermField(exam = {}) {
@@ -74,21 +70,24 @@ function SchoolNameLines({ name }) {
 
 export function buildResultCardData({ student, exam, studentMarks, options, school }) {
  const opts = { ...DEFAULT_RESULT_OPTIONS, ...options }
+ const gradeBands = Array.isArray(school?.gradeBands) ? school.gradeBands : []
+ const officialPassThreshold = passingThreshold(gradeBands)
+ const gradePolicyVerified = school?.gradePolicyVerified === true && officialPassThreshold !== null
  const activeTerms = termFields.filter(([key]) => opts[key])
  const slot = currentTermField(exam)
  const subjects = (studentMarks || []).map((row) => {
  const perTermTotal = Number(row.total_marks || exam?.total_marks || 100)
  const subject = {
  subjectName: row.subjectName || row.subject || 'Subject',
- assessmentMarks: numberOrNull(row.assessmentMarks | row.assessment_marks),
- firstTermMarks: numberOrNull(row.firstTermMarks | row.first_term_marks),
- secondTermMarks: numberOrNull(row.secondTermMarks | row.second_term_marks),
- thirdTermMarks: numberOrNull(row.thirdTermMarks | row.third_term_marks),
- finalTermMarks: numberOrNull(row.finalTermMarks | row.final_term_marks),
+ assessmentMarks: numberOrNull(row.assessmentMarks ?? row.assessment_marks),
+ firstTermMarks: numberOrNull(row.firstTermMarks ?? row.first_term_marks),
+ secondTermMarks: numberOrNull(row.secondTermMarks ?? row.second_term_marks),
+ thirdTermMarks: numberOrNull(row.thirdTermMarks ?? row.third_term_marks),
+ finalTermMarks: numberOrNull(row.finalTermMarks ?? row.final_term_marks),
  remarks: row.remarks || '',
  perTermTotal,
  }
- if (subject[slot] === null) subject[slot] = numberOrNull(row.marks_obtained | row.obtainedMarks)
+ if (subject[slot] === null) subject[slot] = numberOrNull(row.marks_obtained ?? row.obtainedMarks)
  const selectedMarks = activeTerms.map(([, field]) => subject[field]).filter(v => v !== null)
  const obtainedMarks = selectedMarks.length ? selectedMarks.reduce((s, v) => s + v, 0) : Number(row.marks_obtained || 0)
  const totalMarks = selectedMarks.length ? selectedMarks.length * perTermTotal : perTermTotal
@@ -98,7 +97,8 @@ export function buildResultCardData({ student, exam, studentMarks, options, scho
  totalMarks,
  obtainedMarks,
  percentage,
- grade: row.grade || gradeLabel(percentage),
+ grade: gradeLabel(percentage, gradeBands),
+ gradeMismatch: gradeDisagreesWithPolicy(row.grade, percentage, gradeBands) === true,
  remarks: row.remarks || (percentage >= 80 ? 'Excellent' : percentage >= 60 ? 'Good' : percentage >= 50 ? 'Satisfactory' : 'Needs improvement'),
  }
  })
@@ -143,7 +143,10 @@ export function buildResultCardData({ student, exam, studentMarks, options, scho
  totalMarks,
  obtainedMarks,
  percentage,
- grade: gradeLabel(percentage),
+ grade: gradeLabel(percentage, gradeBands),
+ passThreshold: officialPassThreshold,
+ gradePolicyVerified,
+ gradeMismatchCount: subjects.filter(row => row.gradeMismatch).length,
  },
  options: opts,
  }
@@ -268,7 +271,7 @@ export function ResultMarksTable({ data }) {
  <td>{data.result.obtainedMarks}</td>
  <td>{data.result.percentage}%</td>
  <td>{data.result.grade}</td>
- <td>{data.result.percentage >= 50 ? 'Pass' : 'Needs review'}</td>
+ <td>{data.result.passThreshold === null ? 'Unverified' : data.result.percentage >= data.result.passThreshold ? 'Pass' : 'Needs review'}</td>
  </tr>
  </tbody>
  </table>

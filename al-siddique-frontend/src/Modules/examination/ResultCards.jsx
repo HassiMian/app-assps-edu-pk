@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import api from '../../services/api'
+import { gradeForPercentage, passingThreshold, normalizeGradeBands, mayPrintUnderGradePolicy } from './gradePolicy.mjs'
 import { usePaperStore } from '../Paper-Generator/usePaperStore'
 import { C, card, btnPrimary, btnSecondary, select, sectionHeader } from '../moduleStyles'
 import {
@@ -13,13 +14,8 @@ import {
  resultCardPrintCss,
 } from './resultCardTemplates'
 
-function gradeLabel(pct) {
- if (pct >= 90) return 'A+'
- if (pct >= 80) return 'A'
- if (pct >= 70) return 'B'
- if (pct >= 60) return 'C'
- if (pct >= 50) return 'D'
- return 'F'
+function gradeLabel(pct, bands) {
+ return gradeForPercentage(pct, bands) || '—'
 }
 
 const TEACHER_REMARK_PRESETS = [
@@ -248,6 +244,15 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  .filter(item => item?.student && item?.exam && item?.studentMarks?.length)
  .map(item => buildResultCardData({ ...item, options, school }))
  const data = dataList[0]
+ const gradePolicyPreflight = mayPrintUnderGradePolicy(dataList, school)
+ const printWithPolicy = (pdf = false) => {
+  if (!gradePolicyPreflight) {
+   window.alert('Official result printing is on hold: school grade policy or stored subject grades require verification.')
+   return
+  }
+  openResultPrintWindow(dataList, pdf)
+ }
+
 
  useEffect(() => {
  const el = previewRef.current
@@ -284,8 +289,8 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
  <ResultCardPrintToolbar
  options={options}
  setOptions={setOptions}
- onPrint={() => openResultPrintWindow(dataList)}
- onExportPdf={() => openResultPrintWindow(dataList, true)}
+ onPrint={() => printWithPolicy()}
+ onExportPdf={() => printWithPolicy(true)}
  />
  <div style={{ marginTop:14, border:'1px solid rgba(148,163,184,0.18)', borderRadius:14, overflow:'hidden', background:'rgba(7,30,52,0.35)' }}>
  <button
@@ -349,6 +354,8 @@ function ProfessionalParametersModal({ cards, student, exam, studentMarks, schoo
 
 export default function ResultCards() {
  const [exams, setExams] = useState([])
+ const [gradeBands, setGradeBands] = useState([])
+ const [gradePolicyVerified, setGradePolicyVerified] = useState(false)
  const [results, setResults] = useState([])
  const [selectedExam, setSelectedExam] = useState('')
  const [selectedStudent, setSelectedStudent] = useState('')
@@ -357,6 +364,19 @@ export default function ResultCards() {
  const [loading, setLoading] = useState(false)
  const [showParams, setShowParams] = useState(false)
  const { paperSettings } = usePaperStore()
+ useEffect(() => {
+  let mounted = true
+  api.get('/api/exams/grade-settings')
+   .then(response => {
+    if (!mounted) return
+    const data = response?.data
+    const bands = normalizeGradeBands(data?.data)
+    setGradeBands(bands || [])
+    setGradePolicyVerified(data?.success === true && data?.configured === true && Boolean(bands))
+   })
+   .catch(() => { if (mounted) { setGradeBands([]); setGradePolicyVerified(false) } })
+  return () => { mounted = false }
+ }, [])
 
  useEffect(() => {
  api.get('/api/exams').then(r => {
@@ -498,6 +518,8 @@ export default function ResultCards() {
  logo: paperSettings.logo,
  principalSignature: paperSettings.principalSignature,
  showUrduHeader: paperSettings.showUrduHeader !== false,
+ gradeBands,
+ gradePolicyVerified,
  }
 
  return (
@@ -633,7 +655,7 @@ export default function ResultCards() {
  {studentMarks.map(row=>(
  <div key={row.id || row.subject} style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:'11px 14px', borderRadius:12, background:'rgba(255,255,255,0.04)' }}>
  <span style={{ color:C.silver }}>{row.subject}</span>
- <span style={{ color:Number(row.marks_obtained)>=(exam?.pass_marks||33)?C.green:C.red, fontWeight:700 }}>
+ <span style={{ color:passingThreshold(gradeBands) !== null && Number(row.marks_obtained)/Number(row.total_marks || exam?.total_marks || 100)*100>=passingThreshold(gradeBands)?C.green:C.red, fontWeight:700 }}>
  {row.marks_obtained} / {row.total_marks || exam?.total_marks || 100}
  </span>
  </div>
@@ -642,8 +664,8 @@ export default function ResultCards() {
  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', padding:16, borderRadius:20, background:'rgba(255,255,255,0.08)' }}>
  <div><div style={{ color:C.gold, fontWeight:800 }}>Total</div><div style={{ color:C.silver }}>{totalObtained} / {totalPossible}</div></div>
  <div style={{ textAlign:'right' }}>
- <div style={{ color:pct>=(exam?.pass_marks||33)?C.green:C.red, fontSize:32, fontWeight:800 }}>{pct}%</div>
- <div style={{ color:C.muted }}>Grade: {gradeLabel(pct)}</div>
+ <div style={{ color:passingThreshold(gradeBands) !== null && pct>=passingThreshold(gradeBands)?C.green:C.red, fontSize:32, fontWeight:800 }}>{pct}%</div>
+ <div style={{ color:C.muted }}>Grade: {gradeLabel(pct, gradeBands)}</div>
  </div>
  </div>
  </div>

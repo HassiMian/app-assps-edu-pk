@@ -1,0 +1,6 @@
+BEGIN
+mode|scored_students|excluded_post_term_students|mapped_promotion_students|recorded_subject_rows|expected_subject_rows|missing_entries|unmapped_rows
+historical_candidate|303|1|12|1853|2026|193|20
+raw_current_class|303|0|0|1854|1968|205|91
+(2 rows)
+COMMIT
