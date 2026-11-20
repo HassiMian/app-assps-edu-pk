@@ -14,3 +14,8 @@ A private full backup named assps-a335-static-production-A343-20261120T1713Z.tar
 ## Release policy
 
 This is **not** a full editable-source reconstruction or approval to deploy a clean Vite build. The source-level parser duplicate-numbering fix is on the A335 branch with 12 passing unit tests and remains unpromoted until source parity is established. Daily paper and Diary workflows are preserved; no production files, student data, database tables or VPS services were modified by the custody operation.
+
+## Exact A342-to-A343 delta
+
+The compare_static_releases.py tool on the parent folder verifies both immutable snapshots, then identifies exactly which assets and import-map targets changed. A342 -> A343: two new A343 Paper Generator JavaScript assets, no assets removed, and index.html is the only previously present file with changed bytes. This proves what changed in the deployed static tree without assuming functional equivalence or editable source parity.
+
