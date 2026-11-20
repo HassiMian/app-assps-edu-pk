@@ -24,3 +24,7 @@ A private full static backup named assps-a335-static-production-20261120T1640Z.t
 ## Release gate
 
 Full source parity remains HOLD. Only promote a newly compiled release after the static assets and behavior have been reconciled and tested. Until then, retain current live release, archive and source-custody evidence. Always reverify Urdu/English typography, numbering, original-paper save identity, printing, navigation and diary behavior.
+
+## New A335 deployment guard
+
+The included release_guard.py requires all 26 direct script/style references, all 14 active import-map mappings, and the 40 referenced asset hashes to match this verified snapshot. Test with --self-test to confirm it refuses a missing navigation script. A clean Git source build compiled successfully in an isolated Vite preview, but was rejected by the strict release gate with 80 blockers. This is deliberate: the source build omitted live overlays. It must not be deployed over the existing working frontend.\n
