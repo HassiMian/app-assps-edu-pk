@@ -16,6 +16,54 @@ const clamp=(value,min,max)=>Math.max(min,Math.min(max,Number(value)||0))
 const rightSide = {minWidth:0,textAlign:'right',direction:'rtl',unicodeBidi:'isolate',fontFamily:UR_FONT,fontSize:13,lineHeight:1.8}
 const leftSide={minWidth:0,textAlign:'left',direction:'ltr',unicodeBidi:'isolate',fontFamily:EN_FONT,fontSize:11.5,lineHeight:1.48}
 const pairGrid={display:'grid',gridTemplateColumns:'minmax(0,1fr) minmax(0,1.12fr)',gap:5,minWidth:0,alignItems:'start'}
+// A338: raster-optical bilingual alignment, calibrated against Windows Chrome
+// and Linux Chromium with the actual available Nastaleeq font on each device.
+function inkCenter(font,size,lineHeight,text){
+ if(typeof document==='undefined')return 0
+ const sample=String(text||'').replace(/\s+/g,' ').slice(0,34)||'Hg'
+ const cache=inkCenter.cache||(inkCenter.cache=new Map())
+ const key=font+'|'+size+'|'+lineHeight+'|'+sample
+ if(cache.has(key))return cache.get(key)
+ let value
+ try{
+  const canvas=inkCenter.canvas||(inkCenter.canvas=document.createElement('canvas'))
+  let ctx=canvas.getContext('2d',{willReadFrequently:true})
+  if(!ctx)return size*lineHeight/2
+  ctx.font=size+'px '+font
+  const pre=ctx.measureText(sample)
+  const w=Math.min(700,Math.max(64,Math.ceil(pre.width)+32)),h=104
+  canvas.width=w;canvas.height=h
+  ctx=canvas.getContext('2d',{willReadFrequently:true})
+  ctx.clearRect(0,0,w,h);ctx.font=size+'px '+font
+  ctx.textAlign='left';ctx.textBaseline='alphabetic';ctx.fillStyle='#000'
+  const baseline=68
+  ctx.fillText(sample,8,baseline)
+  const pixels=ctx.getImageData(0,0,w,h).data
+  let mass=0,weighted=0
+  for(let y=0;y<h;y++){
+   let row=0
+   for(let x=0;x<w;x++)row+=pixels[(y*w+x)*4+3]
+   if(row){mass+=row;weighted+=y*row}
+  }
+  const asc=pre.fontBoundingBoxAscent||size*.8,desc=pre.fontBoundingBoxDescent||size*.25
+  const lineBaseline=(size*lineHeight-asc-desc)/2+asc
+  const fallback=(pre.actualBoundingBoxAscent||size*.75)-(pre.actualBoundingBoxDescent||size*.2)
+  value=mass?lineBaseline+(weighted/mass-baseline):lineBaseline-fallback/2
+ }catch{value=size*lineHeight/2}
+ if(!Number.isFinite(value))value=size*lineHeight/2
+ if(cache.size>400)cache.clear()
+ cache.set(key,value)
+ return value
+}
+function opticalOffset(enSize,urSize,enLine,urLine,enText,urText){
+ const a=inkCenter(EN_FONT,enSize,enLine,enText||'Group 1')
+ const b=inkCenter(UR_FONT,urSize,urLine,urText||'گروپ 1')
+ const platform=typeof navigator!=='undefined'
+   ?String(navigator.userAgentData?.platform||navigator.platform||''):''
+ // Windows Jameel pixel-density residual measured from the real Windows screenshot.
+ const browserCorrection=/win/i.test(platform)?1.3:0
+ return clamp(Math.round((a-b-browserCorrection)*10)/10,-9,9)
+}
 function EditableText({text,language,editMode,onBlur,compactOption=false}) {
  const isUrdu=language==='ur',base=isUrdu?rightSide:leftSide
  const style=compactOption?{...base,lineHeight:isUrdu?1.55:1.45}:base
@@ -61,6 +109,7 @@ function SectionHeader({section,index,editMode,onChange}) {
  </div>
 }
 function QuestionPair({item,editMode,change}) {
+ const opt=opticalOffset(11.5,13,1.48,1.8,item.en,item.ur)
  return <div data-compact-question-pair style={pairGrid}>
   <div lang="en" dir="ltr" style={{display:'grid',gridTemplateColumns:'21px minmax(0,1fr)',
    gap:3,minWidth:0}}>
@@ -69,7 +118,7 @@ function QuestionPair({item,editMode,change}) {
     onBlur={v=>change('en',v)}/>
   </div>
   <div lang="ur" dir="rtl" style={{display:'grid',direction:'ltr',
-   gridTemplateColumns:'minmax(0,1fr) 21px',gap:3,minWidth:0}}>
+   gridTemplateColumns:'minmax(0,1fr) 21px',gap:3,minWidth:0,position:'relative',top:opt+'px'}}>
    <EditableText text={item.ur} language="ur" editMode={editMode}
     onBlur={v=>change('ur',v)}/>
    <strong data-compact-urdu-number aria-hidden="true"
@@ -112,19 +161,19 @@ export function CompactDualOfficialSection({section,index,editMode=false,onQuest
     data-option-columns={columns}
     style={{display:'grid',gridTemplateColumns:'repeat('+columns+', minmax(0,1fr))',
      gap:'0px 4px',marginTop:3,minWidth:0}}>
-    {item.options.map((option,oi)=><div key={option.id} data-compact-option={option.id}
-     style={{...pairGrid,gridTemplateColumns:'minmax(0,1fr) minmax(0,.94fr)',gap:3,alignItems:'first baseline',
+    {item.options.map((option,oi)=>{const opt=opticalOffset(11.5,13,1.45,1.55,option.en,option.ur);return <div key={option.id} data-compact-option={option.id}
+     style={{...pairGrid,gridTemplateColumns:'minmax(0,1fr) minmax(0,.94fr)',gap:3,alignItems:'start',
       padding:'1px 2px',border:grid?'1px solid #c8d5de':'none'}}>
-      <div lang="en" dir="ltr" style={{display:'grid',gridTemplateColumns:'14px minmax(0,1fr)',gap:2,minWidth:0,alignItems:'baseline'}}>
+      <div lang="en" dir="ltr" style={{display:'grid',gridTemplateColumns:'14px minmax(0,1fr)',gap:2,minWidth:0,alignItems:'start'}}>
        <strong style={{fontFamily:EN_FONT,fontSize:10.5,color:INK}}>{option.id}.</strong>
        <EditableText text={option.en} language="en" compactOption editMode={editMode}
         onBlur={v=>updateCell(q,'en',v,oi)}/>
       </div>
-      <div lang="ur" dir="rtl" style={{minWidth:0,alignSelf:'baseline',transform:'translateY(2px)'}}>
+      <div lang="ur" dir="rtl" data-compact-urdu-optical={opt} style={{minWidth:0,alignSelf:'start',position:'relative',top:opt+'px'}}>
        <EditableText text={option.ur} language="ur" compactOption editMode={editMode}
         onBlur={v=>updateCell(q,'ur',v,oi)}/>
       </div>
-     </div>)}
+     </div>})}
    </div>:null
   const count=parsed.kind==='mcq'?0:linesFor(q)
   return <React.Fragment key={item.id}>
