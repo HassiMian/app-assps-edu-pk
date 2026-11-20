@@ -59,5 +59,7 @@ jobs:
           assert 'P1 Missing referenced assets (32)' in s
           print('A335_64_CHECK_BACKLOG_CI_PASS')
           PYTEST
+      - name: Detect high-confidence accidental credentials in release assets
+        run: python3 al-siddique-frontend/production-release-custody/scan_public_assets.py --snapshot al-siddique-frontend/production-release-custody/2026-11-20-1713
       - name: State release constraint
         run: echo "Static verification only; no production credentials or VPS access."
