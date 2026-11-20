@@ -16,3 +16,7 @@
 
 A read-only regression demonstration of b48527a8's compactDualParser found that duplicate MCQ serials (1,1), short-question serials (1,1), and long alternatives (A,A) were parsed as valid. The source parser now fails closed for duplicate, descending, non-positive or unsafe numbering and enforces A OR B long choice identity. Its serializer also refuses invalid structured serials instead of silently generating malformed paper content. Twelve Node tests pass; the component only edits text on successfully parsed documents, so normal text editing retains the existing safe number identities. This remains unpromoted until source-vs-production parity gate is satisfied; no current student's paper or live editor was changed.
 
+## A343 concurrent production refresh
+
+During the audit the active frontend was upgraded from A342 to A343 independently, leaving A336 navigation in place. The refreshed immutable release evidence at ../2026-11-20-1713 contains 40 directly referenced assets and 1,083 full-file hashes. Private A343 static tar archive SHA256 ea3a490c1803063ef50447e783341f0ce56fc183a3407e5f277c47b570f82a5e was hash-verified and its scratch restore independently passed 1,083 files. Earlier A342 snapshot stays intact. Latest source commit 01db7b83 was merged into this branch as 378adb45; source duplicate-serial checks still pass 12 tests and isolated Vite compilation passes. Full source-to-production runtime parity remains HOLD.
+

@@ -30,5 +30,13 @@ jobs:
           node-version: '22'
       - name: Verify dual-medium serial identity and OR alternatives
         run: node --test al-siddique-frontend/src/Modules/Paper-Generator/tests/compactDualParser.test.mjs
+      - name: Verify refreshed A343 release snapshot
+        run: python3 al-siddique-frontend/production-release-custody/2026-11-20-1713/verify_release.py --snapshot al-siddique-frontend/production-release-custody/2026-11-20-1713
+      - name: Enforce A343 deployment parity
+        run: python3 al-siddique-frontend/production-release-custody/2026-11-20-1713/release_guard.py --snapshot al-siddique-frontend/production-release-custody/2026-11-20-1713 --candidate al-siddique-frontend/production-release-custody/2026-11-20-1713
+      - name: Verify A343 navigation-overlay mutant is blocked
+        run: python3 al-siddique-frontend/production-release-custody/2026-11-20-1713/release_guard.py --snapshot al-siddique-frontend/production-release-custody/2026-11-20-1713 --self-test
+      - name: Validate A343 recovery tool syntax
+        run: python3 -m py_compile al-siddique-frontend/production-release-custody/2026-11-20-1713/restore_custody.py
       - name: State release constraint
         run: echo "Static verification only; no production credentials or VPS access."

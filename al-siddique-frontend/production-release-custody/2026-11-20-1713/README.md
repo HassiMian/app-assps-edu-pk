@@ -1,0 +1,16 @@
+# ASSPS — A343 refreshed production custody, 20 November 2026
+
+Immutable, read-only point-in-time snapshot captured after the live Paper Generator moved from A342 to A343. This contains the exact live index.html and 40 directly referenced script/style/import-map assets. SHA-256 manifest records all **1,083** static files in the deployed tree.
+
+A private full backup named assps-a335-static-production-A343-20261120T1713Z.tar.gz is held under `/root/secure-archive` on the VPS. Its SHA-256 and byte size are recorded in manifest.json. Previous A342 snapshot remains preserved independently.
+
+## Verification and safe recovery
+
+- Run verify_release.py with --snapshot . and --archive /root/secure-archive/assps-a335-static-production-A343-20261120T1713Z.tar.gz to verify all archive files without extraction.
+- Run verify_release.py --snapshot . --live /path/to/live/root to compare each live file against this point-in-time snapshot. Changes introduced by subsequent releases correctly trigger drift, requiring a newly reviewed snapshot.
+- Use restore_custody.py only with an empty /root/workspace/assps-a335-restore-<unique> destination. The script rejects production and non-empty paths, verifies archive integrity first and independently verifies all restored files.
+- Run release_guard.py --snapshot . --candidate /path/to/new/build to block accidental replacement of essential active scripts. Reconcile canonical editable source with current overlays before changing production.
+
+## Release policy
+
+This is **not** a full editable-source reconstruction or approval to deploy a clean Vite build. The source-level parser duplicate-numbering fix is on the A335 branch with 12 passing unit tests and remains unpromoted until source parity is established. Daily paper and Diary workflows are preserved; no production files, student data, database tables or VPS services were modified by the custody operation.
