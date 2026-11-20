@@ -23,3 +23,7 @@ The compare_static_releases.py tool on the parent folder verifies both immutable
 
 The `../test_release_custody.py` suite checks positive snapshot parity, negative missing A336 navigation, replaced A343 Paper Generator mapping, altered JS asset hash and exact A342->A343 delta. Five local tests passed; the GitHub workflow runs these independently with no VPS credentials or live writes.
 
+## A336 navigation source reconciliation
+
+The audit branch now includes the active A336 navigation script byte-for-byte in source public/assets, referenced from the Vite source index. verify_source_navigation.py compares source bytes against the immutable A343 production snapshot and checks the bootstrap script tag. This removes one known source omission but **does not** establish full source/release parity; the remaining production overrides require separate migration and must stay protected.
+

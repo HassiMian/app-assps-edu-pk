@@ -8,6 +8,9 @@ on:
       - '.github/workflows/assps-a335-production-custody.yml'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/compactDualParser.js'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/tests/compactDualParser.test.mjs'
+      - 'al-siddique-frontend/index.html'
+      - 'al-siddique-frontend/public/assets/assps-a336-unified-navigation-20261120.js'
+      - 'al-siddique-frontend/production-release-custody/verify_source_navigation.py'
   workflow_dispatch:
 jobs:
   verify-snapshot:
@@ -42,5 +45,7 @@ jobs:
         run: python3 al-siddique-frontend/production-release-custody/compare_static_releases.py --previous al-siddique-frontend/production-release-custody/2026-11-20 --current al-siddique-frontend/production-release-custody/2026-11-20-1713
       - name: Regression test snapshot corruption, route overlay and A342 to A343 delta
         run: python3 al-siddique-frontend/production-release-custody/test_release_custody.py
+      - name: Ensure source ships byte-matching live A336 navigation
+        run: python3 al-siddique-frontend/production-release-custody/verify_source_navigation.py
       - name: State release constraint
         run: echo "Static verification only; no production credentials or VPS access."
