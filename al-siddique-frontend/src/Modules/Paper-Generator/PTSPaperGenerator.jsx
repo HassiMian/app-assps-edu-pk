@@ -5,6 +5,8 @@ import Portal from '../../components/Portal'
 import { SYLLABI, CLASSES, SUBJECTS, CHAPTERS, QUESTIONS } from './data/questionBank'
 import { usePaperStore } from './usePaperStore'
 import PaperRichTextEditor, { PaperRichTextRenderer } from './PaperRichTextEditor'
+import { parseCompactDual } from './compactDualParser.js'
+import { CompactDualOfficialSection } from './CompactDualOfficialSection.jsx'
 import { classLevelLabel, classLevelsMatch, useAcademicStore } from '../../services/useAcademicStore'
 import { splitQuestionsBalancedVertical } from './PaperEditor/layouts/shortQuestionLayoutEngine.js'
 import { resolveMcqColumns, normalizeQuestionOptions } from './PaperEditor/layouts/mcqLayoutEngine.js'
@@ -1130,6 +1132,7 @@ function OfficialSections({ questions, isUrdu, editMode, fs, qFs, themeColor, on
  const ordered = [...questions].sort((a, b) => Number(a.sourceOrder || 0) - Number(b.sourceOrder || 0))
  return <div style={{ direction:isUrdu ? 'rtl' : 'ltr' }}>
   {ordered.map((question, index) => {
+   if (parseCompactDual(question)) return <CompactDualOfficialSection key={question.id} section={question} index={index} editMode={editMode} onQuestionChange={changes=>onQuestionChange?.(question.id, changes)} />
    const blocks = parseOfficialContentBlocks(question.content)
    const rawHeading = String(question.heading || '').trim()
    const inlineMarks = rawHeading.match(/\(([^)]*\d+[^)]*)\)\s*$/)
