@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   if (window.__ASSPS_A333_NAV__) return;
-  window.__ASSPS_A333_NAV__ = {version: 'A333.2', installed: true};
+  window.__ASSPS_A333_NAV__ = {version: 'A333.3', installed: true};
   var KEY = 'assps.nav.a333.v1';
   var TTL = 8 * 60 * 60 * 1000;
   var MAX = 50;
@@ -32,6 +32,7 @@
     fee:'Fee Notifications', results:'Results Notifications', attendance:'Attendance Alerts'
   };
   var EXACT = new Set(["/academic","/academic-setup","/admin/subscription-requests","/ai-analytics","/attendance","/attendance/analytics","/attendance/mark","/attendance/qr-scan","/attendance/sms","/cards","/dashboard","/datesheet","/employees","/examination","/examination/cards","/examination/manage","/examination/marks","/examination/results","/exams","/exams/grades","/exams/marks","/exams/results","/expenses","/families","/fees","/fees/challans","/fees/create","/fees/proofs","/fees/reporting","/fees/reports","/fees/settings","/fees/view","/id-cards","/library","/messages","/notifications","/paper-generator","/paper-generator/saved","/paper-generator/unified","/parent-portal","/parents","/question-bank","/settings","/student","/student-portal","/students","/students/admissions","/students/promote","/students/reports","/timetable","/transport"]);
+  EXACT.add('/profile'); // Existing compiled profile page is rendered outside AppLayout.
   var paperTabs = new Set(['build','saved','bank','early_years','diary','lesson','word_editor','board_pattern']);
   var nav = null, header = null, observer = null, paintPending = false;
   var memory = {identity:'', entries:[], cursor:-1, resume:null, updated:0};
@@ -206,8 +207,10 @@
   function mount() {
     if (!identity()) { if (nav && nav.parentNode) nav.remove(); return; }
     var host = document.querySelector('.app-topbar-slot');
-    if (!host || !host.parentNode) return;
-    if (nav && nav.parentNode === host.parentNode && nav.previousElementSibling === host) return;
+    var standalone = !host && location.pathname === '/profile' ? document.getElementById('root') : null;
+    if ((!host || !host.parentNode) && (!standalone || !standalone.parentNode)) return;
+    if (host && nav && nav.parentNode === host.parentNode && nav.previousElementSibling === host) {update();return;}
+    if (standalone && nav && nav.parentNode === standalone.parentNode && nav.nextElementSibling === standalone) {update();return;}
     if (!nav) {
       injectStyles();
       nav = document.createElement('nav');
@@ -225,7 +228,8 @@
       actions.appendChild(button('resume','Resume','Return to last working page'));
       nav.appendChild(actions);
     }
-    host.insertAdjacentElement('afterend',nav);
+    if (host && host.parentNode) host.insertAdjacentElement('afterend',nav);
+    else if (standalone && standalone.parentNode) standalone.parentNode.insertBefore(nav,standalone);
     update();
   }
   function update() {

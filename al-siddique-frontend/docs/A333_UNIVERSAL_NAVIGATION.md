@@ -36,3 +36,6 @@ This is forward-portable source implementation, not a full rebuild or certificat
 
 ## A333.2 deep-link correction
 Legacy /paper-generator/saved is canonically replaced with /paper-generator?tab=saved before React Router mounts. This prevents losing the Saved Papers tab. Navigation titles also use readable module labels.
+
+## A333.3 standalone profile handling
+The deployed Profile page is an authenticated standalone React route rather than an AppLayout child. Mount the same navigation bar as a sibling before the React root only on /profile. Do not display navigation controls on login or forced-password-change pages. Synthetic Profile route test passed with zero API writes.
