@@ -49,7 +49,7 @@ def analyze(snapshot: Path, candidate: Path, replace_index: bytes | None = None)
         critical_import_map_entries=len(expected_imports),
         dependency_integrity=len(metadata['reference_files']),
         blockers_total=len(failures),
-        blockers=failures[:25],
+        blockers=failures,
         no_production_modifications=True,
     )
 

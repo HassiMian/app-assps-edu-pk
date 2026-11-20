@@ -31,3 +31,7 @@ The audit branch now includes the active A336 navigation script byte-for-byte in
 
 The seven CSS overlays already active in A343 production have been copied unchanged into source public/assets. The Vite source index loads them in precisely the vetted production cascade order after the module script. verify_source_navigation.py checks their exact SHA-256 hashes and order against the immutable snapshot, in addition to A336 navigation. This is source-only and does not edit current Diary or paper data. Other runtime JavaScript overrides remain blocked by the full release parity gate.
 
+## Exact remaining source migration backlog
+
+The parent folder SOURCE_PARITY_BACKLOG_A343.md enumerates 64 unresolved release compatibility checks after porting source A336 navigation and seven Diary CSS overlays. Groups are 18 missing scripts/styles, 14 import-map aliases, 32 missing vetted runtime assets, and zero changed asset hashes. They are compatibility obligations, NOT claims of 64 broken live features. Generate again with generate_parity_backlog.py against a new candidate Vite dist before proposing a release.
+
