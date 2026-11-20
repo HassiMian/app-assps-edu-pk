@@ -82,4 +82,4 @@ if __name__=='__main__':
     try: sys.exit(main())
     except Exception as exc:
         print('ASSPS_A335_RELEASE_GUARD_ERROR',str(exc),file=sys.stderr)
-        sys.exit(3)\n
+        sys.exit(3)
