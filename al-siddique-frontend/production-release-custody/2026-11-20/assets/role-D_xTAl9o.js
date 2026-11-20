@@ -1,0 +1,1 @@
+function e(e){let t=String(e||`admin`).trim().toLowerCase().replace(/\s+/g,`_`).replace(/-/g,`_`);return t===`school_admin`||t===`schooladmin`?`admin`:t===`superadmin`?`super_admin`:t}export{e as t};
