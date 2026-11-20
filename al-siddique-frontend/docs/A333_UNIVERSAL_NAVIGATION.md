@@ -33,3 +33,6 @@ First-party navigation layer across existing React Router shells: stable, paper,
 
 ## Source caveat
 This is forward-portable source implementation, not a full rebuild or certification of unrelated production overlays. Reconcile production and canonical source before a full rebuild.
+
+## A333.2 deep-link correction
+Legacy /paper-generator/saved is canonically replaced with /paper-generator?tab=saved before React Router mounts. This prevents losing the Saved Papers tab. Navigation titles also use readable module labels.

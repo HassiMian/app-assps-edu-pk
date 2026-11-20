@@ -3,7 +3,7 @@
 (function () {
   'use strict';
   if (window.__ASSPS_A333_NAV__) return;
-  window.__ASSPS_A333_NAV__ = {version: 'A333.1', installed: true};
+  window.__ASSPS_A333_NAV__ = {version: 'A333.2', installed: true};
   var KEY = 'assps.nav.a333.v1';
   var TTL = 8 * 60 * 60 * 1000;
   var MAX = 50;
@@ -26,7 +26,10 @@
     marks:'Marks Entry', review:'Review', results:'Results',
     grades:'Grade Setup', admissions:'Admissions', promote:'Promotions',
     saved:'Saved Papers', build:'Paper Workspace', bank:'Question Bank',
-    early_years:'Pre Classes Papers', diary:'Daily Diary', lesson:'Lesson Plans'
+    early_years:'Pre Classes Papers', diary:'Daily Diary', lesson:'Lesson Plans',
+    'qr-scan':'QR Scanner', manage:'Manage', cards:'Cards', challans:'Challans',
+    proofs:'Fee Proofs', reporting:'Reporting', 'subscription-requests':'Subscriptions',
+    fee:'Fee Notifications', results:'Results Notifications', attendance:'Attendance Alerts'
   };
   var EXACT = new Set(["/academic","/academic-setup","/admin/subscription-requests","/ai-analytics","/attendance","/attendance/analytics","/attendance/mark","/attendance/qr-scan","/attendance/sms","/cards","/dashboard","/datesheet","/employees","/examination","/examination/cards","/examination/manage","/examination/marks","/examination/results","/exams","/exams/grades","/exams/marks","/exams/results","/expenses","/families","/fees","/fees/challans","/fees/create","/fees/proofs","/fees/reporting","/fees/reports","/fees/settings","/fees/view","/id-cards","/library","/messages","/notifications","/paper-generator","/paper-generator/saved","/paper-generator/unified","/parent-portal","/parents","/question-bank","/settings","/student","/student-portal","/students","/students/admissions","/students/promote","/students/reports","/timetable","/transport"]);
   var paperTabs = new Set(['build','saved','bank','early_years','diary','lesson','word_editor','board_pattern']);
@@ -156,6 +159,9 @@
     var family = pieces[0] || '';
     var subject = ROUTES[family] || 'Academic Portal';
     var tab = '';
+    if (family === 'notifications') {
+      try { tab = new URLSearchParams(route.split('?')[1] || '').get('tab') || ''; } catch (_) {}
+    }
     if (family === 'paper-generator') {
       try { tab = new URLSearchParams(route.split('?')[1] || '').get('tab') || ''; } catch (_) {}
     }
@@ -243,6 +249,10 @@
     if (paintPending) return;
     paintPending=true;
     requestAnimationFrame(function () {paintPending=false;mount();});
+  }
+  // Legacy Saved Papers deep link must retain its named tab, not silently open Workspace.
+  if (location.pathname === '/paper-generator/saved') {
+    try {history.replaceState(history.state, '', '/paper-generator?tab=saved');} catch (_) {}
   }
   read();
   sync('load');
