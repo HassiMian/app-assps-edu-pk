@@ -110,20 +110,41 @@ function SectionHeader({section,index,editMode,onChange}) {
 }
 function QuestionPair({item,editMode,change}) {
  const opt=opticalOffset(11.5,13,1.48,1.8,item.en,item.ur)
+ const long=typeof item.number!=='number'
+ const enSerial=numberText(item.number)+(long?'':'.')
+ const urSerial=long?numberText(item.number):item.number+'۔'
+ const urSerialFont=long?EN_FONT:UR_FONT
+ const enSerialOffset=clamp(
+   Math.round((inkCenter(EN_FONT,11.5,1.48,item.en)-
+     inkCenter(EN_FONT,11.5,1.48,enSerial))*10)/10,-9,9)
+ const urSerialOffset=clamp(
+   Math.round((inkCenter(UR_FONT,13,1.8,item.ur)-
+     inkCenter(urSerialFont,13,1.8,urSerial))*10)/10,-9,9)
+ const platform=typeof navigator!=='undefined'?
+   String(navigator.userAgentData?.platform||navigator.platform||''):''
+ const winLatinChoiceOffset=long&&/win/i.test(platform)?1.2:0
  return <div data-compact-question-pair style={pairGrid}>
-  <div lang="en" dir="ltr" style={{display:'grid',gridTemplateColumns:'21px minmax(0,1fr)',
-   gap:3,minWidth:0}}>
-   <strong style={{fontFamily:EN_FONT,color:INK,fontSize:11}}>{numberText(item.number)}.</strong>
+  <div lang="en" dir="ltr" style={{display:'grid',gridTemplateColumns:'23px minmax(0,1fr)',
+   gap:3,minWidth:0,alignItems:'start'}}>
+   <strong data-compact-serial="en" style={{
+      fontFamily:EN_FONT,fontSize:11.5,lineHeight:1.48,fontWeight:800,color:INK,
+      alignSelf:'start',display:'block',position:'relative',top:enSerialOffset+'px'}}>
+     {enSerial}
+   </strong>
    <EditableText text={item.en} language="en" editMode={editMode}
     onBlur={v=>change('en',v)}/>
   </div>
   <div lang="ur" dir="rtl" style={{display:'grid',direction:'ltr',
-   gridTemplateColumns:'minmax(0,1fr) 21px',gap:3,minWidth:0,position:'relative',top:opt+'px'}}>
+   gridTemplateColumns:'minmax(0,1fr) 23px',gap:3,minWidth:0,alignItems:'start',
+   position:'relative',top:opt+'px'}}>
    <EditableText text={item.ur} language="ur" editMode={editMode}
     onBlur={v=>change('ur',v)}/>
-   <strong data-compact-urdu-number aria-hidden="true"
-    style={{fontFamily:UR_FONT,fontSize:13,color:INK,textAlign:'right',whiteSpace:'nowrap'}}>
-    {typeof item.number==='number'?item.number+'۔':numberText(item.number)}
+   <strong data-compact-serial="ur" aria-hidden="true"
+    style={{fontFamily:urSerialFont,fontSize:13,lineHeight:1.8,fontWeight:800,
+       alignSelf:'start',display:'block',position:'relative',
+       top:(urSerialOffset+winLatinChoiceOffset)+'px',
+       color:INK,textAlign:'right',whiteSpace:'nowrap'}}>
+    {urSerial}
    </strong>
   </div>
  </div>
