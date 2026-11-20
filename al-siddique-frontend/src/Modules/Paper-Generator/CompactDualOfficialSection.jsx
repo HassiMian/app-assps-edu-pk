@@ -82,13 +82,15 @@ function EditorButton({children,onClick,disabled=false}) {
    {children}
  </button>
 }
-function SectionHeader({section,index,editMode,onChange}) {
+function SectionHeader({section,index,editMode,onChange,parsedKind}) {
  const text=String(section.heading||'')
  const i=text.indexOf(' / ')
  const en=(i<0?text:text.slice(0,i)).replace(/^\s*Q\d+[.)]?\s*/i,'').trim()
  const ur=(i<0?'':text.slice(i+3)).replace(/^\s*سوال\s*نمبر\s*[0-9۰-۹]+\s*[:.۔]?\s*/,'').trim()
  const sz=clamp(section.dualHeadingFontSize||15,11,22)
- const kind=(section.layoutPreset==='table'||section.layoutPreset==='mcq')?'MCQ':section.layoutPreset==='short'?'Short':section.layoutPreset==='long'||section.layoutPreset==='list'?'Long':'Questions'
+ const kind=parsedKind==='mcq'?'MCQ':parsedKind==='short'?'Short':parsedKind==='long'?'Long':'Questions'
+ const isGrid=section.dualTableMode==='grid'||section.layoutPreset==='table'
+ const fallbackPreset=parsedKind==='mcq'?'mcq':parsedKind==='short'?'short':parsedKind==='long'?'long':'auto'
  return <div data-compact-dual-header style={{...pairGrid,
    direction:'ltr',gridTemplateColumns:'minmax(0,1fr) 90px minmax(0,1fr)',gap:7,
    padding:'5px 4px',background:'#fafcff',borderBottom:'1px solid #aebdcc'}}>
@@ -103,14 +105,14 @@ function SectionHeader({section,index,editMode,onChange}) {
    <span>{sz}px</span>
    <EditorButton disabled={sz<=11} onClick={()=>onChange?.({dualHeadingFontSize:sz-1})}>A−</EditorButton>
    <EditorButton disabled={sz>=22} onClick={()=>onChange?.({dualHeadingFontSize:sz+1})}>A+</EditorButton>
-   <EditorButton onClick={()=>onChange?.(section.layoutPreset==='table'?
-     {layoutPreset:'mcq',dualTableMode:'minimal'}:
-     {dualTableMode:section.dualTableMode==='grid'?'minimal':'grid'})}>
-    {kind+' Table: '+(section.dualTableMode==='grid'||section.layoutPreset==='table'?'ON':'OFF')}</EditorButton>
+   <EditorButton onClick={()=>onChange?.(isGrid&&section.layoutPreset==='table'?
+     {layoutPreset:fallbackPreset,dualTableMode:'minimal'}:
+     {dualTableMode:isGrid?'minimal':'grid'})}>
+    {kind+' Table: '+(isGrid?'ON':'OFF')}</EditorButton>
   </div>}
  </div>
 }
-function QuestionPair({item,editMode,change}) {
+function QuestionPair({item,editMode,change,language=null}) {
  const opt=opticalOffset(11.5,13,1.48,1.8,item.en,item.ur)
  const long=typeof item.number!=='number'
  const enSerial=numberText(item.number)+(long?'':'.')
@@ -125,8 +127,7 @@ function QuestionPair({item,editMode,change}) {
  const platform=typeof navigator!=='undefined'?
    String(navigator.userAgentData?.platform||navigator.platform||''):''
  const winLatinChoiceOffset=long&&/win/i.test(platform)?1.2:0
- return <div data-compact-question-pair style={pairGrid}>
-  <div lang="en" dir="ltr" style={{display:'grid',gridTemplateColumns:'23px minmax(0,1fr)',
+ const english=<div lang="en" dir="ltr" style={{display:'grid',gridTemplateColumns:'23px minmax(0,1fr)',
    gap:3,minWidth:0,alignItems:'start'}}>
    <strong data-compact-serial="en" style={{
       fontFamily:EN_FONT,fontSize:11.5,lineHeight:1.48,fontWeight:800,color:INK,
@@ -136,7 +137,7 @@ function QuestionPair({item,editMode,change}) {
    <EditableText text={item.en} language="en" editMode={editMode}
     onBlur={v=>change('en',v)}/>
   </div>
-  <div lang="ur" dir="rtl" style={{display:'grid',direction:'ltr',
+ const urdu=<div lang="ur" dir="rtl" style={{display:'grid',direction:'ltr',
    gridTemplateColumns:'minmax(0,1fr) 23px',gap:3,minWidth:0,alignItems:'start',
    position:'relative',top:opt+'px'}}>
    <EditableText text={item.ur} language="ur" editMode={editMode}
@@ -149,12 +150,14 @@ function QuestionPair({item,editMode,change}) {
     {urSerial}
    </strong>
   </div>
- </div>
+ if(language==='en')return english
+ if(language==='ur')return urdu
+ return <div data-compact-question-pair style={pairGrid}>{english}{urdu}</div>
 }
 export function CompactDualOfficialSection({section,index,editMode=false,onQuestionChange}) {
  const parsed=parseCompactDual(section)
  if(!parsed)return null
- const grid=section.dualTableMode==='grid'||(parsed.kind==='mcq'&&section.layoutPreset==='table')
+ const grid=section.dualTableMode==='grid'||section.layoutPreset==='table'
  const mutate=(fn)=>{
   const next=structuredClone(parsed)
   fn(next)
@@ -186,7 +189,7 @@ export function CompactDualOfficialSection({section,index,editMode=false,onQuest
      gap:'0px 4px',marginTop:3,minWidth:0}}>
     {item.options.map((option,oi)=>{const opt=opticalOffset(11.5,13,1.45,1.55,option.en,option.ur);return <div key={option.id} data-compact-option={option.id}
      style={{...pairGrid,gridTemplateColumns:'minmax(0,1fr) minmax(0,.94fr)',gap:3,alignItems:'start',
-      padding:'1px 2px',border:grid?'1px solid #c8d5de':'none'}}>
+      padding:'1px 3px',border:'none'}}>
       <div lang="en" dir="ltr" style={{display:'grid',gridTemplateColumns:'14px minmax(0,1fr)',gap:2,minWidth:0,alignItems:'start'}}>
        <strong style={{fontFamily:EN_FONT,fontSize:10.5,color:INK}}>{option.id}.</strong>
        <EditableText text={option.en} language="en" compactOption editMode={editMode}
@@ -202,7 +205,7 @@ export function CompactDualOfficialSection({section,index,editMode=false,onQuest
   return <React.Fragment key={item.id}>
    {parsed.kind==='long'&&q===1&&<div style={{textAlign:'center',
       fontFamily:EN_FONT,fontSize:10.5,padding:2,fontWeight:700,color:'#52687b'}}>OR / یا</div>}
-   <div data-compact-question-block style={{padding:'3px 3px 4px',border:grid?'1px solid #cbd7e0':'none',
+   <div data-compact-question-block style={{padding:'3px 3px 4px',border:'none',
     background:q%2?'#f8fafc':'#fff',breakInside:'avoid',pageBreakInside:'avoid'}}>
     {serialCell}{options}
     {count>0&&<div data-compact-answer-lines>{Array.from({length:count},(_,line)=>
@@ -221,15 +224,56 @@ export function CompactDualOfficialSection({section,index,editMode=false,onQuest
   style={{background:'#fff',color:'#24384c',fontFamily:EN_FONT,
    breakInside:'auto',marginBottom:8}}>
   <SectionHeader section={section} index={index} editMode={editMode}
-   onChange={onQuestionChange}/>
-  {parsed.kind==='mcq'&&grid?
-   <table data-assps-bilingual-mcq-table data-assps-bilingual-version="A342"
-    style={{width:'100%',tableLayout:'fixed',borderCollapse:'collapse'}}>
+   parsedKind={parsed.kind} onChange={onQuestionChange}/>
+  {grid&&parsed.kind==='mcq'?
+   <table data-assps-bilingual-mcq-table data-assps-bilingual-version="A343"
+    style={{width:'100%',border:'1px solid #b6c8d6',
+      tableLayout:'fixed',borderCollapse:'collapse'}}>
     <tbody>{content.map((child,i)=>
      <tr key={parsed.items[i]?.id||i} data-assps-bilingual-mcq-row={i+1}>
-      <td style={{padding:0,border:'1px solid #cbd7e0',
+      <td style={{padding:0,border:'none',borderBottom:'1px solid #c7d5df',
        verticalAlign:'top',breakInside:'avoid'}}>{child}</td>
      </tr>)}</tbody>
+   </table>:
+   grid&&parsed.kind!=='mcq'?
+   <table data-assps-bilingual-subjective-table={parsed.kind}
+    data-assps-bilingual-version="A343"
+    style={{width:'100%',border:'1px solid #b6c8d6',tableLayout:'fixed',borderCollapse:'collapse'}}>
+    <tbody>{parsed.items.map((item,q)=>{
+     const count=linesFor(q)
+     const cellChange=(language,value)=>updateCell(q,language,value)
+     return <React.Fragment key={item.id||q}>
+      {parsed.kind==='long'&&q===1&&
+       <tr data-assps-table-or><td colSpan={2} style={{textAlign:'center',
+        padding:2,fontSize:10.5,fontFamily:EN_FONT,borderBottom:'1px solid #cbd8e2'}}>OR / یا</td></tr>}
+      <tr data-assps-dual-subjective-row data-assps-a333-subjective={parsed.kind}
+        style={{breakInside:'avoid',pageBreakInside:'avoid',
+         background:q%2?'#f8fafc':'#fff'}}>
+       <td lang="en" dir="ltr" style={{width:'47%',padding:'4px 5px',verticalAlign:'top',
+        border:'none',borderBottom:'1px solid #cbd8e2',borderRight:'1px solid #cbd8e2'}}>
+        <QuestionPair item={item} editMode={editMode} change={cellChange} language="en"/>
+       </td>
+       <td lang="ur" dir="rtl" style={{width:'53%',padding:'4px 5px',verticalAlign:'top',
+        border:'none',borderBottom:'1px solid #cbd8e2'}}>
+        <QuestionPair item={item} editMode={editMode} change={cellChange} language="ur"/>
+       </td>
+      </tr>
+      {(count>0||editMode)&&
+       <tr data-assps-subjective-editor-row><td colSpan={2}
+         style={{padding:0,borderBottom:'1px solid #cbd8e2'}}>
+         {count>0&&<div data-compact-answer-lines>
+          {Array.from({length:count},(_,line)=>
+           <div key={line} style={{height:19,borderBottom:'1px solid #a9b9c7'}}/>)}
+         </div>}
+         {editMode&&<div className="no-print" style={{display:'flex',
+          justifyContent:'flex-end',alignItems:'center',gap:5,fontFamily:EN_FONT,fontSize:11}}>
+          <span>Answer lines: {count}</span>
+          <EditorButton disabled={count===0} onClick={()=>adjustLines(q,-1)}>−</EditorButton>
+          <EditorButton disabled={count===8} onClick={()=>adjustLines(q,1)}>+</EditorButton>
+         </div>}
+       </td></tr>}
+     </React.Fragment>
+    })}</tbody>
    </table>:content}
  </section>
 }
