@@ -1,0 +1,19 @@
+/* A208: synchronized page-box padding: preview, isolated print and print-to-PDF.
+ * Existing designs, fonts, row heights, and 2px dividers remain unchanged. */
+.dd-a4-page {
+  padding: var(--dd-page-margin-mm, 3mm) !important;
+}
+.dd-a4-page:has(.dd-density-12) {
+  padding: var(--dd-page-margin-mm, 3mm) !important;
+}
+.dd-margin-controls { margin-top: 8px; padding: 10px; background: #f5fafc; border: 1px solid #d1e1e7; border-radius: 9px; display: grid; gap: 7px; }
+.dd-margin-label { color: #294b62; font-size: 12px; font-weight: 800; }
+.dd-margin-options { display: flex; flex-wrap: wrap; gap: 5px; }
+.dd-margin-options button { border: 1px solid #b9d0dc; border-radius: 6px; padding: 6px 9px; background: white; color: #274355; font-size: 11px; font-weight: 750; cursor: pointer; }
+.dd-margin-options button.active { background: #d9f0ec; border-color: #447b75; color: #164d49; }
+.dd-margin-controls small { font-size: 10px; color: #5b6e7d; line-height: 1.45; }
+@media print {
+  .dd-a4-page, .dd-a4-page:has(.dd-density-12) {
+    padding: var(--dd-page-margin-mm, 3mm) !important;
+  }
+}

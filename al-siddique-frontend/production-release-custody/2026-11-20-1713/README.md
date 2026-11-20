@@ -27,3 +27,7 @@ The `../test_release_custody.py` suite checks positive snapshot parity, negative
 
 The audit branch now includes the active A336 navigation script byte-for-byte in source public/assets, referenced from the Vite source index. verify_source_navigation.py compares source bytes against the immutable A343 production snapshot and checks the bootstrap script tag. This removes one known source omission but **does not** establish full source/release parity; the remaining production overrides require separate migration and must stay protected.
 
+## Canonical Diary style reconciliation
+
+The seven CSS overlays already active in A343 production have been copied unchanged into source public/assets. The Vite source index loads them in precisely the vetted production cascade order after the module script. verify_source_navigation.py checks their exact SHA-256 hashes and order against the immutable snapshot, in addition to A336 navigation. This is source-only and does not edit current Diary or paper data. Other runtime JavaScript overrides remain blocked by the full release parity gate.
+
