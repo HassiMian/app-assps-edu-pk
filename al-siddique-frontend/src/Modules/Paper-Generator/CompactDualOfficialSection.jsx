@@ -88,7 +88,7 @@ function SectionHeader({section,index,editMode,onChange}) {
  const en=(i<0?text:text.slice(0,i)).replace(/^\s*Q\d+[.)]?\s*/i,'').trim()
  const ur=(i<0?'':text.slice(i+3)).replace(/^\s*سوال\s*نمبر\s*[0-9۰-۹]+\s*[:.۔]?\s*/,'').trim()
  const sz=clamp(section.dualHeadingFontSize||15,11,22)
- const kind=section.layoutPreset==='table'?'MCQ':section.layoutPreset==='short'?'Short':section.layoutPreset==='long'||section.layoutPreset==='list'?'Long':'Questions'
+ const kind=(section.layoutPreset==='table'||section.layoutPreset==='mcq')?'MCQ':section.layoutPreset==='short'?'Short':section.layoutPreset==='long'||section.layoutPreset==='list'?'Long':'Questions'
  return <div data-compact-dual-header style={{...pairGrid,
    direction:'ltr',gridTemplateColumns:'minmax(0,1fr) 90px minmax(0,1fr)',gap:7,
    padding:'5px 4px',background:'#fafcff',borderBottom:'1px solid #aebdcc'}}>
@@ -103,8 +103,10 @@ function SectionHeader({section,index,editMode,onChange}) {
    <span>{sz}px</span>
    <EditorButton disabled={sz<=11} onClick={()=>onChange?.({dualHeadingFontSize:sz-1})}>A−</EditorButton>
    <EditorButton disabled={sz>=22} onClick={()=>onChange?.({dualHeadingFontSize:sz+1})}>A+</EditorButton>
-   <EditorButton onClick={()=>onChange?.({dualTableMode:section.dualTableMode==='grid'?'minimal':'grid'})}>
-    {kind+' Table: '+(section.dualTableMode==='grid'?'ON':'OFF')}</EditorButton>
+   <EditorButton onClick={()=>onChange?.(section.layoutPreset==='table'?
+     {layoutPreset:'mcq',dualTableMode:'minimal'}:
+     {dualTableMode:section.dualTableMode==='grid'?'minimal':'grid'})}>
+    {kind+' Table: '+(section.dualTableMode==='grid'||section.layoutPreset==='table'?'ON':'OFF')}</EditorButton>
   </div>}
  </div>
 }
@@ -152,7 +154,7 @@ function QuestionPair({item,editMode,change}) {
 export function CompactDualOfficialSection({section,index,editMode=false,onQuestionChange}) {
  const parsed=parseCompactDual(section)
  if(!parsed)return null
- const grid=section.dualTableMode==='grid'
+ const grid=section.dualTableMode==='grid'||(parsed.kind==='mcq'&&section.layoutPreset==='table')
  const mutate=(fn)=>{
   const next=structuredClone(parsed)
   fn(next)
@@ -220,6 +222,14 @@ export function CompactDualOfficialSection({section,index,editMode=false,onQuest
    breakInside:'auto',marginBottom:8}}>
   <SectionHeader section={section} index={index} editMode={editMode}
    onChange={onQuestionChange}/>
-  {content}
+  {parsed.kind==='mcq'&&grid?
+   <table data-assps-bilingual-mcq-table data-assps-bilingual-version="A342"
+    style={{width:'100%',tableLayout:'fixed',borderCollapse:'collapse'}}>
+    <tbody>{content.map((child,i)=>
+     <tr key={parsed.items[i]?.id||i} data-assps-bilingual-mcq-row={i+1}>
+      <td style={{padding:0,border:'1px solid #cbd7e0',
+       verticalAlign:'top',breakInside:'avoid'}}>{child}</td>
+     </tr>)}</tbody>
+   </table>:content}
  </section>
 }

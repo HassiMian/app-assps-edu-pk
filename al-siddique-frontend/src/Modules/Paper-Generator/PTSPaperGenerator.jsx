@@ -1133,6 +1133,13 @@ function OfficialSections({ questions, isUrdu, editMode, fs, qFs, themeColor, on
  return <div style={{ direction:isUrdu ? 'rtl' : 'ltr' }}>
   {ordered.map((question, index) => {
    if (parseCompactDual(question)) return <CompactDualOfficialSection key={question.id} section={question} index={index} editMode={editMode} onQuestionChange={changes=>onQuestionChange?.(question.id, changes)} />
+   if (question?.medium === 'dual' && /^\s*\|\s*English\s*\|\s*اردو\s*\|/i.test(String(question.content||''))) {
+    return <section key={question.id} data-assps-invalid-bilingual="true" role="alert"
+     style={{border:'1px solid #bd8a6b',padding:8,overflowWrap:'anywhere'}}>
+      <strong>Bilingual MCQ structure needs correction; original content is preserved.</strong>
+      <pre style={{whiteSpace:'pre-wrap',wordBreak:'break-word'}}>{question.content}</pre>
+    </section>
+   }
    const blocks = parseOfficialContentBlocks(question.content)
    const rawHeading = String(question.heading || '').trim()
    const inlineMarks = rawHeading.match(/\(([^)]*\d+[^)]*)\)\s*$/)
