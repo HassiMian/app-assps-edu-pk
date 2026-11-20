@@ -2,6 +2,11 @@
 const enLabels=['A','B','C','D'];
 const urLabels=['الف','ب','ج','د'];
 const txt=x=>String(x??'').trim();
+// Fail closed on duplicate, invalid or decreasing serials; do not silently renumber.
+const validSerials=items=>Array.isArray(items)&&items.length>0&&items.every((item,i)=>{
+ const n=Number(item.number);
+ return Number.isSafeInteger(n)&&n>0&&(i===0||n>Number(items[i-1].number));
+});
 const optionPairs=(raw,language)=>{
  const value=txt(raw),re=language==='en'?/\(([A-D])\)\s*/g:/\((الف|ب|ج|د)\)\s*/g;
  const a=[...value.matchAll(re)];
@@ -36,15 +41,18 @@ function parseTable(content){
   if(options.length!==4||options.some(o=>!o.en||!o.ur))return null;
   items.push({id:'q'+en[1],number:Number(en[1]),en:en[2],ur:ur[2],options});
  }
- return items.length?{kind:'mcq',items}:null;
+ return validSerials(items)?{kind:'mcq',items}:null;
 }
 function parseSubjective(content){
  const rows=content.split(/\r?\n/).map(txt).filter(Boolean);
  const matches=rows.map(x=>x.match(/^(\d+)[.)]\s+(.+?)\s+\/\s+(.+)$/));
- if(rows.length&&matches.every(Boolean))return {kind:'short',items:matches.map(m=>({id:'q'+m[1],number:Number(m[1]),en:m[2],ur:m[3]}))};
+ if(rows.length&&matches.every(Boolean)){
+  const items=matches.map(m=>({id:'q'+m[1],number:Number(m[1]),en:m[2],ur:m[3]}));
+  return validSerials(items)?{kind:'short',items}:null;
+ }
  if(rows.length===3&&/^\s*OR\s*\/\s*یا\s*$/i.test(rows[1])){
   const x=[rows[0],rows[2]].map(r=>r.match(/^\(([AB])\)\s+(.+?)\s+\/\s+(.+)$/));
-  if(x.every(Boolean))return {kind:'long',items:x.map(m=>({id:m[1],number:m[1],en:m[2],ur:m[3]}))};
+  if(x.every(Boolean)&&x[0][1]==='A'&&x[1][1]==='B')return {kind:'long',items:x.map(m=>({id:m[1],number:m[1],en:m[2],ur:m[3]}))};
  }
  return null;
 }
@@ -56,6 +64,7 @@ export function parseCompactDual(question){
 }
 export function serializeCompactDual(doc){
  if(doc?.kind==='mcq'){
+  if(!validSerials(doc.items))throw Error('Invalid or duplicate MCQ serials');
   const lines=['| English | اردو |','| --- | --- |'];
   doc.items.forEach(q=>{
    lines.push('| '+q.number+'. '+q.en+' | '+q.number+'۔ '+q.ur+' |');
@@ -67,7 +76,13 @@ export function serializeCompactDual(doc){
   });
   return lines.join('\n');
  }
- if(doc?.kind==='short')return doc.items.map(q=>q.number+'. '+q.en+' / '+q.ur).join('\n');
- if(doc?.kind==='long')return doc.items.map(q=>'('+q.number+') '+q.en+' / '+q.ur).join('\nOR / یا\n');
+ if(doc?.kind==='short'){
+  if(!validSerials(doc.items))throw Error('Invalid or duplicate short-question serials');
+  return doc.items.map(q=>q.number+'. '+q.en+' / '+q.ur).join('\n');
+ }
+ if(doc?.kind==='long'){
+  if(!Array.isArray(doc.items)||doc.items.length!==2||doc.items[0].number!=='A'||doc.items[1].number!=='B')throw Error('Long choices must be exactly A OR B');
+  return doc.items.map(q=>'('+q.number+') '+q.en+' / '+q.ur).join('\nOR / یا\n');
+ }
  throw Error('Unsupported dual document');
 }

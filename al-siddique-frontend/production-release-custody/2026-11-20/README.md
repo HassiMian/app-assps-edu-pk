@@ -35,3 +35,7 @@ Run restore_custody.py with --snapshot, --archive and --destination /root/worksp
 
 A335 evidence: controlled restore PASS 1,081/1,081; deliberate attempts targeting the production root and nonempty scratch destination both BLOCKED. Scratch was explicitly cleaned after verification.
 
+## Canonical parser safety
+
+Source-only compactDualParser strict serial identity checks and 12 Node tests were added in A335. Current production A342 remains untouched pending release-gate reconciliation. The production guard intentionally does not treat source-only tests as proof of live editor readiness.
+

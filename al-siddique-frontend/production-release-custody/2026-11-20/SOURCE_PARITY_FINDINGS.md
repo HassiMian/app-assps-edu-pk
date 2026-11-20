@@ -11,3 +11,8 @@
 - Full static private archive hash: e5aab3c855e90c721b600561d8a71a9f7456289c2c622586ce5ca99e62030f69. Restore to scratch, verify 1,081/1,081 files, then discard scratch; never overwrite active production to rehearse a restore.
 
 **Release decision: HOLD clean source rebuild.** Source feature parity is still an integration requirement, not proof that current working production is malfunctioning.\n
+
+## A335 canonical parser hardening (source-only)
+
+A read-only regression demonstration of b48527a8's compactDualParser found that duplicate MCQ serials (1,1), short-question serials (1,1), and long alternatives (A,A) were parsed as valid. The source parser now fails closed for duplicate, descending, non-positive or unsafe numbering and enforces A OR B long choice identity. Its serializer also refuses invalid structured serials instead of silently generating malformed paper content. Twelve Node tests pass; the component only edits text on successfully parsed documents, so normal text editing retains the existing safe number identities. This remains unpromoted until source-vs-production parity gate is satisfied; no current student's paper or live editor was changed.
+

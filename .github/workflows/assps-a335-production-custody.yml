@@ -6,6 +6,8 @@ on:
     paths:
       - 'al-siddique-frontend/production-release-custody/2026-11-20/**'
       - '.github/workflows/assps-a335-production-custody.yml'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/compactDualParser.js'
+      - 'al-siddique-frontend/src/Modules/Paper-Generator/tests/compactDualParser.test.mjs'
   workflow_dispatch:
 jobs:
   verify-snapshot:
@@ -23,5 +25,10 @@ jobs:
         run: python3 al-siddique-frontend/production-release-custody/2026-11-20/release_guard.py --snapshot al-siddique-frontend/production-release-custody/2026-11-20 --self-test
       - name: Validate recovery tool syntax
         run: python3 -m py_compile al-siddique-frontend/production-release-custody/2026-11-20/restore_custody.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify dual-medium serial identity and OR alternatives
+        run: node --test al-siddique-frontend/src/Modules/Paper-Generator/tests/compactDualParser.test.mjs
       - name: State release constraint
         run: echo "Static verification only; no production credentials or VPS access."
