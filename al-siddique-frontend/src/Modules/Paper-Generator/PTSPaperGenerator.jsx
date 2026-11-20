@@ -1540,6 +1540,7 @@ function PremiumPaperTemplate({ variant='academic', paper, cfg, printBubble, pri
   <table data-student-info style={{ direction:'ltr', width:'100%', borderCollapse:'collapse', tableLayout:'fixed', margin:`${7 * fs}px 0 ${10 * fs}px`, fontFamily:'Arial, sans-serif' }}><tbody>
    {chunk(metadata, 4).map((row, rowIndex) => <tr key={rowIndex}>{row.map(([label, value]) => <td key={label} style={{ border:`1px solid ${theme.line}`, padding:`${4 * fs}px ${6 * fs}px`, background:rowIndex === 0 ? '#fff' : theme.soft, textAlign:'left', verticalAlign:'top' }}><div style={{ color:theme.accent, fontWeight:800, fontSize:`${7.5 * fs}px`, textTransform:'uppercase' }}>{label}</div>{value ? <div style={{ color:'#172033', fontWeight:700, fontSize:`${10 * fs}px`, direction:'ltr' }}>{value}</div> : <div style={{ borderBottom:`1px solid ${theme.accent}`, height:`${13 * fs}px` }} />}</td>)}</tr>)}
   </tbody></table>
+  <CompactCheckingStrip sections={paper?.official_section} total={total} />
   <main style={{ position:'relative', zIndex:2 }}>
    {questionTypes.map(type => {
     if (!(paper[type.value] || []).length) return null
@@ -1555,6 +1556,26 @@ function AcademicClassicTemplate(props) {
 }
 
 //  Template 5: Docx Assessment 
+function CompactCheckingStrip({sections,total=0}) {
+ const entries=(Array.isArray(sections)?sections:[]).filter(x=>x&&Number(x.marks)>0)
+ if(!entries.length)return null
+ const maximum=Number(total)||entries.reduce((sum,q)=>sum+Number(q.marks||0),0)
+ return <div data-checking-strip style={{direction:'ltr',display:'flex',flexWrap:'wrap',
+    alignItems:'center',columnGap:16,rowGap:6,margin:'7px 0 9px',padding:'8px 11px',
+    background:'#fff',border:'1px solid #ccd9e3',borderRadius:4,
+    fontFamily:'Times New Roman, serif',fontSize:11,minHeight:33,color:'#263545'}}>
+   <strong style={{fontSize:11,fontWeight:800,color:'#174467',marginRight:8}}>Checking</strong>
+   {entries.map((item,i)=><span key={item.id||i} data-question-instance-id={item.id||i}
+      style={{display:'inline-flex',alignItems:'center',gap:5,minWidth:96,justifyContent:'center',whiteSpace:'nowrap'}}>
+      <strong style={{fontSize:12,fontWeight:900,color:'#174467'}}>{'Q'+(i+1)}</strong>
+      <span style={{fontWeight:700,letterSpacing:.4}}>{'[ _____ / '+item.marks+' ]'}</span>
+   </span>)}
+   <strong data-checking-total style={{marginLeft:'auto',paddingLeft:8,fontWeight:900,fontSize:11}}>
+    {'TOTAL [ _____ / '+maximum+' ]'}
+   </strong>
+ </div>
+}
+
 function DocxAssessmentTemplate({ paper, cfg, printBubble, printAns, half, editMode=false, letterSp=0, engLineH=1.5, urdLineH=2.0, showAnsLines=false, fontColor='#1a1a1a', fontFamily='', baseFontSz=11, headFontSz=11, qBorderStyle='none', showUrduHeaders=false, showSectionLine=false, questionTypes=[] , pbStyle, onQuestionChange }) {
  const total = paper.official_section?.length && Number(cfg.totalMarks) ? Number(cfg.totalMarks) : questionTypes.reduce((sum, t) => sum + (paper[t.value]?.length || 0) * (paper[`${t.value}_marks`] || t.marks || 1), 0)
  const isUrdu = cfg.language === 'urdu'
