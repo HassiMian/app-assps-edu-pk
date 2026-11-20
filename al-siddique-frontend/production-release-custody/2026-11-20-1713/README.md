@@ -19,3 +19,7 @@ This is **not** a full editable-source reconstruction or approval to deploy a cl
 
 The compare_static_releases.py tool on the parent folder verifies both immutable snapshots, then identifies exactly which assets and import-map targets changed. A342 -> A343: two new A343 Paper Generator JavaScript assets, no assets removed, and index.html is the only previously present file with changed bytes. This proves what changed in the deployed static tree without assuming functional equivalence or editable source parity.
 
+## Release-gate mutation regression
+
+The `../test_release_custody.py` suite checks positive snapshot parity, negative missing A336 navigation, replaced A343 Paper Generator mapping, altered JS asset hash and exact A342->A343 delta. Five local tests passed; the GitHub workflow runs these independently with no VPS credentials or live writes.
+

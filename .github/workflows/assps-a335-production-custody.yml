@@ -40,5 +40,7 @@ jobs:
         run: python3 -m py_compile al-siddique-frontend/production-release-custody/2026-11-20-1713/restore_custody.py
       - name: Compare A342 and A343 custody release identities
         run: python3 al-siddique-frontend/production-release-custody/compare_static_releases.py --previous al-siddique-frontend/production-release-custody/2026-11-20 --current al-siddique-frontend/production-release-custody/2026-11-20-1713
+      - name: Regression test snapshot corruption, route overlay and A342 to A343 delta
+        run: python3 al-siddique-frontend/production-release-custody/test_release_custody.py
       - name: State release constraint
         run: echo "Static verification only; no production credentials or VPS access."
