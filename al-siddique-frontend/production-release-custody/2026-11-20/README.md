@@ -28,3 +28,10 @@ Full source parity remains HOLD. Only promote a newly compiled release after the
 ## New A335 deployment guard
 
 The included release_guard.py requires all 26 direct script/style references, all 14 active import-map mappings, and the 40 referenced asset hashes to match this verified snapshot. Test with --self-test to confirm it refuses a missing navigation script. A clean Git source build compiled successfully in an isolated Vite preview, but was rejected by the strict release gate with 80 blockers. This is deliberate: the source build omitted live overlays. It must not be deployed over the existing working frontend.\n
+
+## Controlled restoration (isolated rehearsal only)
+
+Run restore_custody.py with --snapshot, --archive and --destination /root/workspace/assps-a335-restore-<unique>. The script first verifies the archive and only extracts into a fresh empty scratch directory under /root/workspace; it refuses the live production root, nonempty directories, symlinks and unsafe tar members. It then performs the full 1,081-file checksum verification. It never deploys, reloads services or alters the database.
+
+A335 evidence: controlled restore PASS 1,081/1,081; deliberate attempts targeting the production root and nonempty scratch destination both BLOCKED. Scratch was explicitly cleaned after verification.
+
