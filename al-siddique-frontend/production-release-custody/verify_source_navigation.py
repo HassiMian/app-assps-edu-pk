@@ -9,7 +9,7 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def main() -> int:
-    root=Path(__file__).resolve().parents[2]
+    root=Path(__file__).resolve().parents[1]
     source=root/'public/assets/assps-a336-unified-navigation-20261120.js'
     vetted=root/'production-release-custody/2026-11-20-1713/assets/assps-a336-unified-navigation-20261120.js'
     html=(root/'index.html').read_text()
