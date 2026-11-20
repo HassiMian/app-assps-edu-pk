@@ -4,7 +4,7 @@ on:
     branches:
       - audit/assps-a335-prod-custody-20261120
     paths:
-      - 'al-siddique-frontend/production-release-custody/2026-11-20/**'
+      - 'al-siddique-frontend/production-release-custody/**'
       - '.github/workflows/assps-a335-production-custody.yml'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/compactDualParser.js'
       - 'al-siddique-frontend/src/Modules/Paper-Generator/tests/compactDualParser.test.mjs'
@@ -47,5 +47,17 @@ jobs:
         run: python3 al-siddique-frontend/production-release-custody/test_release_custody.py
       - name: Ensure source ships byte-matching live A336 navigation
         run: python3 al-siddique-frontend/production-release-custody/verify_source_navigation.py
+      - name: Validate exact recorded A343 source parity backlog
+        run: |
+          python3 - <<'PYTEST'
+          from pathlib import Path
+          p=Path('al-siddique-frontend/production-release-custody/SOURCE_PARITY_BACKLOG_A343.md')
+          s=p.read_text()
+          assert 'Unresolved release compatibility checks: 64' in s
+          assert 'P0 Missing runtime scripts and styles (18)' in s
+          assert 'P0 Active import-map aliases (14)' in s
+          assert 'P1 Missing referenced assets (32)' in s
+          print('A335_64_CHECK_BACKLOG_CI_PASS')
+          PYTEST
       - name: State release constraint
         run: echo "Static verification only; no production credentials or VPS access."
